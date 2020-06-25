@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/servicedesk/static/css/main.893e8efc.chunk.css",
+    "main.js": "/servicedesk/static/js/main.47d4b83d.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.47d4b83d.chunk.js.map",
+    "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
+    "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
+    "static/js/2.59f59a33.chunk.js": "/servicedesk/static/js/2.59f59a33.chunk.js",
+    "static/js/2.59f59a33.chunk.js.map": "/servicedesk/static/js/2.59f59a33.chunk.js.map",
+    "index.html": "/servicedesk/index.html",
+    "precache-manifest.e32efa1610dc805318389fac9fde3360.js": "/servicedesk/precache-manifest.e32efa1610dc805318389fac9fde3360.js",
+    "service-worker.js": "/servicedesk/service-worker.js",
+    "static/css/main.893e8efc.chunk.css.map": "/servicedesk/static/css/main.893e8efc.chunk.css.map",
+    "static/js/2.59f59a33.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.59f59a33.chunk.js.LICENSE.txt",
+    "static/media/wall.jpg": "/servicedesk/static/media/wall.ef614ea4.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3892dbd9.js",
+    "static/js/2.59f59a33.chunk.js",
+    "static/css/main.893e8efc.chunk.css",
+    "static/js/main.47d4b83d.chunk.js"
+  ]
+}
