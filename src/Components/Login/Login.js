@@ -7,6 +7,9 @@ import { StylesProvider } from "@material-ui/styles";
 import { makeStyles } from "@material-ui/styles";
 import "./Login.css";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import LockIcon from "@material-ui/icons/Lock";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   notched: {
@@ -24,26 +27,32 @@ const Login = () => {
   return (
     <StylesProvider injectFirst>
       <Grid container className={classes.container}>
-        <Grid item xs={12} className={classes.containerTop}></Grid>
+        <Grid item container xs={12} className={classes.containerTop}>
+          Service Desk
+        </Grid>
         <Grid item container xs={12} className={classes.containerMid}>
           <Grid item xs={2} className={classes.logincard}>
-            Hello World
             <div className={classes.username}>
-              <Grid container spacing={2} alignItems="flex-end">
-                <Grid item>
-                  <AccountCircle />
-                </Grid>
-                <Grid item>
-                  <TextField id="input-with-icon-grid" label="Username" />
-                </Grid>
-              </Grid>
+              <AccountCircle className={classes.accounticon} />
+              <TextField
+                id="outlined-basic"
+                label="Username"
+                variant="outlined"
+              />
             </div>
             <div className={classes.password}>
+              <LockIcon className={classes.accounticon} />
               <TextField
                 id="outlined-basic"
                 label="Password"
                 variant="outlined"
               />
+            </div>
+            <Divider variant="middle" />
+            <div class="grid">
+              <button>
+                <span>Log In</span>
+              </button>{" "}
             </div>
           </Grid>
         </Grid>
