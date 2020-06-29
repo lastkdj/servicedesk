@@ -17,8 +17,7 @@ button {
   border-radius: 3px;
 }
 
-.submit:hover::before,
-.submit:focus::before {
+.submit:hover::before {
   transform: scaleX(1);
 }
 
@@ -30,8 +29,7 @@ button {
   z-index: 1;
 }
 
-.submit:hover::before,
-.submit:focus::before {
+.submit:hover::before {
   color: white;
 }
 
