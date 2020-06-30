@@ -4,6 +4,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
 import { useFirebaseApp, useUser } from "reactfire";
 import { makeStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -21,12 +22,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = (props) => {
   const [name, setName] = useState("");
   const [displayName, setDisplayName] = useState("");
 
-  const logOut = async () => {
-    await firebase.auth().signOut();
+  const logOut = async (e) => {
+    e.preventDefault();
+    await firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        props.history.push("/");
+      });
   };
 
   const firebase = useFirebaseApp();
@@ -56,6 +63,10 @@ const Profile = () => {
       .catch(function (error) {
         console.log("La cagada total");
       });
+  };
+
+  const goLogin = () => {
+    props.history.push("/");
   };
 
   return (
@@ -112,4 +123,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withRouter(Profile);

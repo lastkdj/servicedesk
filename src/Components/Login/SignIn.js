@@ -19,7 +19,6 @@ import useStyles from "./LoginStyles";
 import CopyRight from "./CopyRight";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { useTransition, animated } from "react-spring";
 import "./Button.css";
 
 const SignIn = (props) => {
@@ -43,7 +42,10 @@ const SignIn = (props) => {
       .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
-        if (errorCode === "auth/wrong-password") {
+        if (
+          errorCode === "auth/wrong-password" ||
+          errorCode === "auth/user-not-found"
+        ) {
           setWrongCred(true);
         } else if (errorCode === "auth/user-disabled") {
           setDisabled(true);

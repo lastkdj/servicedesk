@@ -64,6 +64,9 @@ const Snackbars = () => {
       >
         <Alert severity="success">La Cuenta ha sido Creada</Alert>
       </Snackbar>
+      <Snackbar open={sent} autoHideDuration={4000} onClose={handleClose}>
+        <Alert severity="success">Correo de Enviado!</Alert>
+      </Snackbar>
     </div>
   );
 };
