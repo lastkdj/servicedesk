@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b53c994ca2f5df0427068e130ef8c559",
+    "revision": "059edc8763ea180d129685e004a2ee3c",
     "url": "/servicedesk/index.html"
   },
   {
-    "revision": "2bc7a39c9c204687df39",
+    "revision": "27271fb41985ba788e05",
     "url": "/servicedesk/static/css/main.84a17571.chunk.css"
   },
   {
@@ -32,12 +32,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/servicedesk/static/js/11.0a58fb19.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d24af2c60a51f853e752",
-    "url": "/servicedesk/static/js/3.1db566b8.chunk.js"
+    "revision": "314ef23f18b8b022845d",
+    "url": "/servicedesk/static/js/3.89195c3d.chunk.js"
   },
   {
     "revision": "df29ce23dc71344ae95e2113fe8322a8",
-    "url": "/servicedesk/static/js/3.1db566b8.chunk.js.LICENSE.txt"
+    "url": "/servicedesk/static/js/3.89195c3d.chunk.js.LICENSE.txt"
   },
   {
     "revision": "4d4a4afc94d6b0968fd0",
@@ -88,8 +88,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/servicedesk/static/js/9.857c71d9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2bc7a39c9c204687df39",
-    "url": "/servicedesk/static/js/main.f6fe8c7f.chunk.js"
+    "revision": "27271fb41985ba788e05",
+    "url": "/servicedesk/static/js/main.cb88e604.chunk.js"
   },
   {
     "revision": "fb4b77fb5b921ec1cb83",
