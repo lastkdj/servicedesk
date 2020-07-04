@@ -7,10 +7,8 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import LockIcon from "@material-ui/icons/Lock";
 import InputBase from "@material-ui/core/InputBase";
 import "firebase/auth";
-import { useFirebaseApp, useUser } from "reactfire";
 import { withRouter } from "react-router-dom";
 import useStyles from "./LoginStyles";
 import CopyRight from "./CopyRight";
@@ -18,36 +16,14 @@ import Link from "@material-ui/core/Link";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./Button.css";
+import { useUsuario } from "../Context/UserContext";
 
 const PasswordReset = (props) => {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
-  const firebase = useFirebaseApp();
+  const { sent, handleClose, sendMail, onChangeEmail } = useUsuario();
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
-
-  var auth = firebase.auth();
-
-  const sendMail = (e) => {
-    e.preventDefault();
-    auth
-      .sendPasswordResetEmail(email)
-      .then(function () {
-        setSent(true);
-      })
-      .catch(function (error) {
-        console.log("No se Pudo enviar el mensaje");
-      });
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSent(false);
-  };
 
   const classes = useStyles();
 
@@ -73,7 +49,7 @@ const PasswordReset = (props) => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(ev) => setEmail(ev.target.value)}
+              onChange={onChangeEmail}
             />
           </Grid>
           <Grid container className={classes.iniciasesioncontainer}>

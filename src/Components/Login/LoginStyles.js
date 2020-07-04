@@ -47,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
   },
 
+  containedPrimary: {
+    backgroundColor: "#5D2EAB",
+  },
+
   textcolor: {
     color: "white",
     cursor: "pointer",
@@ -71,8 +75,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   iniciasesion: {
-    marginTop: "0px",
-    marginBottom: "10px",
+    marginTop: "20px",
+    marginBottom: "20px",
   },
 
   registrate: {
@@ -198,7 +202,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   placeholder: {
-    marginLeft: "30px",
+    marginLeft: "15px",
   },
 
   emailpassword: {

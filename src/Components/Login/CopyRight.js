@@ -9,10 +9,7 @@ function CopyRight() {
   return (
     <Typography variant="body2" className={classes.textcolor} align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        ServiceDesk
-      </Link>{" "}
-      {new Date().getFullYear()}
+      <Link color="inherit">ServiceDesk</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );

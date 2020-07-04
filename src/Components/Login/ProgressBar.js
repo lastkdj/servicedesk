@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { useUsuario } from "../Context/UserContext";
 
 const useStyles = makeStyles({
   bar20: {
@@ -25,33 +26,34 @@ const useStyles = makeStyles({
   },
 });
 
-const ProgressBar = (props) => {
+const ProgressBar = () => {
+  const { password } = useUsuario();
   const [progress, setProgress] = useState(0);
   const [progressColor, setProgressColor] = useState({ bar: "red" });
 
   useEffect(() => {
     var strength = 0;
-    if (props.password.match(/[a-z]+/)) {
+    if (password.match(/[a-z]+/)) {
       strength += 1;
     }
 
-    if (props.password.match(/[A-Z]+/)) {
+    if (password.match(/[A-Z]+/)) {
       strength += 1;
     }
 
-    if (props.password.match(/[0-9]+/)) {
+    if (password.match(/[0-9]+/)) {
       strength += 1;
     }
 
-    if (props.password.match(/[!@$%^&*()?]+/)) {
+    if (password.match(/[!@$%^&*()?]+/)) {
       strength += 1;
     }
 
-    if (props.password.length >= 6) {
+    if (password.length >= 6) {
       strength += 1;
     }
 
-    if (props.password.length === 0) {
+    if (password.length === 0) {
       strength = 0;
     }
 
@@ -80,7 +82,7 @@ const ProgressBar = (props) => {
         setProgressColor({ bar: classes.bar100 });
         break;
     }
-  }, [props.password]);
+  }, [password]);
 
   const classes = useStyles();
   return (

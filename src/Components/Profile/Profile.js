@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
-import { useFirebaseApp, useUser } from "reactfire";
 import { makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
+import firebase from "@firebase/app";
+import "@firebase/firestore";
+import { useUsuario } from "../Context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = (props) => {
+  const { setOpen } = useUsuario();
   const [name, setName] = useState("");
   const [displayName, setDisplayName] = useState("");
 
@@ -36,34 +39,68 @@ const Profile = (props) => {
       });
   };
 
-  const firebase = useFirebaseApp();
-  const user = useUser();
+  const firestore = firebase.firestore();
+
+  // const user = useUser();
   const classes = useStyles();
 
-  const getProfile = () => {
-    console.log(
-      user.displayName,
-      user.email,
-      user.photoURL,
-      user.emailVerified,
-      user.uid
-    );
-  };
+  // const getProfile = () => {
+  //   console.log(
+  //     user.displayName,
+  //     user.email,
+  //     user.photoURL,
+  //     user.emailVerified,
+  //     user.uid
+  //   );
+  // };
+  const user = firebase.auth().currentUser;
 
-  const updateName = async () => {
-    await user
-      .updateProfile({
-        displayName: `${name}`,
-        photoURL: "",
+  const docRef = firestore.collection("Users").doc("UID");
+
+  const onClicky = () => {
+    docRef
+      .set({
+        Nombre: name, //Ya viene como objeto
       })
       .then(function () {
-        setDisplayName(`${name}`);
-        console.log("succesfull");
+        console.log("Success, se grabo!");
       })
       .catch(function (error) {
-        console.log("La cagada total");
+        console.log("Se fue a la puta", error);
       });
   };
+
+  const getProfile = () => {
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc && doc.exists) {
+          const myData = doc.data();
+          setDisplayName(myData.Nombre);
+        }
+      })
+      .catch(function (error) {
+        console.log("Te fuiste de jeta mano", error);
+      });
+  };
+
+  // const updateName = async () => {
+  //   await user
+  //     .updateProfile({
+  //       displayName: `${name}`,
+  //       photoURL: "",
+  //     })
+  //     .then(function () {
+  //       setDisplayName(`${name}`);
+  //     })
+  //     .catch(function (error) {
+  //       console.log("La cagada total");
+  //     });
+  // };
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   const goLogin = () => {
     props.history.push("/");
@@ -73,7 +110,7 @@ const Profile = (props) => {
     <div>
       <Grid item xs={12} className={classes.logOut}>
         <div>
-          <h1 className={classes.placeholder}>{displayName}</h1>
+          <h1 className={classes.placeholder}>Nombre : {displayName}</h1>
         </div>
         <Button
           type="submit"
@@ -114,7 +151,7 @@ const Profile = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={updateName}
+          onClick={onClicky}
         >
           Cambiar Nombre
         </Button>
