@@ -8,10 +8,10 @@ import Container from "@material-ui/core/Container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "firebase/auth";
 import { withRouter } from "react-router-dom";
-import useStyles from "./LoginStyles";
-import CopyRight from "./CopyRight";
-import "./Button.css";
-import SignInForm from "./SignInForm";
+import useStyles from "../LoginStyles";
+import CopyRight from "../CopyRight";
+import "../Button.css";
+import SignInForm from "../SignInForm";
 
 const SignIn = () => {
   const classes = useStyles();

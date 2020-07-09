@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
-import { __RouterContext } from "react-router";
-import SignIn from "./Components/Login/SignIn";
-import SignUp from "./Components/Login/SignUp";
+import SignIn from "./Components/Login/views/SignIn";
+import SignUp from "./Components/Login/views/SignUp";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Background from "./Imagenes/background.jpg";
-import Profile from "./Components/Profile/Profile";
-import PasswordReset from "./Components/Login/PasswordReset";
+import PasswordReset from "./Components/Login/views/PasswordReset";
 import { UserProvider } from "./Components/Context/UserContext";
-import { useUser } from "reactfire";
 import SnackBar from "./Components/Login/Snackbars";
 import LinearIndeterminate from "./Components/Login/Loading";
+import { AuthContext } from "./Components/Context/AuthContext";
+import Main from "./Components/Main/MainView/Main";
+import { DashProvider } from "./Components/Context/DashContext";
 
 const useStyles = makeStyles((theme) => ({
   wall: {
@@ -23,29 +23,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const user = useUser();
+  const { user } = useContext(AuthContext);
   const classes = useStyles();
-  console.log("render de arriba marico");
+
   return (
-    <UserProvider>
-      <Grid container className={classes.wall}>
-        <Grid item xs={12}>
-          <LinearIndeterminate />
-        </Grid>
-        {user ? (
-          <Profile />
-        ) : (
+    <DashProvider>
+      <UserProvider>
+        <Grid container className={classes.wall}>
           <Grid item xs={12}>
-            <Switch>
-              <Route exact path="/" component={SignIn} />
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/passwordreset" component={PasswordReset} />
-            </Switch>
-            <SnackBar />
+            <LinearIndeterminate />
           </Grid>
-        )}
-      </Grid>
-    </UserProvider>
+          {user ? (
+            <Main />
+          ) : (
+            // <Profile />
+            <Grid item xs={12}>
+              <Switch>
+                <Route exact path="/" component={SignIn} />
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/passwordreset" component={PasswordReset} />
+              </Switch>
+              <SnackBar />
+            </Grid>
+          )}
+        </Grid>
+      </UserProvider>
+    </DashProvider>
   );
 }
 

@@ -21,12 +21,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LinearIndeterminate() {
-  const { open } = useUsuario();
+  const { open, error } = useUsuario();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {open ? (
+      {(open && error === "auth/wrong-password") ||
+      (open && error === "auth/invalid-email") ||
+      (open && error === "auth/user-disabled") ||
+      (open && error === "auth/email-already-in-use") ||
+      (open && error === "auth/weak-password") ||
+      (open && error === "") ? (
         <LinearProgress classes={{ colorPrimary: classes.colorPrimary }} />
       ) : null}
     </div>

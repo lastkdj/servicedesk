@@ -7,10 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withRouter } from "react-router-dom";
 import "firebase/auth";
-import useStyles from "./LoginStyles";
-import CopyRight from "./CopyRight";
-import "./Button.css";
-import SingUpForm from "./SignUpForm";
+import useStyles from "../LoginStyles";
+import CopyRight from "../CopyRight";
+import "../Button.css";
+import SingUpForm from "../SignUpForm";
 
 const SignUp = () => {
   const classes = useStyles();

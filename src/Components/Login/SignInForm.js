@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import useStyles from "./LoginStyles";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -10,26 +10,27 @@ import InputBase from "@material-ui/core/InputBase";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useUsuario } from "../Context/UserContext";
 import { withRouter } from "react-router-dom";
+import FirebaseApp from "../../FireBase/FireBaseConfig";
 
 const SignForm = (props) => {
+  const { setError, setOpen } = useUsuario();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
-  const {
-    onChangeEmail,
-    onChangePassword,
-    signIn,
-    setOpen,
-    setEmail,
-    setPassword,
-  } = useUsuario();
 
-  useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setOpen(false);
-  }, []);
-
-  const handleClickClose = () => {
-    setOpen(false);
+  //Metodo Sign In
+  const signIn = (e) => {
+    setOpen(true);
+    e.preventDefault();
+    FirebaseApp.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(function () {
+        setOpen(false);
+      })
+      .catch(function (error) {
+        var errorCode = error.code;
+        setError(errorCode);
+      });
   };
 
   return (
@@ -45,7 +46,9 @@ const SignForm = (props) => {
           name="email"
           autoComplete="email"
           autoFocus
-          onChange={onChangeEmail}
+          onChange={(ev) => {
+            setEmail(ev.target.value);
+          }}
         />
       </Grid>
 
@@ -59,7 +62,9 @@ const SignForm = (props) => {
           type="password"
           id="password"
           autoComplete="current-password"
-          onChange={onChangePassword}
+          onChange={(ev) => {
+            setPassword(ev.target.value);
+          }}
         />
       </Grid>
       <Grid container className={classes.iniciasesioncontainer}>

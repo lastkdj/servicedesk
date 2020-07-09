@@ -10,20 +10,38 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import InputBase from "@material-ui/core/InputBase";
 import "firebase/auth";
 import { withRouter } from "react-router-dom";
-import useStyles from "./LoginStyles";
-import CopyRight from "./CopyRight";
+import useStyles from "../LoginStyles";
+import CopyRight from "../CopyRight";
 import Link from "@material-ui/core/Link";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import "./Button.css";
-import { useUsuario } from "../Context/UserContext";
+import "../Button.css";
+import { useUsuario } from "../../Context/UserContext";
+import FirebaseApp from "../../../FireBase/FireBaseConfig";
 
 const PasswordReset = (props) => {
-  const { sent, handleClose, sendMail, onChangeEmail } = useUsuario();
-
+  const [email, setEmail] = useState("");
+  const [open, setOpen] = useState(false);
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+
+  //Metodo Send Mail, Password Reset
+  const sendMail = (e) => {
+    e.preventDefault();
+    FirebaseApp.auth()
+      .sendPasswordResetEmail(email)
+      .then(function () {
+        setOpen(true);
+      })
+      .catch(function (error) {
+        console.log("No se Pudo enviar el mensaje");
+      });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const classes = useStyles();
 
@@ -49,7 +67,9 @@ const PasswordReset = (props) => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={onChangeEmail}
+              onChange={(ev) => {
+                setEmail(ev.target.value);
+              }}
             />
           </Grid>
           <Grid container className={classes.iniciasesioncontainer}>
@@ -85,7 +105,7 @@ const PasswordReset = (props) => {
       <Box mt={8}>
         <CopyRight />
       </Box>
-      <Snackbar open={sent} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert severity="success">Correo de Enviado!</Alert>
       </Snackbar>
     </Container>

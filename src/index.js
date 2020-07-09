@@ -3,19 +3,18 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { FirebaseAppProvider } from "reactfire";
-import FireBaseConfig from "./FireBase/FireBaseConfig";
 import { HashRouter } from "react-router-dom";
+import { AuthProvider } from "./Components/Context/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <FirebaseAppProvider firebaseConfig={FireBaseConfig}>
+    <AuthProvider>
       <Suspense fallback={"Conectando la App"}>
         <HashRouter>
           <App />
         </HashRouter>
       </Suspense>
-    </FirebaseAppProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
