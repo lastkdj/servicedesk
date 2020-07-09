@@ -122,7 +122,7 @@ const SingUpForm = (props) => {
             type="email"
           />
         </Grid>
-        <Grid item xs={12} className={classes.passwordsignup}>
+        <Grid xs={12} className={classes.passwordsignup}>
           <Tooltip placement="left-end" title="6 Caracteres minimo" arrow>
             <LockIcon className={classes.accounticon} />
           </Tooltip>
