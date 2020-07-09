@@ -71,7 +71,7 @@ const SingUpForm = (props) => {
     <form className={classes.formsignup} noValidate>
       <Grid container spacing={2} justify="center">
         {/* <Grid container item xs={12} className={classes.firstlast}> */}
-        <Grid item xs={12} sm={5} className={classes.usernamesignup}>
+        <Grid xs={12} sm={5} className={classes.usernamesignup}>
           <InputBase
             placeholder="Nombre"
             required
