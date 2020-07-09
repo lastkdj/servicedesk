@@ -80,7 +80,7 @@ const SignForm = (props) => {
           className={classes.textcolor}
         />
 
-        <Grid item xs={10} className={classes.iniciasesion}>
+        <Grid item xs={10} classes={{ item: classes.iniciasesion }}>
           <Button
             type="submit"
             fullWidth
