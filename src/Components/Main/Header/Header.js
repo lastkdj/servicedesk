@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#282C34",
     height: "60px",
     justifyContent: "space-between",
-    boxShadow: "-1px 3px 7px 4px rgba(0,0,0,0.42)",
+    boxShadow: " -1px 2px 2px 1px rgba(0,0,0,0.75)",
     paddingLeft: "20px",
   },
 

@@ -63,38 +63,6 @@ const SingUpForm = (props) => {
     signupUser(userDetails);
   };
 
-  //Metodo SignUp
-  // const signUp = (e) => {
-  //   setOpen(true);
-  //   e.preventDefault();
-  //   FirebaseApp.auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((cred) => {
-  //       setOpen(false);
-  //       console.log(name, lastname);
-  //       console.log("Vamos bien Marditoooo");
-  //       FirebaseApp.firestore()
-  //         .collection("Users")
-  //         .doc(cred.user.uid)
-  //         .set({
-  //           Name: name,
-  //           LastName: lastname,
-  //           Email: email,
-  //           Password: password,
-  //         })
-  //         .then(function () {
-  //           console.log("Se guardo mmgvo");
-  //         })
-  //         .catch(function (error) {
-  //           console.log(error);
-  //         });
-  //     })
-  //     .catch(function (error) {
-  //       var errorCode = error.code;
-  //       setError(errorCode);
-  //     });
-  // };
-
   const goLogin = () => {
     props.history.push("/");
   };
@@ -120,7 +88,7 @@ const SingUpForm = (props) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={5} className={classes.lastname}>
+        <Grid xs={12} sm={5} className={classes.lastname}>
           <InputBase
             placeholder="Apellido"
             required
@@ -137,7 +105,7 @@ const SingUpForm = (props) => {
           />
         </Grid>
 
-        <Grid item xs={12} className={classes.email}>
+        <Grid xs={12} className={classes.email}>
           <AccountCircleIcon className={classes.accounticon} />
           <InputBase
             placeholder="Email"
