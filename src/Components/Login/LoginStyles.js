@@ -9,6 +9,22 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 
+  buttoninicia: {
+    "&.MuiButton-containedPrimary:hover": {
+      backgroundColor: "#5d2eab",
+    },
+  },
+
+  root: {
+    "&.MuiCheckbox-root": {
+      color: "white",
+    },
+
+    "&.MuiCheckbox-colorPrimary.Mui-checked": {
+      color: "white",
+    },
+  },
+
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",

@@ -29,6 +29,14 @@ button {
   z-index: 1;
 }
 
+.submit:hover {
+  margin-bottom: 10px;
+  height: 40px;
+  background-color: #5d2eab;
+  transition: color 300ms ease-in-out;
+  z-index: 1;
+}
+
 .submit:hover::before {
   color: white;
 }

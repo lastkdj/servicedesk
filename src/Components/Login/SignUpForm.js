@@ -146,7 +146,7 @@ const SingUpForm = (props) => {
               <Checkbox
                 value="allowExtraEmails"
                 color="primary"
-                className={classes.textcolor}
+                className={classes.root}
               />
             }
             label="Quiero recibir promociones y actualizaciones a traves de este email."

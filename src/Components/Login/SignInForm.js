@@ -73,11 +73,11 @@ const SignForm = (props) => {
             <Checkbox
               value="remember"
               color="primary"
-              className={classes.textcolor}
+              className={classes.root}
             />
           }
           label="Remember me"
-          className={classes.textcolor}
+          classes={{ label: classes.textcolor }}
         />
 
         <Grid item xs={10} classes={{ item: classes.iniciasesion }}>

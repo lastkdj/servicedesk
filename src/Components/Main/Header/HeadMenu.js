@@ -29,14 +29,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 
-  small: {
-    width: theme.spacing(5),
-    height: theme.spacing(5),
-    margin: "0%",
-    marginRight: "10px",
-    justifySelf: "center",
-  },
-
   root: {
     color: "white",
     fontSize: "0.5em",

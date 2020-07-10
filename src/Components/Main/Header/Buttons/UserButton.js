@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import PicTest from "../../../../Imagenes/avatarpic.jpg";
+import PicTest from "../../../../Imagenes/abraham_nones.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";
@@ -15,15 +15,24 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: "flex",
     marginLeft: "10px",
-    marginRight: "10px",
   },
 
   username: {
     display: "none",
 
-    [theme.breakpoints.up("md")]: { display: "flex" },
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
 
     [theme.breakpoints.up("lg")]: {},
+  },
+
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    margin: "0%",
+    marginRight: "10px",
+    justifySelf: "center",
   },
 
   paper: {
@@ -58,7 +67,14 @@ const UserButton = (props) => {
         </Grid>
 
         <Grid item className={classes.username}>
-          <p style={{ color: "white", textAlign: "center" }}>
+          <p
+            style={{
+              color: "white",
+              textAlign: "center",
+              fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+              textTransform: "none",
+            }}
+          >
             {props.username}
           </p>
         </Grid>

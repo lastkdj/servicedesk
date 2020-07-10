@@ -28,11 +28,11 @@ const useStyles = makeStyles(() => ({
 }));
 const SearchButton = () => {
   const classes = useStyles();
-  const { setOpen } = useDash();
+  const { setOpenRight } = useDash();
 
   const onClick = (e) => {
     e.preventDefault();
-    setOpen(true);
+    setOpenRight(true);
   };
 
   return (

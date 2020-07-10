@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Drawer from "@material-ui/core/Drawer";
-import { makeStyles } from "@material-ui/core/styles";
 import { useDash } from "../../Context/DashContext";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -8,90 +7,23 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CloseDrawer from "./CloseDrawer";
 import "fontsource-roboto";
-
-const drawerWidth = 450;
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-
-  drawerPaper: {
-    width: drawerWidth,
-    background: "#282C34",
-  },
-
-  papergrid: {
-    padding: "10px 30px",
-  },
-
-  gridspacing: {
-    margin: "10px 0px",
-  },
-
-  gridOnespacing: {
-    margin: "10px 0px",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
-  buttongrid: {
-    justifyContent: "flex-end",
-    margin: "10px 0px",
-  },
-
-  button: {
-    backgroundColor: "#8A85FF",
-    color: "white",
-
-    "&:hover": {
-      backgroundColor: "#5A55DA",
-    },
-  },
-
-  root: {
-    width: "100%",
-    "& label.Mui-focused": {
-      color: "#B6B3FF",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#8A85FF",
-        borderWidth: "2px",
-      },
-      "&:hover fieldset": {
-        borderColor: "#B6B3FF",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#8A85FF",
-      },
-    },
-  },
-
-  label: {
-    color: "gray",
-  },
-}));
+import useStyles from "./DrawerStyles";
 
 const DrawerRight = () => {
-  const { open, setOpen } = useDash();
+  const { openRight, setOpenRight } = useDash();
   const classes = useStyles();
 
   const toggleDrawer = () => {
-    setOpen(false);
+    setOpenRight(false);
   };
 
   return (
     <Drawer
-      className="classes.drawer"
       classes={{
         paper: classes.drawerPaper,
       }}
       anchor="right"
-      open={open}
+      open={openRight}
       onClose={toggleDrawer}
     >
       <Grid container className={classes.papergrid}>

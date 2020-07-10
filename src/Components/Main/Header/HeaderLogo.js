@@ -1,21 +1,30 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import LightSpeed from "react-reveal/LightSpeed";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   logo: {
-    fontFamily: "Poppins, sans-serif",
-    color: "white",
-    margin: "0",
+    display: "none",
+
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {
+      fontFamily: "Poppins, sans-serif",
+      color: "white",
+      margin: "0",
+      display: "block",
+    },
+    [theme.breakpoints.up("lg")]: {},
   },
 }));
 
 const HeaderLogo = () => {
   const classes = useStyles();
   return (
-    <div>
+    <LightSpeed left>
       <h1 className={classes.logo}> Logo</h1>
-    </div>
+    </LightSpeed>
   );
 };
 

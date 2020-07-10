@@ -3,14 +3,17 @@ import React, { useState, useContext, useMemo, createContext } from "react";
 const DashContext = createContext();
 
 export function DashProvider(props) {
-  const [open, setOpen] = useState(false);
+  const [openRight, setOpenRight] = useState(false);
+  const [openLeft, setOpenLeft] = useState(true);
 
   const value = useMemo(() => {
     return {
-      open,
-      setOpen,
+      openRight,
+      openLeft,
+      setOpenRight,
+      setOpenLeft,
     };
-  }, [open]);
+  }, [openRight, openLeft]);
 
   return <DashContext.Provider value={value} {...props} />;
 }

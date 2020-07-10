@@ -28,11 +28,11 @@ const useStyles = makeStyles(() => ({
 }));
 const CloseDrawer = () => {
   const classes = useStyles();
-  const { setOpen } = useDash();
+  const { setOpenRight } = useDash();
 
   const onClick = (e) => {
     e.preventDefault();
-    setOpen(false);
+    setOpenRight(false);
   };
 
   return (
