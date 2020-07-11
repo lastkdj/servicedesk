@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import PicTest from "../../../../Imagenes/abraham_nones.png";
+import PicTest from "../../../../Imagenes/avatar.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";

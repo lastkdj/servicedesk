@@ -8,6 +8,7 @@ import FirebaseApp from "../../../FireBase/FireBaseConfig";
 import IconButton from "@material-ui/core/IconButton";
 import SearchButton from "./Buttons/SearchButton";
 import UserButton from "./Buttons/UserButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   rightmenu: {
@@ -57,33 +58,40 @@ const HeadMenu = () => {
   return (
     <Grid container className={classes.rightmenu}>
       <SearchButton />
-      <Grid item className={classes.icon}>
-        <IconButton
-          aria-label="upload picture"
-          component="span"
-          classes={{ root: classes.root }}
-        >
-          <SupervisorAccountOutlinedIcon />
-        </IconButton>
-      </Grid>
-      <Grid item className={classes.icon}>
-        <IconButton
-          aria-label="upload picture"
-          component="span"
-          classes={{ root: classes.root }}
-        >
-          <NotificationsOutlinedIcon />
-        </IconButton>
-      </Grid>
-      <Grid item className={classes.icon}>
-        <IconButton
-          aria-label="upload picture"
-          component="span"
-          classes={{ root: classes.root }}
-        >
-          <SettingsOutlinedIcon />
-        </IconButton>
-      </Grid>
+
+      <Tooltip title="Contacts">
+        <Grid item className={classes.icon}>
+          <IconButton
+            aria-label="upload picture"
+            component="span"
+            classes={{ root: classes.root }}
+          >
+            <SupervisorAccountOutlinedIcon />
+          </IconButton>
+        </Grid>
+      </Tooltip>
+      <Tooltip title="Notifications">
+        <Grid item className={classes.icon}>
+          <IconButton
+            aria-label="upload picture"
+            component="span"
+            classes={{ root: classes.root }}
+          >
+            <NotificationsOutlinedIcon />
+          </IconButton>
+        </Grid>
+      </Tooltip>
+      <Tooltip title="Settings">
+        <Grid item className={classes.icon}>
+          <IconButton
+            aria-label="upload picture"
+            component="span"
+            classes={{ root: classes.root }}
+          >
+            <SettingsOutlinedIcon />
+          </IconButton>
+        </Grid>
+      </Tooltip>
       <UserButton username={username} />
     </Grid>
   );

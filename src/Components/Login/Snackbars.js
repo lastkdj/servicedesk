@@ -4,7 +4,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 const Snackbars = () => {
-  const { error, setError } = useUsuario();
+  const { error, setError, setOpen } = useUsuario();
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -15,6 +15,7 @@ const Snackbars = () => {
       return;
     }
     setError("");
+    setOpen(false);
   };
 
   console.log(error);

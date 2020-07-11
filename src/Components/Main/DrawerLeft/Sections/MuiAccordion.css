@@ -1,0 +1,15 @@
+.MuiAccordionSummary-content {
+  margin: 0;
+  width: 100%;
+  display: flex;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0;
+  display: flex;
+}
+
+.MuiAccordionSummary-expandIcon {
+  padding: 0;
+  display: flex;
+}

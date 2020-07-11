@@ -5,13 +5,13 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import BarChartOutlinedIcon from "@material-ui/icons/BarChartOutlined";
 import Typography from "@material-ui/core/Typography";
-import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
-import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
-import AllInboxOutlinedIcon from "@material-ui/icons/AllInboxOutlined";
-import ComputerOutlinedIcon from "@material-ui/icons/ComputerOutlined";
-import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
-import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import VerticalSplitOutlinedIcon from "@material-ui/icons/VerticalSplitOutlined";
+import "./MuiAccordion.css";
+import Hardware from "./MenuItems/Hardware";
+import Software from "./MenuItems/Software";
+import Users from "./MenuItems/Users";
+import Tickets from "./MenuItems/Tickets";
+import Organization from "./MenuItems/Organization";
 
 const useStyles = makeStyles((theme) => ({
   menusection: {
@@ -39,6 +39,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     fontSize: "1em",
     lineHeight: "1.334",
+    display: "flex",
+    alignItems: "center",
+  },
+
+  menutexthardware: {
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    textTransform: "none",
+    fontWeight: "500",
+    fontSize: "1em",
+    lineHeight: "1.334",
+    display: "flex",
+    alignItems: "center",
+    marginRight: "80px",
   },
 
   buttonlist: {
@@ -46,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px 0",
     width: "100%",
     borderRadius: "5px",
+    margin: "0",
     "&:hover": {
       backgroundColor: "#31343D",
       "@media (hover: none)": {
@@ -63,10 +77,60 @@ const useStyles = makeStyles((theme) => ({
       color: "#8A85FF",
     },
   },
+
+  buttonhardware: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    color: "#adb0bb",
+    padding: "10px 0",
+    width: "100%",
+    borderRadius: "5px",
+    margin: "0",
+    "&:hover": {
+      backgroundColor: "#31343D",
+      "@media (hover: none)": {
+        backgroundColor: "transparent",
+      },
+    },
+    "&:focus": {
+      color: "#8A85FF",
+    },
+    "&:active .MuiTypography-root": {
+      color: "#8A85FF",
+    },
+
+    "&:active .MuiSvgIcon-root": {
+      color: "#8A85FF",
+    },
+  },
+
+  acordionroot: {
+    backgroundColor: "transparent",
+    boxShadow: "none",
+    margin: "0",
+    "&.MuiAccordion-root:before": {
+      display: "none",
+    },
+    "&.MuiAccordion-root.Mui-expanded": {
+      margin: "0",
+    },
+  },
+
+  root: {
+    margin: "0px",
+    width: "100%",
+    padding: theme.spacing(0),
+    "&.MuiAccordionSummary-root": {
+      minHeight: "0",
+    },
+  },
 }));
 
 const MenuSection = () => {
   const classes = useStyles();
+
+  console.log("render");
   return (
     <Grid container className={classes.menusection}>
       <Grid item xs={12}>
@@ -90,45 +154,17 @@ const MenuSection = () => {
       </Button>
       <Divider />
       <Grid item xs={12}>
-        <Typography className={classes.menutittle}>Service Desk</Typography>
+        <Typography className={classes.menutittle}>Desk Management</Typography>
       </Grid>
-      <Button classes={{ root: classes.buttonlist }}>
-        <Grid item container xs={12} alignItems="center">
-          <EmailOutlinedIcon className={classes.menuicon} />
-          <Typography className={classes.menutext}>Tickets</Typography>
-        </Grid>
-      </Button>
-      <Button
-        classes={{
-          root: classes.buttonlist,
-        }}
-      >
-        <Grid item container xs={12} alignItems="center">
-          <PeopleAltOutlinedIcon className={classes.menuicon} />
-          <Typography className={classes.menutext}>Users</Typography>
-        </Grid>
-      </Button>
+      <Tickets />
+      <Users />
+      <Organization />
       <Divider />
       <Grid item xs={12}>
         <Typography className={classes.menutittle}>Inventory</Typography>
       </Grid>
-      <Button classes={{ root: classes.buttonlist }}>
-        <Grid item container xs={12} alignItems="center">
-          <ComputerOutlinedIcon className={classes.menuicon} />
-          <Typography className={classes.menutext}>Notebooks</Typography>
-        </Grid>
-      </Button>
-
-      <Button
-        classes={{
-          root: classes.buttonlist,
-        }}
-      >
-        <Grid item container xs={12} alignItems="center">
-          <PhoneAndroidOutlinedIcon className={classes.menuicon} />
-          <Typography className={classes.menutext}>Cellphones</Typography>
-        </Grid>
-      </Button>
+      <Software />
+      <Hardware />
     </Grid>
   );
 };

@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { useDash } from "../../../Context/DashContext";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -36,16 +37,18 @@ const SearchButton = () => {
   };
 
   return (
-    <Grid item className={classes.icon}>
-      <IconButton
-        aria-label="upload picture"
-        component="span"
-        classes={{ root: classes.root }}
-        onClick={onClick}
-      >
-        <SearchIcon />
-      </IconButton>
-    </Grid>
+    <Tooltip title="Search">
+      <Grid item className={classes.icon}>
+        <IconButton
+          aria-label="upload picture"
+          component="span"
+          classes={{ root: classes.root }}
+          onClick={onClick}
+        >
+          <SearchIcon />
+        </IconButton>
+      </Grid>
+    </Tooltip>
   );
 };
 

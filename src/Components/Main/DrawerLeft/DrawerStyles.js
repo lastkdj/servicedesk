@@ -1,16 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 256;
+const drawerWidthxs = 255;
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     background: "#282C34",
-    width: "100%",
+    width: drawerWidthxs,
     flexShrink: 0,
     top: "65px",
 
     [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
+      width: drawerWidthxs,
       borderRight: "1px solid rgba(255, 255, 255, 0.12);",
       flexShrink: 0,
     },
