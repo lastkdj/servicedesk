@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import DrawerRight from "../DrawerRight/DrawerRight";
 import DrawerLeft from "../DrawerLeft/DrawerLeft";
 import Bounce from "react-reveal/Bounce";
-// import Account from "../";
+import Content from "../Content/Content";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -21,14 +21,10 @@ const Main = () => {
 
   return (
     <div className={classes.main}>
-      <Grid>
-        <Header />
-        <DrawerRight />
-        <Bounce right>
-          <DrawerLeft />
-        </Bounce>
-        {/* <Account /> */}
-      </Grid>
+      <Header />
+      <DrawerRight />
+      <DrawerLeft />
+      <Content />
     </div>
   );
 };
