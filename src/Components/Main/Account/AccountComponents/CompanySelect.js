@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
       color: "#B6B3FF",
     },
     "& .MuiOutlinedInput-root": {
+      color: "white",
       "& fieldset": {
         borderColor: "rgba(255, 255, 255, 0.23)",
         borderWidth: "1px",
@@ -58,7 +59,7 @@ export default function CompanySelect() {
         id="demo-simple-select-outlined-label"
         style={{ color: "white" }}
       >
-        Choose a Company
+        Company
       </InputLabel>
       <Select
         fullWidth

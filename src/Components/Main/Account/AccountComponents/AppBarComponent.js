@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 import Grid from "@material-ui/core/Grid";
 import General from "./General";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
+import { useMediaQuery } from "react-responsive";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -38,6 +38,19 @@ const useStyles = makeStyles((theme) => ({
     "&.PrivateTabIndicator-colorSecondary-93": {
       backgroundColor: "#8a85ff",
     },
+  },
+
+  tabs: {
+    justifyContent: "center",
+
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      justifyContent: "left",
+    },
+
+    indicator: {},
   },
 }));
 function TabPanel(props) {
@@ -86,6 +99,8 @@ const AppBarComponent = () => {
     }, 500);
   }, []);
 
+  const isMobile = useMediaQuery({ query: "(max-device-width: 375px)" });
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -97,9 +112,17 @@ const AppBarComponent = () => {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
-          TabIndicatorProps={{
-            style: { backgroundColor: "#8a85ff" },
-          }}
+          classes={{ flexContainer: classes.tabs }}
+          TabIndicatorProps={
+            !isMobile
+              ? {
+                  style: {
+                    backgroundColor: "#8a85ff",
+                    width: "160px",
+                  },
+                }
+              : { style: { backgroundColor: "#8a85ff", width: "100%" } }
+          }
         >
           <Tab
             label="GENERAL"

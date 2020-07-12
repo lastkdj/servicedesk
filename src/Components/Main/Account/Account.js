@@ -20,6 +20,26 @@ const useStyles = makeStyles((theme) => ({
     height: "700px",
     backgroundColor: "#1c2025",
     margin: " 0px 192px",
+
+    [theme.breakpoints.up("sm")]: {
+      width: "1280",
+      height: "700px",
+      backgroundColor: "#1c2025",
+      margin: " 0px 10px",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      width: "1280",
+      height: "700px",
+      backgroundColor: "#1c2025",
+      margin: " 0px 10px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "1280",
+      height: "700px",
+      backgroundColor: "#1c2025",
+      margin: " 0px 192px",
+    },
   },
 
   link: {

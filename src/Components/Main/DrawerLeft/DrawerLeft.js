@@ -10,7 +10,7 @@ const DrawerLeft = (props) => {
   const { openLeft, setOpenLeft } = useDash();
   const classes = useStyles();
 
-  const isMobile = useMediaQuery({ query: "(min-device-width: 960px)" });
+  const isMobile = useMediaQuery({ query: "(min-device-width: 961px)" });
 
   const toggleDrawer = () => {
     if (!isMobile) {

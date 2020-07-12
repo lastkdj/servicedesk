@@ -10,9 +10,29 @@ import Content from "../Content/Content";
 const useStyles = makeStyles((theme) => ({
   main: {
     width: "100%",
-    height: "100vh",
+    height: "1650px",
     backgroundColor: "#1c2025",
     position: "absolute",
+
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      height: "1200px",
+      backgroundColor: "#1c2025",
+      position: "absolute",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      width: "100%",
+      height: "100%",
+      backgroundColor: "#1c2025",
+      position: "absolute",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "100%",
+      height: "100%",
+      backgroundColor: "#1c2025",
+      position: "absolute",
+    },
   },
 }));
 

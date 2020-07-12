@@ -12,7 +12,8 @@ import "../Account.css";
 import CountrySelect from "./CountrySelect";
 import CompanySelect from "./CompanySelect";
 import Switch from "@material-ui/core/Switch";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import ImageUpload from "./ImageUpload";
+import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -131,7 +132,20 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#8A85FF",
     },
   },
+
+  userpaper: {
+    marginTop: "10px",
+
+    [theme.breakpoints.up("sm")]: {
+      justifyContent: "center",
+    },
+
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {},
+  },
 }));
+
+const db = FirebaseApp.firestore();
 
 const General = (props) => {
   const [state, setState] = React.useState(true);
@@ -142,7 +156,6 @@ const General = (props) => {
 
   const classes = useStyles();
 
-  console.log("te estoy jodiendo");
   return (
     <Bounce left when={props.value === 0}>
       <props.TabPanel
@@ -150,8 +163,8 @@ const General = (props) => {
         index={0}
         className={classes.tabpanel}
       >
-        <Grid container spacing={2} style={{ marginTop: "24px" }}>
-          <Grid item xs={3}>
+        <Grid container spacing={2} className={classes.userpaper}>
+          <Grid item xs={12} sm={8} md={3} lg={3}>
             <Paper elevation={3} style={{ backgroundColor: "#282C34" }}>
               <Grid container>
                 <Grid item xs={12} className={classes.avatargrid}>
@@ -179,36 +192,11 @@ const General = (props) => {
                     Santiago, Chile
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  style={{ padding: "10px", marginTop: "10px", color: "white" }}
-                >
-                  <input
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                  />
-                  <label htmlFor="contained-button-file">
-                    <Button
-                      fullWidth
-                      type="submit"
-                      color="primary"
-                      variant="contained"
-                      className="submit"
-                      component="span"
-                    >
-                      <PhotoCamera style={{ marginRight: "20px" }} />
-                      Change Picture
-                    </Button>
-                  </label>
-                </Grid>
+                <ImageUpload />
               </Grid>
             </Paper>
           </Grid>
-          <Grid container item xs={9}>
+          <Grid container item xs={12} sm={12} md={9} lg={9}>
             <Grid item xs={12}>
               <Paper elevation={3} style={{ backgroundColor: "#282C34" }}>
                 <Grid container>
@@ -224,7 +212,14 @@ const General = (props) => {
                     </Typography>
                   </Grid>
                   <Grid container item xs={12}>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <TextField
                         id="outlined-helperText"
                         label="First Name"
@@ -239,7 +234,14 @@ const General = (props) => {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <TextField
                         id="outlined-basic"
                         label="Last Name"
@@ -265,7 +267,10 @@ const General = (props) => {
                   >
                     <Grid
                       item
-                      xs={6}
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
                       style={{ padding: "16px", marginBottom: "20px" }}
                     >
                       <TextField
@@ -283,7 +288,14 @@ const General = (props) => {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <TextField
                         id="outlined-basic"
                         label="Phone Number"
@@ -312,15 +324,36 @@ const General = (props) => {
                     </Typography>
                   </Grid>
                   <Grid container item xs={12}>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <CountrySelect />
                     </Grid>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <CompanySelect />
                     </Grid>
                   </Grid>
                   <Grid container item xs={12}>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <TextField
                         id="outlined-basic"
                         label="Department"
@@ -335,7 +368,14 @@ const General = (props) => {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={6} style={{ padding: "16px" }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={6}
+                      style={{ padding: "16px" }}
+                    >
                       <TextField
                         id="outlined-basic"
                         label="Job Position"
@@ -351,7 +391,15 @@ const General = (props) => {
                       />
                     </Grid>
                   </Grid>
-                  <Grid container item xs={6} style={{ padding: "16px" }}>
+                  <Grid
+                    container
+                    item
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    style={{ padding: "16px" }}
+                  >
                     <Grid item xs={12} style={{ color: "#e6e5e8" }}>
                       <Typography style={{ fontWeight: "500" }}>
                         Make Contact Info Public
@@ -381,7 +429,10 @@ const General = (props) => {
                   <Grid
                     container
                     item
-                    xs={6}
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
                     style={{
                       padding: "16px",
                       justifyContent: "flex-end",

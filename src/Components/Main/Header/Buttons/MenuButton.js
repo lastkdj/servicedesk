@@ -14,10 +14,10 @@ const useStyles = makeStyles((theme) => ({
       margin: "0",
     },
 
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
       display: "none",
     },
-    [theme.breakpoints.up("lg")]: {},
   },
 }));
 

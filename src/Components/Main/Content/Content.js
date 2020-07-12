@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Account from "../Account/Account";
 
 const Content = () => {
-  const isMobile = useMediaQuery({ query: "(min-device-width: 960px)" });
+  const isMobile = useMediaQuery({ query: "(min-device-width: 961px)" });
 
   return (
     <Grid style={{ marginLeft: !isMobile ? "0px" : "256px", color: "white" }}>

@@ -30,6 +30,7 @@ function signupUser(userDetails, setError, setOpen) {
               firstName: name,
               lastName: lastname,
               email: email,
+              password: password,
             });
         })
         .catch((error) => {

@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
       margin: "0",
       display: "block",
+      marginRight: "10px",
     },
     [theme.breakpoints.up("lg")]: {},
   },
