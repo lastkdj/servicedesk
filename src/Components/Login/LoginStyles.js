@@ -227,6 +227,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     borderRadius: "7px",
   },
+
+  input: {
+    color: "black",
+  },
 }));
 
 export default useStyles;

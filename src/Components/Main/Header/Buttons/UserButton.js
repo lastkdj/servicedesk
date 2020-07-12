@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -55,6 +57,7 @@ const UserButton = (props) => {
 
   const onClicky = () => {
     FirebaseApp.auth().signOut();
+    props.history.push("/");
   };
 
   const classes = useStyles();
@@ -90,7 +93,17 @@ const UserButton = (props) => {
           classes={{ paper: classes.paper }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+
+          <MenuItem>
+            {" "}
+            <Link
+              to="/account"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              My account
+            </Link>
+          </MenuItem>
+
           <MenuItem onClick={onClicky}>Logout</MenuItem>
         </Menu>
       </Grid>
@@ -98,4 +111,4 @@ const UserButton = (props) => {
   );
 };
 
-export default UserButton;
+export default withRouter(UserButton);

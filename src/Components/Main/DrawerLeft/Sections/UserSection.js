@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -59,9 +60,11 @@ const UserSection = () => {
 
   return (
     <Grid container className={classes.usersection}>
-      <Grid item xs={12} className={classes.avatargrid}>
-        <Avatar alt="avatar" src={PicTest} className={classes.small} />
-      </Grid>
+      <Link to="/account">
+        <Grid item xs={12} className={classes.avatargrid}>
+          <Avatar alt="avatar" src={PicTest} className={classes.small} />
+        </Grid>
+      </Link>
 
       <Grid item xs={12} className={classes.username}>
         <Typography
@@ -72,7 +75,7 @@ const UserSection = () => {
             fontFamily: "Roboto, Helvetica, Arial, sans-serif",
             textTransform: "none",
             fontWeight: "400",
-            fontSize: "1.2em",
+            fontSize: "16px",
             lineHeight: "1.334",
             cursor: "pointer",
           }}
@@ -88,7 +91,7 @@ const UserSection = () => {
             fontFamily: "Roboto, Helvetica, Arial, sans-serif",
             textTransform: "none",
             fontWeight: "400",
-            fontSize: "1em",
+            fontSize: "14px",
             lineHeight: "1.334",
           }}
         >

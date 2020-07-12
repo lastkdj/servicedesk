@@ -18,6 +18,10 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   menuicon: {
+    margin: "0",
+  },
+
+  submenuicon: {
     margin: "0 10px",
   },
 
@@ -39,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "1.334",
     display: "flex",
     alignItems: "center",
-    // marginRight: "80px",
   },
 
   buttonlist: {
@@ -133,11 +136,11 @@ const Hardware = () => {
       <AccordionSummary id="panel1d-header" className={classes.root}>
         <Button classes={{ root: classes.buttonhardware }}>
           <Grid item container xs={12} alignItems="center">
-            <Grid item xs={2}>
+            <Grid item container xs={2} style={{ justifyContent: "center" }}>
               <Icon
                 icon={hardwareChipOutline}
                 className={classes.menuicon}
-                style={{ fontSize: "1.7em", marginRight: "13px" }}
+                style={{ fontSize: "1.7em" }}
               ></Icon>
             </Grid>
             <Grid
@@ -172,7 +175,7 @@ const Hardware = () => {
               style={{ paddingLeft: "45px" }}
             >
               <Typography className={classes.menutext}>Notebooks</Typography>
-              <ComputerOutlinedIcon className={classes.menuicon} />
+              <ComputerOutlinedIcon className={classes.submenuicon} />
             </Grid>
           </Button>
           <Divider />
@@ -191,7 +194,7 @@ const Hardware = () => {
               <Typography className={classes.menutext}>
                 Mobile Phones
               </Typography>
-              <PhoneAndroidOutlinedIcon className={classes.menuicon} />
+              <PhoneAndroidOutlinedIcon className={classes.submenuicon} />
             </Grid>
           </Button>
         </Grid>

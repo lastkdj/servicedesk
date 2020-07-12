@@ -39,6 +39,7 @@ const SignForm = (props) => {
         <AccountCircleIcon className={classes.accounticon} />
 
         <InputBase
+          classes={{ input: classes.input }}
           placeholder="Email"
           required
           fullWidth
@@ -55,6 +56,7 @@ const SignForm = (props) => {
       <Grid className={classes.password}>
         <LockIcon className={classes.accounticon} />
         <InputBase
+          classes={{ input: classes.input }}
           placeholder="Contraseña"
           required
           fullWidth

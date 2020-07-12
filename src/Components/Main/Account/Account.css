@@ -1,0 +1,54 @@
+.PrivateTabIndicator-colorSecondary-94 {
+  background-color: #8a85ff;
+}
+
+.MuiBox-root {
+  padding: 0;
+}
+
+.MuiAutocomplete-root {
+  backgroundcolor: rgba(0, 0, 0, 0.87);
+}
+
+button {
+  position: relative;
+}
+
+.submit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: #ffa600;
+  transform: scaleX(0);
+  /* transform-origin: left; */
+  transition: transform 300ms ease-in-out;
+  border-radius: 3px;
+}
+
+.submit:hover::before {
+  transform: scaleX(1);
+}
+
+.submit {
+  margin-bottom: 10px;
+  height: 40px;
+  background-color: #5d2eab;
+  transition: color 300ms ease-in-out;
+  z-index: 1;
+}
+
+.submit:hover {
+  margin-bottom: 10px;
+  height: 40px;
+  background-color: #5d2eab;
+  transition: color 300ms ease-in-out;
+  z-index: 1;
+}
+
+.submit:hover::before {
+  color: white;
+}

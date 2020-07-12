@@ -16,6 +16,10 @@ import microsoftofficeIcon from "@iconify/icons-simple-icons/microsoftoffice";
 
 const useStyles = makeStyles((theme) => ({
   menuicon: {
+    margin: "0",
+  },
+
+  submenuicon: {
     margin: "0 10px",
   },
 
@@ -132,7 +136,7 @@ const Software = () => {
       <AccordionSummary id="panel1d-header" className={classes.root}>
         <Button classes={{ root: classes.buttonhardware }}>
           <Grid item container xs={12} alignItems="center">
-            <Grid item xs={2}>
+            <Grid item container xs={2} style={{ justifyContent: "center" }}>
               <AppsIcon className={classes.menuicon} />
             </Grid>
             <Grid
@@ -170,7 +174,7 @@ const Software = () => {
               <Icon
                 icon={microsoftofficeIcon}
                 className={classes.menuicon}
-                style={{ fontSize: "1.7em", marginRight: "13px" }}
+                style={{ fontSize: "1.7em", margin: "0 10px" }}
               ></Icon>
             </Grid>
           </Button>
@@ -191,7 +195,7 @@ const Software = () => {
               <Icon
                 icon={designLine}
                 className={classes.menuicon}
-                style={{ fontSize: "1.7em", marginRight: "13px" }}
+                style={{ fontSize: "1.7em", margin: "0 10px" }}
               />
             </Grid>
           </Button>

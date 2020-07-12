@@ -13,7 +13,7 @@ import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 
 const useStyles = makeStyles((theme) => ({
   menuicon: {
-    margin: "0 10px",
+    margin: "0",
   },
 
   menutext: {
@@ -128,7 +128,7 @@ const Tickets = () => {
       <AccordionSummary id="panel1d-header" className={classes.root}>
         <Button classes={{ root: classes.buttonhardware }}>
           <Grid item container xs={12} alignItems="center">
-            <Grid item xs={2}>
+            <Grid item container xs={2} style={{ justifyContent: "center" }}>
               <EmailOutlinedIcon className={classes.menuicon} />
             </Grid>
             <Grid
