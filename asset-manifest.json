@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/servicedesk/static/css/main.1faf95b5.chunk.css",
-    "main.js": "/servicedesk/static/js/main.e05c7585.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.e05c7585.chunk.js.map",
+    "main.css": "/servicedesk/static/css/main.199c2c9a.chunk.css",
+    "main.js": "/servicedesk/static/js/main.0c4493f2.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.0c4493f2.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.8c1804ae.chunk.js": "/servicedesk/static/js/2.8c1804ae.chunk.js",
-    "static/js/2.8c1804ae.chunk.js.map": "/servicedesk/static/js/2.8c1804ae.chunk.js.map",
+    "static/js/2.225da20e.chunk.js": "/servicedesk/static/js/2.225da20e.chunk.js",
+    "static/js/2.225da20e.chunk.js.map": "/servicedesk/static/js/2.225da20e.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.c5e9c3d1b736baef0e508da4516d94cd.js": "/servicedesk/precache-manifest.c5e9c3d1b736baef0e508da4516d94cd.js",
+    "precache-manifest.b759271d8ddef4a7c92004bce8986a3b.js": "/servicedesk/precache-manifest.b759271d8ddef4a7c92004bce8986a3b.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
-    "static/css/main.1faf95b5.chunk.css.map": "/servicedesk/static/css/main.1faf95b5.chunk.css.map",
-    "static/js/2.8c1804ae.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.8c1804ae.chunk.js.LICENSE.txt",
+    "static/css/main.199c2c9a.chunk.css.map": "/servicedesk/static/css/main.199c2c9a.chunk.css.map",
+    "static/js/2.225da20e.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.225da20e.chunk.js.LICENSE.txt",
     "static/media/avatar.png": "/servicedesk/static/media/avatar.456fa3e1.png",
     "static/media/background.jpg": "/servicedesk/static/media/background.7a9468ab.jpg",
     "static/media/index.css": "/servicedesk/static/media/roboto-latin-900-normal.bb1e4dc6.woff"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.8c1804ae.chunk.js",
-    "static/css/main.1faf95b5.chunk.css",
-    "static/js/main.e05c7585.chunk.js"
+    "static/js/2.225da20e.chunk.js",
+    "static/css/main.199c2c9a.chunk.css",
+    "static/js/main.0c4493f2.chunk.js"
   ]
 }
