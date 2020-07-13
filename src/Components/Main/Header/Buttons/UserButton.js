@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import PicTest from "../../../../Imagenes/avatar.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";
@@ -10,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { useAccount } from "../../../Context/AccountContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -44,7 +44,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserButton = (props) => {
+  const { state } = useAccount();
+  const { picture } = state;
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [pic, setPic] = useState({});
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -60,13 +63,21 @@ const UserButton = (props) => {
     props.history.push("/");
   };
 
+  const docRef = FirebaseApp.firestore()
+    .collection("users")
+    .doc(FirebaseApp.auth().currentUser.uid);
+
+  useEffect(() => {
+    setPic(picture);
+  }, [picture]);
+
   const classes = useStyles();
 
   return (
     <div style={{ display: "flex" }}>
       <Button onClick={handleClick}>
         <Grid item className={classes.avatargrid}>
-          <Avatar alt="avatar" src={PicTest} className={classes.small} />
+          <Avatar alt="avatar" src={pic.photoUrl} className={classes.small} />
         </Grid>
 
         <Grid item className={classes.username}>

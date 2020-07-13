@@ -89,15 +89,6 @@ function a11yProps(index) {
 const AppBarComponent = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [username, setUserName] = useState("");
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (FirebaseApp.auth().currentUser) {
-        setUserName(FirebaseApp.auth().currentUser.displayName);
-      }
-    }, 500);
-  }, []);
 
   const isMobile = useMediaQuery({ query: "(max-device-width: 375px)" });
 
@@ -141,7 +132,7 @@ const AppBarComponent = () => {
           />
         </Tabs>
       </AppBar>
-      <General username={username} value={value} TabPanel={TabPanel} />
+      <General value={value} TabPanel={TabPanel} />
       <TabPanel value={value} index={1}>
         Item Two
       </TabPanel>

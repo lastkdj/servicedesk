@@ -2,10 +2,6 @@
   padding: 0;
 }
 
-.MuiAutocomplete-root {
-  backgroundcolor: rgba(0, 0, 0, 0.87);
-}
-
 button {
   position: relative;
 }

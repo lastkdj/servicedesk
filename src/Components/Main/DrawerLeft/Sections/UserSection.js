@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import { useAccount } from "../../../Context/AccountContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -46,7 +47,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserSection = () => {
+  const { state } = useAccount();
+  const { picture } = state;
   const [username, setUserName] = useState("");
+  const [pic, setPic] = useState({});
+
+  const docRef = FirebaseApp.firestore()
+    .collection("users")
+    .doc(FirebaseApp.auth().currentUser.uid);
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,13 +64,17 @@ const UserSection = () => {
     }, 500);
   }, []);
 
+  useEffect(() => {
+    setPic(picture);
+  }, [picture]);
+
   const classes = useStyles();
 
   return (
     <Grid container className={classes.usersection}>
       <Link to="/account">
         <Grid item xs={12} className={classes.avatargrid}>
-          <Avatar alt="avatar" src={PicTest} className={classes.small} />
+          <Avatar alt="avatar" src={pic.photoUrl} className={classes.small} />
         </Grid>
       </Link>
 

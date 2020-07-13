@@ -4,17 +4,20 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { HashRouter } from "react-router-dom";
-import { AuthProvider } from "./Components/Context/AuthContext";
+import MaxProvider from "./Components/Context/MaxProvider";
+// import { AuthProvider } from "./Components/Context/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
+    {/* <AuthProvider> */}
+    <MaxProvider>
       <Suspense fallback={"Conectando la App"}>
         <HashRouter>
           <App />
         </HashRouter>
       </Suspense>
-    </AuthProvider>
+    </MaxProvider>
+    {/* </AuthProvider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

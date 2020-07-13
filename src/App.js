@@ -6,13 +6,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Background from "./Imagenes/background.jpg";
 import PasswordReset from "./Components/Login/views/PasswordReset";
-import { UserProvider } from "./Components/Context/UserContext";
+// import { UserProvider } from "./Components/Context/UserContext";
 import SnackBar from "./Components/Login/Snackbars";
 import LinearIndeterminate from "./Components/Login/Loading";
 import { AuthContext } from "./Components/Context/AuthContext";
 import Main from "./Components/Main/MainView/Main";
-import { DashProvider } from "./Components/Context/DashContext";
-import { StylesProvider } from "@material-ui/core/styles";
+// import { DashProvider } from "./Components/Context/DashContext";
+// import { StylesProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   wall: {
@@ -28,34 +28,30 @@ function App() {
   const classes = useStyles();
 
   return (
-    <StylesProvider injectFirst>
-      <DashProvider>
-        <UserProvider>
-          <Grid container className={classes.wall}>
-            <Grid item xs={12}>
-              <LinearIndeterminate />
-            </Grid>
-            {user ? (
-              <Main />
-            ) : (
-              // <Profile />
-              <Grid item xs={12}>
-                <Switch>
-                  <Route exact path="/" component={SignIn} />
-                  <Route exact path="/signup" component={SignUp} />
-                  <Route
-                    exact
-                    path="/passwordreset"
-                    component={PasswordReset}
-                  />
-                </Switch>
-                <SnackBar />
-              </Grid>
-            )}
-          </Grid>
-        </UserProvider>
-      </DashProvider>
-    </StylesProvider>
+    // <StylesProvider injectFirst>
+    //   <DashProvider>
+    //     <UserProvider>
+    <Grid container className={classes.wall}>
+      <Grid item xs={12}>
+        <LinearIndeterminate />
+      </Grid>
+      {user ? (
+        <Main />
+      ) : (
+        // <Profile />
+        <Grid item xs={12}>
+          <Switch>
+            <Route exact path="/" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/passwordreset" component={PasswordReset} />
+          </Switch>
+          <SnackBar />
+        </Grid>
+      )}
+    </Grid>
+    //     </UserProvider>
+    //   </DashProvider>
+    // </StylesProvider>
   );
 }
 

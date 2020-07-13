@@ -10,7 +10,7 @@ const Content = () => {
   return (
     <Grid style={{ marginLeft: !isMobile ? "0px" : "256px", color: "white" }}>
       <Switch>
-        <Route exact path="/" component={Account} />
+        <Route exact path="/account" component={Account} />
       </Switch>
     </Grid>
   );
