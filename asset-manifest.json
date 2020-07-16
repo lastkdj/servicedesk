@@ -1,28 +1,30 @@
 {
   "files": {
-    "main.css": "/servicedesk/static/css/main.199c2c9a.chunk.css",
-    "main.js": "/servicedesk/static/js/main.0c4493f2.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.0c4493f2.chunk.js.map",
+    "main.css": "/servicedesk/static/css/main.a95ec40d.chunk.css",
+    "main.js": "/servicedesk/static/js/main.b93e65e8.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.b93e65e8.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.225da20e.chunk.js": "/servicedesk/static/js/2.225da20e.chunk.js",
-    "static/js/2.225da20e.chunk.js.map": "/servicedesk/static/js/2.225da20e.chunk.js.map",
+    "static/js/2.bb9c4c1b.chunk.js": "/servicedesk/static/js/2.bb9c4c1b.chunk.js",
+    "static/js/2.bb9c4c1b.chunk.js.map": "/servicedesk/static/js/2.bb9c4c1b.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.b759271d8ddef4a7c92004bce8986a3b.js": "/servicedesk/precache-manifest.b759271d8ddef4a7c92004bce8986a3b.js",
+    "precache-manifest.48895d53c2572c56c0ebdb1817b312a2.js": "/servicedesk/precache-manifest.48895d53c2572c56c0ebdb1817b312a2.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
-    "static/css/main.199c2c9a.chunk.css.map": "/servicedesk/static/css/main.199c2c9a.chunk.css.map",
-    "static/js/2.225da20e.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.225da20e.chunk.js.LICENSE.txt",
-    "static/media/avatar.png": "/servicedesk/static/media/avatar.456fa3e1.png",
+    "static/css/main.a95ec40d.chunk.css.map": "/servicedesk/static/css/main.a95ec40d.chunk.css.map",
+    "static/js/2.bb9c4c1b.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.bb9c4c1b.chunk.js.LICENSE.txt",
+    "static/media/TALogo.jpg": "/servicedesk/static/media/TALogo.4cfeda56.jpg",
     "static/media/background.jpg": "/servicedesk/static/media/background.7a9468ab.jpg",
-    "static/media/index.css": "/servicedesk/static/media/roboto-latin-900-normal.bb1e4dc6.woff"
+    "static/media/freyLogo.jpg": "/servicedesk/static/media/freyLogo.1b7429a4.jpg",
+    "static/media/index.css": "/servicedesk/static/media/roboto-latin-900-normal.bb1e4dc6.woff",
+    "static/media/sbc.jpg": "/servicedesk/static/media/sbc.1493fcaa.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.225da20e.chunk.js",
-    "static/css/main.199c2c9a.chunk.css",
-    "static/js/main.0c4493f2.chunk.js"
+    "static/js/2.bb9c4c1b.chunk.js",
+    "static/css/main.a95ec40d.chunk.css",
+    "static/js/main.b93e65e8.chunk.js"
   ]
 }
