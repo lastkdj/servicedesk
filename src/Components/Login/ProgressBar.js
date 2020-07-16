@@ -84,7 +84,7 @@ const ProgressBar = (props) => {
 
   const classes = useStyles();
   return (
-    <Grid item xs={10}>
+    <Grid item xs={12}>
       <LinearProgress
         variant="determinate"
         value={progress}

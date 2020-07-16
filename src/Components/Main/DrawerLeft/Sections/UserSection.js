@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import PicTest from "../../../../Imagenes/avatar.png";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import { useAccount } from "../../../Context/AccountContext";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -47,26 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserSection = () => {
-  const { state } = useAccount();
-  const { picture } = state;
-  const [username, setUserName] = useState("");
-  const [pic, setPic] = useState({});
-
-  const docRef = FirebaseApp.firestore()
-    .collection("users")
-    .doc(FirebaseApp.auth().currentUser.uid);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (FirebaseApp.auth().currentUser) {
-        setUserName(FirebaseApp.auth().currentUser.displayName);
-      }
-    }, 500);
-  }, []);
-
-  useEffect(() => {
-    setPic(picture);
-  }, [picture]);
+  const { data } = useContext(AuthContext);
 
   const classes = useStyles();
 
@@ -74,7 +53,7 @@ const UserSection = () => {
     <Grid container className={classes.usersection}>
       <Link to="/account">
         <Grid item xs={12} className={classes.avatargrid}>
-          <Avatar alt="avatar" src={pic.photoUrl} className={classes.small} />
+          <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
         </Grid>
       </Link>
 
@@ -92,7 +71,9 @@ const UserSection = () => {
             cursor: "pointer",
           }}
         >
-          {username}
+          {data.firstName === undefined || data.lastName === undefined
+            ? " "
+            : data.firstName + " " + data.lastName}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.jobposition}>
@@ -107,7 +88,7 @@ const UserSection = () => {
             lineHeight: "1.334",
           }}
         >
-          Gerente General
+          {data.job}
         </Typography>
       </Grid>
     </Grid>

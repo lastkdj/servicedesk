@@ -16,7 +16,6 @@ import Link from "@material-ui/core/Link";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "../Button.css";
-import { useUsuario } from "../../Context/UserContext";
 import FirebaseApp from "../../../FireBase/FireBaseConfig";
 
 const PasswordReset = (props) => {

@@ -130,7 +130,6 @@ const useStyles = makeStyles((theme) => ({
 const MenuSection = () => {
   const classes = useStyles();
 
-  console.log("render");
   return (
     <Grid container className={classes.menusection}>
       <Grid item xs={12}>

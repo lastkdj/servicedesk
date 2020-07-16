@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAccount } from "../../../../Context/AccountContext";
+import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
+import { AuthContext } from "../../../../Context/AuthContext";
 
 const useStyles = makeStyles(() => ({
   userdetails: {
@@ -45,9 +47,18 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ProfileForm = () => {
-  const { state, dispatch } = useAccount();
-  const { error } = state;
+  const { data } = useContext(AuthContext);
+  const { dispatch } = useAccount();
+
   const classes = useStyles();
+
+  useEffect(() => {
+    document.getElementById("name_name").value = data.firstName;
+    document.getElementById("name_lastname").value = data.lastName;
+    document.getElementById("phone").value =
+      data.phonenumber === "" ? "" : data.phonenumber;
+    document.getElementById("email").value = data.email;
+  }, [data.firstName, data.lastName, data.phonenumber, data.email]);
 
   return (
     <React.Fragment>
@@ -63,8 +74,7 @@ const ProfileForm = () => {
       <Grid container item xs={12}>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            error={error}
-            id="outlined-helperText"
+            id="name_name"
             label="First Name"
             variant="outlined"
             required
@@ -86,7 +96,7 @@ const ProfileForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="outlined-basic"
+            id="name_lastname"
             label="Last Name"
             variant="outlined"
             required
@@ -124,7 +134,7 @@ const ProfileForm = () => {
           style={{ padding: "16px", marginBottom: "20px" }}
         >
           <TextField
-            id="outlined-basic"
+            id="email"
             label="Email Address"
             variant="outlined"
             required
@@ -147,7 +157,7 @@ const ProfileForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="outlined-basic"
+            id="phone"
             label="Phone Number"
             variant="outlined"
             placeholder="Ex +56949651721"

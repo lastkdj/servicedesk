@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -26,6 +26,7 @@ const SubmitForm = () => {
   const classes = useStyles();
 
   const {
+    error,
     checked,
     name,
     lastname,
@@ -37,18 +38,15 @@ const SubmitForm = () => {
     job,
     snack,
     update,
+    loading,
   } = state;
 
   const onSubmit = (e) => {
-    if (
-      name !== "" &&
-      lastname !== "" &&
-      email !== "" &&
-      phone !== "" &&
-      department !== "" &&
-      job !== ""
-    ) {
-      e.preventDefault();
+    e.preventDefault();
+    dispatch({ type: "load" });
+    if (company === "" || department === "") {
+      dispatch({ type: "error", value: error });
+    } else {
       FirebaseApp.firestore()
         .collection("users")
         .doc(FirebaseApp.auth().currentUser.uid)
@@ -62,6 +60,7 @@ const SubmitForm = () => {
             company: company,
             department: department,
             job: job,
+            publicinfo: checked,
           },
           { merge: true }
         )
@@ -69,9 +68,6 @@ const SubmitForm = () => {
           dispatch({ type: "snack", value: snack });
           dispatch({ type: "patch", value: update });
         });
-    } else {
-      console.log("FALTAN CAMPOS POR ESCRIBIR");
-      dispatch({ type: "error" });
     }
   };
 
@@ -85,6 +81,10 @@ const SubmitForm = () => {
 
   const handleClose = () => {
     dispatch({ type: "snack", value: snack });
+  };
+
+  const handleError = () => {
+    dispatch({ type: "error", value: error });
   };
 
   return (
@@ -143,13 +143,19 @@ const SubmitForm = () => {
             type="submit"
             color="primary"
             className="submit"
+            disabled={loading}
             onClick={onSubmit}
           >
             Submit
           </Button>
         </Grid>
         <Snackbar open={snack} autoHideDuration={4000} onClose={handleClose}>
-          <Alert severity="success">Updated! </Alert>
+          <Alert severity="success">
+            You have successfully updated your info!
+          </Alert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={4000} onClose={handleError}>
+          <Alert severity="error">Select Company / Department </Alert>
         </Snackbar>
       </Grid>
     </React.Fragment>

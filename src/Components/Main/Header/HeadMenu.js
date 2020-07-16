@@ -44,15 +44,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HeadMenu = () => {
-  const [username, setUserName] = useState("");
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (FirebaseApp.auth().currentUser) {
-        setUserName(FirebaseApp.auth().currentUser.displayName);
-      }
-    }, 500);
-  }, []);
   const classes = useStyles();
 
   return (
@@ -92,7 +83,7 @@ const HeadMenu = () => {
           </IconButton>
         </Grid>
       </Tooltip>
-      <UserButton username={username} />
+      <UserButton />
     </Grid>
   );
 };

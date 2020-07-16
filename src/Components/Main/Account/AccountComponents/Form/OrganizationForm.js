@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import countries from "../Countries";
 import TextField from "@material-ui/core/TextField";
 import { useAccount } from "../../../../Context/AccountContext";
+import { AuthContext } from "../../../../Context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   userdetails: {
@@ -149,18 +150,32 @@ function countryToFlag(isoCode) {
         )
     : isoCode;
 }
-
+//Company
 const sb = "Soletanche Bachy";
 const frey = "Freyssinet";
 const ta = "Tierra Armada";
 
+//Department
+const it = "IT Department";
+const acc = "Accounting";
+const st = "Study";
+const grmd = "442 GRMD";
+const hua = "450 Huatacondo";
+const piq = "452 Pique Inco";
+const cand = "453 Candelaria";
+
 const OrganizationForm = () => {
   const { state, dispatch } = useAccount();
-  const { company } = state;
+  const { data } = React.useContext(AuthContext);
+  const { company, department } = state;
   const classes = useStyles();
 
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });
+  };
+
+  const handledepartment = (event) => {
+    dispatch({ type: "field", field: "department", value: event.target.value });
   };
 
   return (
@@ -235,6 +250,7 @@ const OrganizationForm = () => {
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
               value={company}
+              defaultValue={sb}
               onChange={handleCompany}
               label="Company"
               classes={{ icon: classes.popupcompany }}
@@ -242,6 +258,7 @@ const OrganizationForm = () => {
                 PopoverClasses: { paper: classes.backcompany },
               }}
             >
+              <MenuItem value="">None</MenuItem>
               <MenuItem value={sb}>Soletanche Bachy</MenuItem>
               <MenuItem value={frey}>Freyssinet</MenuItem>
               <MenuItem value={ta}>Tierra Armada</MenuItem>
@@ -251,26 +268,36 @@ const OrganizationForm = () => {
       </Grid>
       <Grid container item xs={12}>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
-          <TextField
-            id="outlined-basic"
-            label="Department"
-            variant="outlined"
-            placeholder="Choose a Department"
-            className={classes.root}
-            onChange={(ev) =>
-              dispatch({
-                type: "field",
-                field: "department",
-                value: ev.target.value,
-              })
-            }
-            InputLabelProps={{
-              classes: {
-                root: classes.label,
-              },
-              shrink: true,
-            }}
-          />
+          <FormControl variant="outlined" className={classes.rootcompany}>
+            <InputLabel
+              id="demo-simple-select-outlined-label"
+              style={{ color: "white" }}
+            >
+              Department
+            </InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              value={department}
+              onChange={handledepartment}
+              defaultValue={data.department}
+              label="Department"
+              classes={{ icon: classes.popupcompany }}
+              MenuProps={{
+                PopoverClasses: { paper: classes.backcompany },
+              }}
+            >
+              <MenuItem value="">None</MenuItem>
+              <MenuItem value={it}>IT Department</MenuItem>
+              <MenuItem value={acc}>Accounting</MenuItem>
+              <MenuItem value={st}>Study</MenuItem>
+              <MenuItem value={grmd}>442 GRMD</MenuItem>
+              <MenuItem value={hua}>450 Huatacondo</MenuItem>
+              <MenuItem value={piq}>452 Pique Inco</MenuItem>
+              <MenuItem value={cand}>453 Candelaria</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
@@ -278,6 +305,9 @@ const OrganizationForm = () => {
             label="Job Position"
             variant="outlined"
             placeholder="Analyst"
+            inputProps={{
+              maxLength: 15,
+            }}
             className={classes.root}
             onChange={(ev) =>
               dispatch({

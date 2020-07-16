@@ -27,6 +27,7 @@
     "react-scripts": "3.4.1",
     "react-select-country-list": "^2.2.1",
     "react-spring": "^8.0.27",
+    "react-swipeable-views": "^0.13.9",
     "react-use": "^15.3.2",
     "reactfire": "^2.0.0-alpha.3"
   },

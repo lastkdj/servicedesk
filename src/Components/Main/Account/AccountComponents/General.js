@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 const General = (props) => {
   const classes = useStyles();
 
-  console.log("render marico");
   return (
     <Bounce left when={props.value === 0}>
       <props.TabPanel

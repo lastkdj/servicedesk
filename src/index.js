@@ -5,11 +5,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { HashRouter } from "react-router-dom";
 import MaxProvider from "./Components/Context/MaxProvider";
-// import { AuthProvider } from "./Components/Context/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <AuthProvider> */}
     <MaxProvider>
       <Suspense fallback={"Conectando la App"}>
         <HashRouter>
@@ -17,7 +15,6 @@ ReactDOM.render(
         </HashRouter>
       </Suspense>
     </MaxProvider>
-    {/* </AuthProvider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

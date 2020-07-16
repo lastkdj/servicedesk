@@ -28,9 +28,6 @@ function App() {
   const classes = useStyles();
 
   return (
-    // <StylesProvider injectFirst>
-    //   <DashProvider>
-    //     <UserProvider>
     <Grid container className={classes.wall}>
       <Grid item xs={12}>
         <LinearIndeterminate />
@@ -38,7 +35,6 @@ function App() {
       {user ? (
         <Main />
       ) : (
-        // <Profile />
         <Grid item xs={12}>
           <Switch>
             <Route exact path="/" component={SignIn} />
@@ -49,9 +45,6 @@ function App() {
         </Grid>
       )}
     </Grid>
-    //     </UserProvider>
-    //   </DashProvider>
-    // </StylesProvider>
   );
 }
 

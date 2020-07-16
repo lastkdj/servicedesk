@@ -1,16 +1,15 @@
 import React from "react";
 import Header from "../Header/Header";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import DrawerRight from "../DrawerRight/DrawerRight";
 import DrawerLeft from "../DrawerLeft/DrawerLeft";
-import Bounce from "react-reveal/Bounce";
 import Content from "../Content/Content";
+import SimpleBackdrop from "../Account/AccountComponents/Form/BackDrop/LoadingBackdrop";
 
 const useStyles = makeStyles((theme) => ({
   main: {
     width: "100%",
-    height: "1650px",
+    height: "100%",
     backgroundColor: "#1c2025",
     position: "absolute",
 
@@ -45,6 +44,7 @@ const Main = () => {
       <DrawerRight />
       <DrawerLeft />
       <Content />
+      <SimpleBackdrop />
     </div>
   );
 };

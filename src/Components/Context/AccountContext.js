@@ -15,12 +15,14 @@ function submitReducer(state, action) {
         ...state,
         snack: !action.value,
         error: false,
+        loading: false,
       };
     }
     case "error": {
       return {
         ...state,
-        error: true,
+        error: !action.value,
+        loading: false,
       };
     }
     case "switch": {
@@ -35,10 +37,10 @@ function submitReducer(state, action) {
         update: !action.value,
       };
     }
-    case "pic": {
+    case "load": {
       return {
         ...state,
-        picture: action.value,
+        loading: true,
       };
     }
 
@@ -62,7 +64,7 @@ const initialState = {
   error: false,
   checked: false,
   update: false,
-  picture: {},
+  loading: false,
 };
 
 export function AccountProvider(props) {

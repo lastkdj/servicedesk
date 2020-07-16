@@ -14,10 +14,10 @@ button {
   bottom: 0;
   right: 0;
   z-index: -1;
-  background-color: #ffa600;
+  background-color: #5a55da;
   transform: scaleX(0);
   /* transform-origin: left; */
-  transition: transform 300ms ease-in-out;
+  transition: transform 400ms ease-in-out;
   border-radius: 3px;
 }
 
@@ -28,7 +28,7 @@ button {
 .submit {
   margin-bottom: 10px;
   height: 40px;
-  background-color: #5d2eab;
+  background-color: #8a85ff;
   transition: color 300ms ease-in-out;
   z-index: 1;
 }
@@ -36,7 +36,7 @@ button {
 .submit:hover {
   margin-bottom: 10px;
   height: 40px;
-  background-color: #5d2eab;
+  background-color: #8a85ff;
   transition: color 300ms ease-in-out;
   z-index: 1;
 }

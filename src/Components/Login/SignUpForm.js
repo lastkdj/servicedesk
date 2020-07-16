@@ -32,6 +32,7 @@ function signupUser(userDetails, setError, setOpen) {
               email: email,
               password: password,
             });
+          setOpen(false);
         })
         .catch((error) => {
           console.log(error);

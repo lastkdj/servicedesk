@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,7 +9,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { useAccount } from "../../../Context/AccountContext";
+
+import { AuthContext } from "../../../Context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -44,10 +45,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserButton = (props) => {
-  const { state } = useAccount();
-  const { picture } = state;
+  const { data } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [pic, setPic] = useState({});
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -63,21 +62,13 @@ const UserButton = (props) => {
     props.history.push("/");
   };
 
-  const docRef = FirebaseApp.firestore()
-    .collection("users")
-    .doc(FirebaseApp.auth().currentUser.uid);
-
-  useEffect(() => {
-    setPic(picture);
-  }, [picture]);
-
   const classes = useStyles();
 
   return (
     <div style={{ display: "flex" }}>
       <Button onClick={handleClick}>
         <Grid item className={classes.avatargrid}>
-          <Avatar alt="avatar" src={pic.photoUrl} className={classes.small} />
+          <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
         </Grid>
 
         <Grid item className={classes.username}>
@@ -89,7 +80,9 @@ const UserButton = (props) => {
               textTransform: "none",
             }}
           >
-            {props.username}
+            {data.firstName === undefined || data.lastName === undefined
+              ? " "
+              : data.firstName + " " + data.lastName}
           </p>
         </Grid>
       </Button>
@@ -103,17 +96,14 @@ const UserButton = (props) => {
           TransitionComponent={Fade}
           classes={{ paper: classes.paper }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <Link
+            to="/account"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+          </Link>
 
-          <MenuItem>
-            {" "}
-            <Link
-              to="/account"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              My account
-            </Link>
-          </MenuItem>
+          <MenuItem>My account</MenuItem>
 
           <MenuItem onClick={onClicky}>Logout</MenuItem>
         </Menu>

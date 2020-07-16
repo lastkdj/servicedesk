@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 import Grid from "@material-ui/core/Grid";
 import General from "./General";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
+import Security from "./Security/Security";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttonlist: {
+    fontSize: "0.6em",
     "&:hover": {
       backgroundColor: "#31343D",
       "@media (hover: none)": {
@@ -37,6 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
     "&.PrivateTabIndicator-colorSecondary-93": {
       backgroundColor: "#8a85ff",
+    },
+
+    [theme.breakpoints.up("sm")]: {
+      minWidth: "130px",
+      fontSize: "0.8em",
+    },
+
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "0.9em",
+      minWidth: "160px",
     },
   },
 
@@ -91,29 +103,26 @@ const AppBarComponent = () => {
   const [value, setValue] = React.useState(0);
 
   const isMobile = useMediaQuery({ query: "(max-device-width: 375px)" });
+  const isSemiTab = useMediaQuery({ query: "(max-device-width: 375px)" });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Grid item xs={12}>
+    <Grid item container xs={12}>
       <AppBar position="static" className={classes.appbar}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
           classes={{ flexContainer: classes.tabs }}
-          TabIndicatorProps={
-            !isMobile
-              ? {
-                  style: {
-                    backgroundColor: "#8a85ff",
-                    width: "160px",
-                  },
-                }
-              : { style: { backgroundColor: "#8a85ff", width: "100%" } }
-          }
+          fullWidth
+          TabIndicatorProps={{
+            style: {
+              backgroundColor: "#8a85ff",
+            },
+          }}
         >
           <Tab
             label="GENERAL"
@@ -130,15 +139,21 @@ const AppBarComponent = () => {
             {...a11yProps(2)}
             className={classes.buttonlist}
           />
+          <Tab
+            label="SECURITY"
+            {...a11yProps(3)}
+            className={classes.buttonlist}
+          />
         </Tabs>
       </AppBar>
+
       <General value={value} TabPanel={TabPanel} />
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+
+      <Security value={value} TabPanel={TabPanel} />
+
+      <TabPanel value={value} index={1}></TabPanel>
+      <TabPanel value={value} index={2}></TabPanel>
+      <TabPanel value={value} index={2}></TabPanel>
     </Grid>
   );
 };

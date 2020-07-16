@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
@@ -7,7 +7,10 @@ import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import { useAccount } from "../../../../Context/AccountContext";
+import SBC from "../../../../../Imagenes/sbc.jpg";
+import FREY from "../../../../../Imagenes/freyLogo.jpg";
+import TA from "../../../../../Imagenes/TALogo.jpg";
+import { AuthContext } from "../../../../Context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -66,21 +69,151 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "15px",
     lineHeight: "1.334",
   },
+
+  companysbc: {
+    backgroundImage: `url(${SBC})`,
+    height: "150px",
+    justifyContent: "center",
+    flexDirection: "column",
+    padding: "50px 40px 40px 107px",
+    backgroundRepeat: "no-repeat",
+
+    [theme.breakpoints.up("sm")]: {
+      backgroundPosition: "center",
+      paddingLeft: "150px",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      backgroundImage: `url(${SBC})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("lg")]: {
+      backgroundImage: `url(${SBC})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("xl")]: {
+      backgroundImage: `url(${SBC})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 40px 113px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "auto",
+    },
+  },
+
+  companyfrey: {
+    backgroundImage: `url(${FREY})`,
+    height: "150px",
+    justifyContent: "center",
+    flexDirection: "column",
+    padding: "50px 40px 40px 107px",
+    backgroundRepeat: "no-repeat",
+
+    [theme.breakpoints.up("sm")]: {
+      backgroundPosition: "center",
+      paddingLeft: "150px",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      backgroundImage: `url(${FREY})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("lg")]: {
+      backgroundImage: `url(${FREY})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("xl")]: {
+      backgroundImage: `url(${FREY})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 40px 107px",
+      backgroundRepeat: "no-repeat",
+    },
+  },
+
+  companyta: {
+    backgroundImage: `url(${TA})`,
+    backgroundRepeat: "no-repeat",
+    height: "150px",
+    justifyContent: "center",
+    flexDirection: "column",
+    padding: "50px 40px 40px 107px",
+
+    [theme.breakpoints.up("sm")]: {
+      backgroundPosition: "center",
+      paddingLeft: "150px",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      backgroundImage: `url(${TA})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("lg")]: {
+      backgroundImage: `url(${TA})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 50px 90px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "contain",
+    },
+    [theme.breakpoints.up("xl")]: {
+      backgroundImage: `url(${TA})`,
+      height: "150px",
+      justifyContent: "center",
+      flexDirection: "column",
+      padding: "50px 40px 40px 107px",
+      backgroundRepeat: "no-repeat",
+    },
+  },
+
+  companytext: {
+    color: "#adb0bb",
+    textAlign: "left",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    textTransform: "none",
+    fontWeight: "400",
+    fontSize: "13px",
+    lineHeight: "1.334",
+  },
 }));
 
 const ImageUpload = () => {
+  const { data } = useContext(AuthContext);
   const classes = useStyles();
-  const { state, dispatch } = useAccount();
-  const { update, picture } = state;
-  const [load, setLoad] = useState(false);
-  const [pic, setPic] = React.useState({});
-  const [username, setUserName] = useState("");
 
   const handleChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = FirebaseApp.storage().ref();
     const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
+    await fileRef.put(file).then(() => {});
     const fileDown = await fileRef.getDownloadURL();
     FirebaseApp.firestore()
       .collection("users")
@@ -91,62 +224,72 @@ const ImageUpload = () => {
         },
         { merge: true }
       )
-      .then(() => {
-        setLoad(!load);
-      });
+      .then(() => {});
   };
 
-  const docRef = FirebaseApp.firestore()
-    .collection("users")
-    .doc(FirebaseApp.auth().currentUser.uid);
-
-  useEffect(() => {
-    const uploading = async () => {
-      await docRef.onSnapshot(function (doc) {
-        if (doc.exists) {
-          dispatch({ type: "pic", value: doc.data() });
-          // setPic(doc.data());
-        } else {
-          console.log("No hay nada papi");
-        }
-      });
-    };
-    uploading();
-  }, [load, update]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (FirebaseApp.auth().currentUser) {
-        setUserName(FirebaseApp.auth().currentUser.displayName);
-      }
-    }, 500);
-  }, []);
-
-  console.log("renderito");
   return (
     <Grid container>
       <Grid item xs={12} className={classes.avatargrid}>
-        <Avatar alt="avatar" src={picture.photoUrl} className={classes.small} />
+        <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
       </Grid>
 
       <Grid item xs={12}>
-        <Typography className={classes.usertext}>{username}</Typography>
+        <Typography className={classes.usertext}>
+          {data.firstName === undefined || data.lastName === undefined
+            ? " "
+            : data.firstName + " " + data.lastName}
+        </Typography>
       </Grid>
       <Grid item xs={12} style={{ marginTop: "10px" }}>
-        <Typography className={classes.positiontext}> {picture.job}</Typography>
+        <Typography className={classes.positiontext}> {data.job}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography className={classes.locationtext}>
           {" "}
-          {picture.country}
+          {data.country}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
-        <Typography className={classes.locationtext}>
+      {data.publicinfo ? (
+        <React.Fragment>
+          <Grid item xs={12}>
+            <Typography className={classes.locationtext}>
+              {" "}
+              {data.phonenumber === undefined ? "" : data.phonenumber}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography className={classes.locationtext}>
+              {" "}
+              {data.email === undefined ? "" : data.email}
+            </Typography>
+          </Grid>
+        </React.Fragment>
+      ) : null}
+
+      <Grid
+        item
+        container
+        xs={12}
+        className={
+          data.company === "Soletanche Bachy"
+            ? classes.companysbc
+            : data.company === "Freyssinet"
+            ? classes.companyfrey
+            : data.company === "Tierra Armada"
+            ? classes.companyta
+            : null
+        }
+      >
+        <Typography
+          className={classes.companytext}
+          style={{ marginTop: "15px" }}
+        >
           {" "}
-          {pic.phonenumber}
+          {data.department}
         </Typography>
+        <Typography className={classes.companytext}> {data.job}</Typography>
       </Grid>
+
       <Grid
         item
         xs={12}
@@ -170,7 +313,7 @@ const ImageUpload = () => {
             component="span"
           >
             <PhotoCamera style={{ marginRight: "20px" }} />
-            Choose Picture
+            Upload Picture
           </Button>
         </label>
       </Grid>

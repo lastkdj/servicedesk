@@ -26,12 +26,7 @@ export default function LinearIndeterminate() {
 
   return (
     <div className={classes.root}>
-      {(open && error === "auth/wrong-password") ||
-      (open && error === "auth/invalid-email") ||
-      (open && error === "auth/user-disabled") ||
-      (open && error === "auth/email-already-in-use") ||
-      (open && error === "auth/weak-password") ||
-      (open && error === "") ? (
+      {open ? (
         <LinearProgress classes={{ colorPrimary: classes.colorPrimary }} />
       ) : null}
     </div>

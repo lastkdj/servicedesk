@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 import FirebaseApp from "../../FireBase/FireBaseConfig";
 
 const SignForm = (props) => {
-  const { setError, setOpen } = useUsuario();
+  const { setError, setOpen, open } = useUsuario();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
@@ -30,6 +30,7 @@ const SignForm = (props) => {
       .catch(function (error) {
         var errorCode = error.code;
         setError(errorCode);
+        setOpen(false);
       });
   };
 
@@ -89,6 +90,7 @@ const SignForm = (props) => {
             variant="contained"
             color="primary"
             className="submit"
+            disabled={open}
             onClick={signIn}
           >
             Inicia Sesion
