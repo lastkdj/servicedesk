@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAccount } from "../../../../Context/AccountContext";
+import { AuthContext } from "../../../../Context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   secondary: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SubmitForm = () => {
   const { state, dispatch } = useAccount();
+  const { data } = React.useContext(AuthContext);
   const classes = useStyles();
 
   const {
@@ -50,20 +52,16 @@ const SubmitForm = () => {
       FirebaseApp.firestore()
         .collection("users")
         .doc(FirebaseApp.auth().currentUser.uid)
-        .set(
-          {
-            firstName: name,
-            lastName: lastname,
-            email: email,
-            phonenumber: phone,
-            country: country,
-            company: company,
-            department: department,
-            job: job,
-            publicinfo: checked,
-          },
-          { merge: true }
-        )
+        .update({
+          firstName: name,
+          lastName: lastname,
+          phonenumber: phone,
+          country: country,
+          company: company,
+          department: department,
+          job: job,
+          publicinfo: checked,
+        })
         .then(() => {
           dispatch({ type: "snack", value: snack });
           dispatch({ type: "patch", value: update });
@@ -86,6 +84,10 @@ const SubmitForm = () => {
   const handleError = () => {
     dispatch({ type: "error", value: error });
   };
+
+  useEffect(() => {
+    dispatch({ type: "switch", value: !data.publicinfo });
+  }, []);
 
   return (
     <React.Fragment>

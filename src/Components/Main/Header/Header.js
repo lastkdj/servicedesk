@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "20px",
     width: "100%",
     zIndex: theme.zIndex.drawer + 1,
+    position: "fixed",
   },
 
   logo: {

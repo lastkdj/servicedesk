@@ -2,6 +2,10 @@
   padding: 0;
 }
 
+.MuiFormHelperText-root.Mui-disabled {
+  color: white;
+}
+
 button {
   position: relative;
 }

@@ -61,6 +61,35 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {},
   },
+
+  securityresp: {
+    position: "absolute",
+    width: "335px",
+    top: "25%",
+
+    [theme.breakpoints.up("sm")]: {
+      width: "90%",
+      top: "18%",
+      left: "5%",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      width: "67%",
+      top: "30%",
+      left: "18%",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "60%",
+      top: "30%",
+      left: "30%",
+    },
+
+    [theme.breakpoints.up("xl")]: {
+      width: "67%",
+      top: "23%",
+      left: "23%",
+    },
+  },
 }));
 
 const Security = (props) => {
@@ -100,11 +129,7 @@ const Security = (props) => {
   }
 
   return (
-    <Grid
-      item
-      xs={12}
-      style={{ position: "absolute", width: "1280px", top: " 23%" }}
-    >
+    <Grid item xs={12} className={classes.securityresp}>
       <Bounce left when={props.value === 3}>
         <props.TabPanel
           value={props.value}

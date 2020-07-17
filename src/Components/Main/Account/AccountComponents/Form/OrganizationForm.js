@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -170,6 +170,21 @@ const OrganizationForm = () => {
   const { company, department } = state;
   const classes = useStyles();
 
+  useEffect(() => {
+    dispatch({ type: "field", field: "company", value: data.company });
+    dispatch({ type: "field", field: "department", value: data.department });
+    dispatch({ type: "field", field: "job", value: data.job });
+    dispatch({ type: "field", field: "country", value: data.country });
+  }, []);
+
+  useEffect(() => {
+    document.getElementById("company").value = data.company;
+    document.getElementById("department").value = data.department;
+    document.getElementById("job").value =
+      data.job === undefined ? "" : data.job;
+    document.getElementById("country").value = data.country;
+  }, [data.company, data.department, data.country, data.job]);
+
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });
   };
@@ -192,7 +207,7 @@ const OrganizationForm = () => {
       <Grid container item xs={12}>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <Autocomplete
-            id="country-select-demo"
+            id="country"
             options={countries}
             classes={{
               option: classes.option,
@@ -248,9 +263,8 @@ const OrganizationForm = () => {
             <Select
               fullWidth
               labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
+              id="company"
               value={company}
-              defaultValue={sb}
               onChange={handleCompany}
               label="Company"
               classes={{ icon: classes.popupcompany }}
@@ -278,10 +292,9 @@ const OrganizationForm = () => {
             <Select
               fullWidth
               labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
+              id="department"
               value={department}
               onChange={handledepartment}
-              defaultValue={data.department}
               label="Department"
               classes={{ icon: classes.popupcompany }}
               MenuProps={{
@@ -301,7 +314,7 @@ const OrganizationForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="outlined-basic"
+            id="job"
             label="Job Position"
             variant="outlined"
             placeholder="Analyst"

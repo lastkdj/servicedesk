@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       width: "1280",
       height: "700px",
       backgroundColor: "#1c2025",
-      margin: "0px 10px",
+      margin: "0px 50px",
     },
 
     [theme.breakpoints.up("xl")]: {

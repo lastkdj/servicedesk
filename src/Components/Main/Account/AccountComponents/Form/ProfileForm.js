@@ -4,7 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAccount } from "../../../../Context/AccountContext";
-import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import { AuthContext } from "../../../../Context/AuthContext";
 
 const useStyles = makeStyles(() => ({
@@ -28,6 +27,13 @@ const useStyles = makeStyles(() => ({
         borderColor: "rgba(255, 255, 255, 0.23)",
         borderWidth: "1px",
       },
+
+      "&.MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline": {
+        borderColor: "rgba(255, 255, 255, 0.23)",
+        borderWidth: "1px",
+        color: "white",
+      },
+
       "&:hover fieldset": {
         borderColor: "#B6B3FF",
       },
@@ -43,6 +49,10 @@ const useStyles = makeStyles(() => ({
 
   label: {
     color: "#e6e5e8",
+
+    "&.MuiInputLabel-outlined.MuiInputLabel-shrink": {
+      color: "#e6e5e8",
+    },
   },
 }));
 
@@ -53,13 +63,21 @@ const ProfileForm = () => {
   const classes = useStyles();
 
   useEffect(() => {
+    dispatch({ type: "field", field: "name", value: data.firstName });
+    dispatch({ type: "field", field: "lastname", value: data.lastName });
+    dispatch({ type: "field", field: "email", value: data.email });
+    dispatch({ type: "field", field: "phone", value: data.phonenumber });
+  }, []);
+
+  useEffect(() => {
     document.getElementById("name_name").value = data.firstName;
     document.getElementById("name_lastname").value = data.lastName;
     document.getElementById("phone").value =
-      data.phonenumber === "" ? "" : data.phonenumber;
+      data.phonenumber === undefined ? "" : data.phonenumber;
     document.getElementById("email").value = data.email;
   }, [data.firstName, data.lastName, data.phonenumber, data.email]);
 
+  console.log(" Ya se fue a la verga esto");
   return (
     <React.Fragment>
       <Grid
@@ -140,13 +158,15 @@ const ProfileForm = () => {
             required
             placeholder="Ex sendhelp@nvm.com"
             className={classes.root}
-            onChange={(ev) =>
-              dispatch({
-                type: "field",
-                field: "email",
-                value: ev.target.value,
-              })
-            }
+            helperText="This is your login username"
+            disabled
+            // onChange={(ev) =>
+            //   dispatch({
+            //     type: "field",
+            //     field: "email",
+            //     value: ev.target.value,
+            //   })
+            // }
             InputLabelProps={{
               classes: {
                 root: classes.label,
