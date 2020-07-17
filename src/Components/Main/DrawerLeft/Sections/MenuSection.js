@@ -12,6 +12,7 @@ import Software from "./MenuItems/Software";
 import Users from "./MenuItems/Users";
 import Tickets from "./MenuItems/Tickets";
 import Organization from "./MenuItems/Organization";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   menusection: {
@@ -135,12 +136,22 @@ const MenuSection = () => {
       <Grid item xs={12}>
         <Typography className={classes.menutittle}>Reports</Typography>
       </Grid>
-      <Button classes={{ root: classes.buttonlist }}>
-        <Grid item container xs={12} alignItems="center">
-          <BarChartOutlinedIcon className={classes.menuicon} />
-          <Typography className={classes.menutext}>Dashboard</Typography>
-        </Grid>
-      </Button>
+      <Link
+        to="/dashboard"
+        style={{
+          textDecoration: "none",
+          color: "white",
+          justifyContent: "flex-start",
+          width: "100%",
+        }}
+      >
+        <Button classes={{ root: classes.buttonlist }}>
+          <Grid item container xs={12} alignItems="center">
+            <BarChartOutlinedIcon className={classes.menuicon} />
+            <Typography className={classes.menutext}>Dashboard</Typography>
+          </Grid>
+        </Button>{" "}
+      </Link>
       <Button
         classes={{
           root: classes.buttonlist,

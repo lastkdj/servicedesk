@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#282C34",
     width: drawerWidthxs,
     flexShrink: 0,
-    top: "65px",
+    top: "60px",
 
     [theme.breakpoints.up("sm")]: {
       width: drawerWidthxs,

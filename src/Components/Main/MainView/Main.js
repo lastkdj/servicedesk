@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { makeStyles } from "@material-ui/core";
 import DrawerRight from "../DrawerRight/DrawerRight";
 import DrawerLeft from "../DrawerLeft/DrawerLeft";
-import Content from "../Content/Content";
+import Routes from "../Routes/Routes";
 import SimpleBackdrop from "../Account/AccountComponents/Form/BackDrop/LoadingBackdrop";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const Main = () => {
       <Header />
       <DrawerRight />
       <DrawerLeft />
-      <Content />
+      <Routes />
       <SimpleBackdrop />
     </div>
   );
