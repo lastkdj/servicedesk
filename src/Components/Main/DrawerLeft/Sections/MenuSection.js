@@ -137,7 +137,7 @@ const MenuSection = () => {
         <Typography className={classes.menutittle}>Reports</Typography>
       </Grid>
       <Link
-        to="/dashboard"
+        to="/"
         style={{
           textDecoration: "none",
           color: "white",

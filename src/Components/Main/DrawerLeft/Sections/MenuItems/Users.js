@@ -10,6 +10,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   menuicon: {
@@ -154,17 +155,27 @@ const Users = () => {
       </AccordionSummary>
       <AccordionDetails classes={{ root: classes.root }}>
         <Grid container item xs={12} alignItems="center">
-          <Button classes={{ root: classes.buttonlist }}>
-            <Grid
-              item
-              container
-              xs={12}
-              alignItems="center"
-              style={{ paddingLeft: "45px" }}
-            >
-              <Typography className={classes.menutext}>User List</Typography>
-            </Grid>
-          </Button>
+          <Link
+            to="/userlist"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              justifyContent: "flex-start",
+              width: "100%",
+            }}
+          >
+            <Button classes={{ root: classes.buttonlist }}>
+              <Grid
+                item
+                container
+                xs={12}
+                alignItems="center"
+                style={{ paddingLeft: "45px" }}
+              >
+                <Typography className={classes.menutext}>User List</Typography>
+              </Grid>
+            </Button>
+          </Link>
           <Divider />
           <Button
             classes={{

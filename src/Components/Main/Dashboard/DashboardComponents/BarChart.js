@@ -3,9 +3,11 @@ import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import FirebaseApp from "../../../../FireBase/FireBaseConfig";
 
 const BarChart = () => {
   const [chartDatam, setChartData] = useState({});
+  const [userCount, setUserCount] = useState(0);
 
   const chart = () => {
     setChartData({
@@ -26,7 +28,7 @@ const BarChart = () => {
       datasets: [
         {
           label: "New Users",
-          data: [12, 19, 3, 17, 28, 24, 7, 3, 15, 23, 33, 19],
+          data: [12, 19, 3, 17, 28, 24, userCount, 3, 15, 23, 33, 19],
           backgroundColor: "rgba(75, 74, 93, 0.2)",
           borderWidth: 4,
           borderColor: "#8a85ff",

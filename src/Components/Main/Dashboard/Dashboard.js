@@ -9,15 +9,14 @@ import News from "./DashboardComponents/News";
 import DataDonut from "./DashboardComponents/DataDonut";
 import RecentTicketsDetailed from "./DashboardComponents/RecentTicketsDetailed";
 import ShowDate from "./DashboardComponents/ShowDate";
-import { useGeolocation } from "react-use";
-import Paper from "@material-ui/core/Paper";
 import BarChart from "./DashboardComponents/BarChart";
-
+import FirebaseApp from "../../../FireBase/FireBaseConfig";
 import Assigments from "./DashboardComponents/Assignments";
 
 const Dashboard = () => {
   const [content, setContent] = React.useState("");
 
+  console.log(content);
   return (
     <Grid container>
       <Grid
@@ -45,7 +44,6 @@ const Dashboard = () => {
           <DataDonut />
           <BarChart />
           <Assigments />
-
           <RecentTicketsDetailed />
         </Grid>
       </Grid>
