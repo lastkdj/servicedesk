@@ -79,6 +79,9 @@ const ProgressBar = (props) => {
         setProgress(100);
         setProgressColor({ bar: classes.bar100 });
         break;
+
+      default:
+        break;
     }
   }, [props.password]);
 

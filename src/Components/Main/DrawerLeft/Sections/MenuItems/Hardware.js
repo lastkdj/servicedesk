@@ -4,8 +4,6 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import ComputerOutlinedIcon from "@material-ui/icons/ComputerOutlined";
 import PhoneAndroidOutlinedIcon from "@material-ui/icons/PhoneAndroidOutlined";
-import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
-import VerticalSplitOutlinedIcon from "@material-ui/icons/VerticalSplitOutlined";
 import { Icon } from "@iconify/react";
 import hardwareChipOutline from "@iconify/icons-ion/hardware-chip-outline";
 import Accordion from "@material-ui/core/Accordion";

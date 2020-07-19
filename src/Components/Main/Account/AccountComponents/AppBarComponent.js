@@ -7,7 +7,6 @@ import General from "./General";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
-import { useMediaQuery } from "react-responsive";
 import Security from "./Security/Security";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,8 +60,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       justifyContent: "left",
     },
-
-    indicator: {},
   },
 }));
 function TabPanel(props) {
@@ -102,9 +99,6 @@ const AppBarComponent = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const isMobile = useMediaQuery({ query: "(max-device-width: 375px)" });
-  const isSemiTab = useMediaQuery({ query: "(max-device-width: 375px)" });
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -117,7 +111,6 @@ const AppBarComponent = () => {
           onChange={handleChange}
           aria-label="simple tabs example"
           classes={{ flexContainer: classes.tabs }}
-          fullWidth
           TabIndicatorProps={{
             style: {
               backgroundColor: "#8a85ff",

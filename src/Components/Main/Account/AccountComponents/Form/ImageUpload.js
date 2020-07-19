@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
@@ -212,19 +212,36 @@ const ImageUpload = () => {
   const handleChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = FirebaseApp.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file).then(() => {});
-    const fileDown = await fileRef.getDownloadURL();
-    FirebaseApp.firestore()
-      .collection("users")
-      .doc(FirebaseApp.auth().currentUser.uid)
-      .set(
-        {
-          photoUrl: fileDown,
-        },
-        { merge: true }
-      )
-      .then(() => {});
+    let fileext = file.type.split("/");
+    if (
+      fileext[1] === "jpg" ||
+      fileext[1] === "jpeg" ||
+      fileext[1] === "png" ||
+      fileext[1] === "gif"
+    ) {
+      const fileRef = storageRef.child(
+        "userPic/" +
+          FirebaseApp.auth().currentUser.uid +
+          "/" +
+          FirebaseApp.auth().currentUser.uid +
+          "." +
+          fileext[1]
+      );
+      await fileRef.put(file).then(() => {});
+      const fileDown = await fileRef.getDownloadURL();
+      FirebaseApp.firestore()
+        .collection("users")
+        .doc(FirebaseApp.auth().currentUser.uid)
+        .set(
+          {
+            photoUrl: fileDown,
+          },
+          { merge: true }
+        )
+        .then(() => {});
+    } else {
+      console.log("No es un formato valido");
+    }
   };
 
   return (

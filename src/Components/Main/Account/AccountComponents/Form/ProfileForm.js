@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAccount } from "../../../../Context/AccountContext";
-import { AuthContext } from "../../../../Context/AuthContext";
+
+import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 
 const useStyles = makeStyles(() => ({
   userdetails: {
@@ -57,27 +58,48 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ProfileForm = () => {
-  const { data } = useContext(AuthContext);
   const { dispatch } = useAccount();
+  const [profile, setProfile] = useState({});
+  const nameRef = useRef();
+  const lastnameRef = useRef();
+  const emailRef = useRef();
+  const phoneRef = useRef();
 
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch({ type: "field", field: "name", value: data.firstName });
-    dispatch({ type: "field", field: "lastname", value: data.lastName });
-    dispatch({ type: "field", field: "email", value: data.email });
-    dispatch({ type: "field", field: "phone", value: data.phonenumber });
+    var docRef = FirebaseApp.firestore()
+      .collection("users")
+      .doc(FirebaseApp.auth().currentUser.uid);
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setProfile(doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
   }, []);
 
   useEffect(() => {
-    document.getElementById("name_name").value = data.firstName;
-    document.getElementById("name_lastname").value = data.lastName;
-    document.getElementById("phone").value =
-      data.phonenumber === undefined ? "" : data.phonenumber;
-    document.getElementById("email").value = data.email;
-  }, [data.firstName, data.lastName, data.phonenumber, data.email]);
+    dispatch({ type: "field", field: "name", value: profile.firstName });
+    dispatch({ type: "field", field: "lastname", value: profile.lastName });
+    dispatch({
+      type: "field",
+      field: "phone",
+      value: profile.phonenumber === undefined ? "" : profile.phonenumber,
+    });
+    nameRef.current.value = profile.firstName;
+    lastnameRef.current.value = profile.lastName;
+    phoneRef.current.value =
+      profile.phonenumber === undefined ? "" : profile.phonenumber;
+    emailRef.current.value = profile.email;
+  }, [profile]);
 
-  console.log(" Ya se fue a la verga esto");
   return (
     <React.Fragment>
       <Grid
@@ -92,7 +114,7 @@ const ProfileForm = () => {
       <Grid container item xs={12}>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="name_name"
+            inputRef={nameRef}
             label="First Name"
             variant="outlined"
             required
@@ -114,7 +136,7 @@ const ProfileForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="name_lastname"
+            inputRef={lastnameRef}
             label="Last Name"
             variant="outlined"
             required
@@ -152,7 +174,7 @@ const ProfileForm = () => {
           style={{ padding: "16px", marginBottom: "20px" }}
         >
           <TextField
-            id="email"
+            inputRef={emailRef}
             label="Email Address"
             variant="outlined"
             required
@@ -177,7 +199,7 @@ const ProfileForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} style={{ padding: "16px" }}>
           <TextField
-            id="phone"
+            inputRef={phoneRef}
             label="Phone Number"
             variant="outlined"
             placeholder="Ex +56949651721"

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LinearIndeterminate() {
-  const { open, error } = useUsuario();
+  const { open } = useUsuario();
   const classes = useStyles();
 
   return (

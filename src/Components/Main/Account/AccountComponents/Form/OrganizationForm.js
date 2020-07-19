@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,7 @@ import Select from "@material-ui/core/Select";
 import countries from "../Countries";
 import TextField from "@material-ui/core/TextField";
 import { useAccount } from "../../../../Context/AccountContext";
-import { AuthContext } from "../../../../Context/AuthContext";
+import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 
 const useStyles = makeStyles((theme) => ({
   userdetails: {
@@ -165,32 +165,74 @@ const piq = "452 Pique Inco";
 const cand = "453 Candelaria";
 
 const OrganizationForm = () => {
-  const { state, dispatch } = useAccount();
-  const { data } = React.useContext(AuthContext);
-  const { company, department } = state;
+  const { dispatch } = useAccount();
+  const [organization, setOrganization] = useState({});
+  const [depa, setDepa] = useState("");
+  const [opendepa, setOpenDepa] = useState(false);
+  const [comp, setComp] = useState("");
+  const [opencomp, setOpenComp] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch({ type: "field", field: "company", value: data.company });
-    dispatch({ type: "field", field: "department", value: data.department });
-    dispatch({ type: "field", field: "job", value: data.job });
-    dispatch({ type: "field", field: "country", value: data.country });
+    var docRef = FirebaseApp.firestore()
+      .collection("users")
+      .doc(FirebaseApp.auth().currentUser.uid);
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setOrganization(doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
   }, []);
 
   useEffect(() => {
-    document.getElementById("company").value = data.company;
-    document.getElementById("department").value = data.department;
-    document.getElementById("job").value =
-      data.job === undefined ? "" : data.job;
-    document.getElementById("country").value = data.country;
-  }, [data.company, data.department, data.country, data.job]);
+    dispatch({
+      type: "field",
+      field: "company",
+      value: organization.company === undefined ? "" : organization.company,
+    });
+    dispatch({
+      type: "field",
+      field: "department",
+      value:
+        organization.department === undefined ? "" : organization.department,
+    });
+    dispatch({
+      type: "field",
+      field: "job",
+      value: organization.job === undefined ? "" : organization.job,
+    });
+    dispatch({
+      type: "field",
+      field: "country",
+      value: organization.country === undefined ? "" : organization.country,
+    });
+
+    // document.getElementById("company").value = organization.company;
+    // document.getElementById("department").value = organization.department;
+  }, [organization]);
+
+  // useEffect(() => {
+
+  //   document.getElementById("job").value =
+  //     data.job === undefined ? "" : data.job;
+  //   document.getElementById("country").value = data.country;
+  // }, [data.company, data.department, data.country, data.job]);
 
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });
+    setComp(event.target.value);
   };
 
   const handledepartment = (event) => {
     dispatch({ type: "field", field: "department", value: event.target.value });
+    setDepa(event.target.value);
   };
 
   return (
@@ -240,8 +282,6 @@ const OrganizationForm = () => {
                   ...params.inputProps,
                   autoComplete: "new-password",
                   shrink: "true",
-
-                  // disable autocomplete and autofill
                 }}
                 InputLabelProps={{
                   classes: {
@@ -264,8 +304,17 @@ const OrganizationForm = () => {
               fullWidth
               labelId="demo-simple-select-outlined-label"
               id="company"
-              value={company}
+              open={opencomp}
+              value={comp}
+              onClose={() => {
+                setOpenComp(false);
+              }}
+              onOpen={() => {
+                setOpenComp(true);
+              }}
+              value={comp}
               onChange={handleCompany}
+              defaultValue={organization.company}
               label="Company"
               classes={{ icon: classes.popupcompany }}
               MenuProps={{
@@ -293,7 +342,14 @@ const OrganizationForm = () => {
               fullWidth
               labelId="demo-simple-select-outlined-label"
               id="department"
-              value={department}
+              open={opendepa}
+              value={depa}
+              onClose={() => {
+                setOpenDepa(false);
+              }}
+              onOpen={() => {
+                setOpenDepa(true);
+              }}
               onChange={handledepartment}
               label="Department"
               classes={{ icon: classes.popupcompany }}

@@ -1,22 +1,25 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import RecentTickets from "./DashboardComponents/RecentTickets";
+import RecentUsers from "./DashboardComponents/RecentUsers";
+import RecentProducts from "./DashboardComponents/RecentProducts";
+import ActiveUsers from "./DashboardComponents/ActiveUsers";
+import News from "./DashboardComponents/News";
+import DataDonut from "./DashboardComponents/DataDonut";
+import RecentTicketsDetailed from "./DashboardComponents/RecentTicketsDetailed";
+import ShowDate from "./DashboardComponents/ShowDate";
+import { useGeolocation } from "react-use";
 import Paper from "@material-ui/core/Paper";
-import EmailIcon from "@material-ui/icons/Email";
+import BarChart from "./DashboardComponents/BarChart";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    backgroundColor: "teal",
-    width: "270px",
-    height: "100px",
-  },
-}));
+import Assigments from "./DashboardComponents/Assignments";
 
 const Dashboard = () => {
-  const classes = useStyles();
+  const [content, setContent] = React.useState("");
+
   return (
-    <Grid container className={classes.background}>
+    <Grid container>
       <Grid
         item
         container
@@ -27,170 +30,23 @@ const Dashboard = () => {
           justifyContent: "center",
         }}
       >
-        <Grid item xs={12} style={{ padding: "40px 20px 20px 20px" }}>
+        <Grid item xs={10} style={{ padding: "40px 20px 0px 30px" }}>
           <Typography style={{ fontSize: "1.5em", fontWeight: "500" }}>
             DASHBOARD
           </Typography>
         </Grid>
+        <ShowDate />
         <Grid container item xs={12} style={{ padding: "20px" }} spacing={2}>
-          <Grid item xs={3}>
-            <Paper
-              elevation={3}
-              style={{
-                backgroundColor: "#282C34",
+          <RecentTickets />
+          <RecentUsers />
+          <RecentProducts />
+          <ActiveUsers />
+          <News />
+          <DataDonut />
+          <BarChart />
+          <Assigments />
 
-                padding: "20px",
-              }}
-            >
-              <Grid item container xs={12}>
-                <Grid item xs={10}>
-                  <Typography
-                    style={{
-                      fontSize: "0.7em",
-                      fontWeight: "500",
-                      color: "#adb0bb",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    RECENT TICKETS
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <EmailIcon style={{ color: "#adb0bb", fontSize: "2em" }} />
-                </Grid>
-                <Grid xs={12}>
-                  <Typography
-                    style={{
-                      fontSize: "1.4em",
-                      fontWeight: "500",
-                      color: "#e6e5e8",
-                    }}
-                  >
-                    13 New Tickets
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper
-              elevation={3}
-              style={{
-                backgroundColor: "#282C34",
-                padding: "20px",
-              }}
-            >
-              <Grid item container xs={12}>
-                <Grid item xs={10}>
-                  <Typography
-                    style={{
-                      fontSize: "0.7em",
-                      fontWeight: "500",
-                      color: "#adb0bb",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    NEW USERS
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <EmailIcon style={{ color: "#adb0bb", fontSize: "2em" }} />
-                </Grid>
-                <Grid xs={12}>
-                  <Typography
-                    style={{
-                      fontSize: "1.4em",
-                      fontWeight: "500",
-                      color: "#e6e5e8",
-                    }}
-                  >
-                    4 New Users
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper
-              elevation={3}
-              style={{
-                backgroundColor: "#282C34",
-                padding: "20px",
-              }}
-            >
-              <Grid item container xs={12}>
-                <Grid item xs={10}>
-                  <Typography
-                    style={{
-                      fontSize: "0.7em",
-                      fontWeight: "500",
-                      color: "#adb0bb",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    RECENT TICKETS
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <EmailIcon style={{ color: "#adb0bb", fontSize: "2em" }} />
-                </Grid>
-                <Grid xs={12}>
-                  <Typography
-                    style={{
-                      fontSize: "1.4em",
-                      fontWeight: "500",
-                      color: "#e6e5e8",
-                    }}
-                  >
-                    13 New Tickets
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={3}>
-            <Paper
-              elevation={3}
-              style={{
-                backgroundColor: "#282C34",
-                padding: "20px",
-              }}
-            >
-              <Grid item container xs={12}>
-                <Grid item xs={10}>
-                  <Typography
-                    style={{
-                      fontSize: "0.7em",
-                      fontWeight: "500",
-                      color: "#adb0bb",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    RECENT TICKETS
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <EmailIcon style={{ color: "#adb0bb", fontSize: "2em" }} />
-                </Grid>
-                <Grid xs={12}>
-                  <Typography
-                    style={{
-                      fontSize: "1.4em",
-                      fontWeight: "500",
-                      color: "#e6e5e8",
-                    }}
-                  >
-                    13 New Tickets
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            Information
-          </Grid>
+          <RecentTicketsDetailed />
         </Grid>
       </Grid>
     </Grid>

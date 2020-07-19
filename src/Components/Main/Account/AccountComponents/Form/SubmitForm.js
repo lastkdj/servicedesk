@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -32,7 +32,6 @@ const SubmitForm = () => {
     checked,
     name,
     lastname,
-    email,
     phone,
     country,
     company,

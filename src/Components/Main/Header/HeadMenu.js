@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SupervisorAccountOutlinedIcon from "@material-ui/icons/SupervisorAccountOutlined";
 import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
 import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
-import FirebaseApp from "../../../FireBase/FireBaseConfig";
 import IconButton from "@material-ui/core/IconButton";
 import SearchButton from "./Buttons/SearchButton";
 import UserButton from "./Buttons/UserButton";
