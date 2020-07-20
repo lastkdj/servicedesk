@@ -5,27 +5,26 @@ import Paper from "@material-ui/core/Paper";
 import EmojiEmotionsRoundedIcon from "@material-ui/icons/EmojiEmotionsRounded";
 import IconButton from "@material-ui/core/IconButton";
 import Zoom from "@material-ui/core/Zoom";
+import useStyles from "./styles";
+
 const ActiveUsers = () => {
+  const classes = useStyles();
   return (
     <Zoom in={true} timeout={900}>
-      <Grid item xs={3}>
+      <Grid item xs={12} sm={6} md={3} lg={3} xl={3} style={{ order: 4 }}>
         <Paper
           elevation={3}
+          className={classes.quadrapapers}
           style={{
             backgroundColor: "#8a85ff",
-
-            padding: "20px",
-            display: "flex",
           }}
         >
           <Grid item container xs={8} style={{ marginTop: "10px" }}>
             <Grid item xs={12}>
               <Typography
+                className={classes.papertitle}
                 style={{
-                  fontSize: "0.7em",
-                  fontWeight: "500",
                   color: "white",
-                  marginBottom: "10px",
                 }}
               >
                 ACTIVE USERS
@@ -33,9 +32,8 @@ const ActiveUsers = () => {
             </Grid>
             <Grid xs={12}>
               <Typography
+                className={classes.paperinfo}
                 style={{
-                  fontSize: "1.4em",
-                  fontWeight: "500",
                   color: "white",
                 }}
               >
@@ -43,31 +41,15 @@ const ActiveUsers = () => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid
-            item
-            xs={4}
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={4} className={classes.icongrid}>
             <IconButton
+              className={classes.iconbutton}
               style={{
                 color: "#8a85ff",
                 backgroundColor: "white",
-                borderRadius: "50%",
-                width: "2em",
-                height: "2em",
               }}
             >
-              <EmojiEmotionsRoundedIcon
-                style={{
-                  fontSize: "1.3em",
-                  width: "1em",
-                  height: "1em",
-                }}
-              />
+              <EmojiEmotionsRoundedIcon className={classes.iconstyle} />
             </IconButton>
           </Grid>
         </Paper>

@@ -5,70 +5,33 @@ import Paper from "@material-ui/core/Paper";
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import IconButton from "@material-ui/core/IconButton";
 import Zoom from "@material-ui/core/Zoom";
+import useStyles from "./styles";
 
 const RecentUsers = () => {
+  const classes = useStyles();
   return (
     <Zoom in={true} timeout={500}>
-      <Grid item xs={3}>
-        <Paper
-          elevation={3}
-          style={{
-            backgroundColor: "#282C34",
-
-            padding: "20px",
-            display: "flex",
-          }}
-        >
+      <Grid item xs={12} sm={6} md={3} lg={3} xl={3} style={{ order: 2 }}>
+        <Paper elevation={3} className={classes.quadrapapers}>
           <Grid item container xs={8} style={{ marginTop: "10px" }}>
             <Grid item xs={12}>
-              <Typography
-                style={{
-                  fontSize: "0.7em",
-                  fontWeight: "500",
-                  color: "#adb0bb",
-                  marginBottom: "10px",
-                }}
-              >
+              <Typography className={classes.papertitle}>
                 RECENT USERS
               </Typography>
             </Grid>
             <Grid xs={12}>
-              <Typography
-                style={{
-                  fontSize: "1.4em",
-                  fontWeight: "500",
-                  color: "#e6e5e8",
-                }}
-              >
-                4 New Users
-              </Typography>
+              <Typography className={classes.paperinfo}>4 New Users</Typography>
             </Grid>
           </Grid>
-          <Grid
-            item
-            xs={4}
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
+          <Grid item xs={4} className={classes.icongrid}>
             <IconButton
+              className={classes.iconbutton}
               style={{
-                color: "#fff",
+                color: "white",
                 backgroundColor: "#8a85ff",
-                borderRadius: "50%",
-                width: "2em",
-                height: "2em",
               }}
             >
-              <PeopleAltRoundedIcon
-                style={{
-                  fontSize: "1em",
-                  width: "1em",
-                  height: "1em",
-                }}
-              />
+              <PeopleAltRoundedIcon className={classes.iconstyle} />
             </IconButton>
           </Grid>
         </Paper>

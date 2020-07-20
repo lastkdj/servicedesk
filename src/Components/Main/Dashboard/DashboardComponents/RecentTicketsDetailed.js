@@ -17,6 +17,48 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: "flex",
     marginLeft: "10px",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "0px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: "10px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      marginLeft: "10px",
+    },
+  },
+
+  gridpadding: {
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: "10px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      paddingLeft: "30px",
+      justifyContent: "flex-start",
+    },
+    [theme.breakpoints.up("xl")]: {
+      paddingLeft: "30px",
+      justifyContent: "flex-start",
+    },
+  },
+
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+    },
   },
 
   ticketgrid: {
@@ -26,12 +68,69 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#363B47",
     },
   },
+
+  paperinfo: {
+    fontSize: "1.2em",
+    fontWeight: "500",
+    color: "#e6e5e8",
+    margin: "11px 0px",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "1em",
+      margin: "0px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "1.2em",
+      margin: "11px 0px",
+    },
+  },
+
+  iconbutton: {
+    color: "#fff",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      padding: "0px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      pdding: "12px",
+    },
+  },
+
+  iconstyle: {
+    color: "#e6e5e8",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "1rem",
+    },
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "1.5rem",
+    },
+  },
+
+  order: {
+    order: 9,
+  },
 }));
 
 const RecentTicketsDetailed = () => {
   const classes = useStyles();
   return (
-    <Grid item container xs={8}>
+    <Grid
+      item
+      container
+      xs={12}
+      sm={12}
+      md={8}
+      lg={8}
+      xl={8}
+      className={classes.order}
+    >
       <Paper
         elevation={3}
         style={{
@@ -51,27 +150,20 @@ const RecentTicketsDetailed = () => {
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "1.2em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.paperinfo}>
               Recent Tickets Detailed
             </Typography>
           </Grid>
           <Grid
             item
             container
-            xs={6}
+            xs={4}
             style={{ justifyContent: "flex-end", alignItems: "center" }}
           >
-            <IconButton style={{ color: "#fff" }}>
-              <MoreVertIcon style={{ color: "#e6e5e8" }} />
+            <IconButton className={classes.iconbutton}>
+              <MoreVertIcon className={classes.iconstyle} />
             </IconButton>
           </Grid>
         </Grid>
@@ -156,7 +248,7 @@ const RecentTicketsDetailed = () => {
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
-          <Grid item container xs={3}>
+          <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
             <Typography
               style={{
@@ -169,10 +261,19 @@ const RecentTicketsDetailed = () => {
               Description 1
             </Typography>
           </Grid>
-          <Grid item container xs={3} style={{ paddingLeft: "30px" }}>
+          <Grid
+            item
+            container
+            xs={3}
+            sm={3}
+            md={4}
+            lg={4}
+            xl={3}
+            className={classes.gridpadding}
+          >
             {" "}
             <Grid item className={classes.avatargrid}>
-              <Avatar alt="avatar" src={Image} />
+              <Avatar alt="avatar" src={Image} className={classes.small} />
             </Grid>
             <Grid item>
               <Typography
@@ -233,7 +334,7 @@ const RecentTicketsDetailed = () => {
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
-          <Grid item container xs={3}>
+          <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
             <Typography
               style={{
@@ -246,9 +347,18 @@ const RecentTicketsDetailed = () => {
               Description 2
             </Typography>
           </Grid>
-          <Grid item container xs={3} style={{ paddingLeft: "30px" }}>
+          <Grid
+            item
+            container
+            xs={3}
+            sm={3}
+            md={4}
+            lg={4}
+            xl={3}
+            className={classes.gridpadding}
+          >
             <Grid item className={classes.avatargrid}>
-              <Avatar alt="avatar" src={Image2} />
+              <Avatar alt="avatar" src={Image2} className={classes.small} />
             </Grid>
             <Grid item>
               <Typography
@@ -309,7 +419,7 @@ const RecentTicketsDetailed = () => {
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
-          <Grid item container xs={3}>
+          <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
             <Typography
               style={{
@@ -322,9 +432,18 @@ const RecentTicketsDetailed = () => {
               Description 3
             </Typography>
           </Grid>
-          <Grid item container xs={3} style={{ paddingLeft: "30px" }}>
+          <Grid
+            item
+            container
+            xs={3}
+            sm={3}
+            md={4}
+            lg={4}
+            xl={3}
+            className={classes.gridpadding}
+          >
             <Grid item className={classes.avatargrid}>
-              <Avatar alt="avatar" src={Image3} />
+              <Avatar alt="avatar" src={Image3} className={classes.small} />
             </Grid>
             <Grid item>
               <Typography
@@ -385,7 +504,7 @@ const RecentTicketsDetailed = () => {
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
-          <Grid item container xs={3}>
+          <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
             <Typography
               style={{
@@ -398,9 +517,18 @@ const RecentTicketsDetailed = () => {
               Description 4
             </Typography>
           </Grid>
-          <Grid item container xs={3} style={{ paddingLeft: "30px" }}>
+          <Grid
+            item
+            container
+            xs={3}
+            sm={3}
+            md={4}
+            lg={4}
+            xl={3}
+            className={classes.gridpadding}
+          >
             <Grid item className={classes.avatargrid}>
-              <Avatar alt="avatar" src={Image4} />
+              <Avatar alt="avatar" src={Image4} className={classes.small} />
             </Grid>
             <Grid item>
               <Typography

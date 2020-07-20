@@ -13,6 +13,53 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#282C34",
     color: "white",
   },
+
+  gridpadding: {
+    padding: "10px 20px 0px 30px",
+    justifyContent: "flex-end",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      padding: "10px 20px 0px 30px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      padding: "40px 20px 0px 30px",
+    },
+  },
+
+  datefilterstyle: {
+    fontSize: "0.6em",
+    fontWeight: "500",
+    textAlign: "center",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "0.6em",
+    },
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "1em",
+    },
+  },
+
+  iconstyle: {
+    fontSize: "1em",
+    width: "1.1em",
+    height: "1.1em",
+    marginLeft: "10px",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      width: "1.1em",
+      height: "1.1em",
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: "1.5em",
+      height: "1.5em",
+    },
+  },
 }));
 
 const ShowDate = () => {
@@ -29,35 +76,15 @@ const ShowDate = () => {
   };
 
   return (
-    <Grid
-      item
-      container
-      xs={2}
-      style={{ padding: "40px 20px 0px 30px", justifyContent: "flex-end" }}
-    >
+    <Grid item container xs={2} className={classes.gridpadding}>
       <Button
         onClick={handleClick}
         style={{
           color: "#fff",
         }}
       >
-        <Typography
-          style={{
-            fontSize: "1em",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          Last Month
-        </Typography>
-        <CalendarTodayIcon
-          style={{
-            fontSize: "1em",
-            width: "1.5em",
-            height: "1.5em",
-            marginLeft: "10px",
-          }}
-        />
+        <Typography className={classes.datefilterstyle}>Last Month</Typography>
+        <CalendarTodayIcon className={classes.iconstyle} />
       </Button>
       <Grid>
         <Menu

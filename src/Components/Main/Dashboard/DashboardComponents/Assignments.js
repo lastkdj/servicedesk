@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {},
+    [theme.breakpoints.up("xl")]: {},
   },
 
   small: {
@@ -28,12 +32,39 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#363B47",
     },
   },
+
+  paperinfo: {
+    fontSize: "1.2em",
+    fontWeight: "500",
+    color: "#e6e5e8",
+    margin: "11px 0px",
+
+    [theme.breakpoints.up("sm")]: {},
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "1em",
+      margin: "0px",
+    },
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "1.2em",
+      margin: "11px 0px",
+    },
+  },
 }));
 
 const Assigments = () => {
   const classes = useStyles();
   return (
-    <Grid item container xs={4}>
+    <Grid
+      item
+      container
+      xs={12}
+      sm={12}
+      md={4}
+      lg={4}
+      xl={4}
+      style={{ order: 8 }}
+    >
       <Paper
         elevation={3}
         style={{
@@ -51,16 +82,7 @@ const Assigments = () => {
           }}
         >
           {" "}
-          <Typography
-            style={{
-              fontSize: "1.2em",
-              fontWeight: "500",
-              color: "#e6e5e8",
-              margin: "11px 0px",
-            }}
-          >
-            Assignments
-          </Typography>
+          <Typography className={classes.paperinfo}>Assignments</Typography>
         </Grid>
 
         <Grid item xs={12} container className={classes.ticketgrid}>

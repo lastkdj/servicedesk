@@ -2,30 +2,22 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import useStyles from "./styles";
 
 const News = () => {
+  const classes = useStyles();
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} style={{ order: 5 }}>
       <Paper
         elevation={3}
+        className={classes.quadrapapers}
         style={{
           backgroundColor: "#8a85ff",
-
-          padding: "20px",
-          display: "flex",
           color: "white",
         }}
       >
         {" "}
-        <Typography
-          style={{
-            fontSize: "1.2em",
-            fontWeight: "500",
-            color: "#e6e5e8",
-          }}
-        >
-          Breaking News
-        </Typography>
+        <Typography className={classes.paperinfo}>Breaking News</Typography>
       </Paper>
     </Grid>
   );

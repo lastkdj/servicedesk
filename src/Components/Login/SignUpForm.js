@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 import FirebaseApp from "../../FireBase/FireBaseConfig";
 import { useUsuario } from "../Context/UserContext";
 
-function signupUser(userDetails, setError, setOpen) {
+function signupUser(userDetails, setError, setOpen, goLogin) {
   const { name, lastname, email, password } = userDetails;
   setOpen(true);
   return FirebaseApp.auth()
@@ -33,6 +33,7 @@ function signupUser(userDetails, setError, setOpen) {
               password: password,
             });
           setOpen(false);
+          goLogin();
         })
         .catch((error) => {
           console.log(error);
@@ -61,7 +62,7 @@ const SingUpForm = (props) => {
 
   const signUp = (e) => {
     e.preventDefault();
-    signupUser(userDetails, setError, setOpen);
+    signupUser(userDetails, setError, setOpen, goLogin);
   };
 
   const goLogin = () => {

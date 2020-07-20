@@ -3,11 +3,12 @@ import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import FirebaseApp from "../../../../FireBase/FireBaseConfig";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const BarChart = () => {
   const [chartDatam, setChartData] = useState({});
-  const [userCount, setUserCount] = useState(0);
+
+  const matcheslg = useMediaQuery("(max-width:600px)");
 
   const chart = () => {
     setChartData({
@@ -28,9 +29,9 @@ const BarChart = () => {
       datasets: [
         {
           label: "New Users",
-          data: [12, 19, 3, 17, 28, 24, userCount, 3, 15, 23, 33, 19],
+          data: [12, 19, 3, 17, 28, 24, 7, 3, 15, 23, 33, 19],
           backgroundColor: "rgba(75, 74, 93, 0.2)",
-          borderWidth: 4,
+          borderWidth: 2,
           borderColor: "#8a85ff",
           borderRadius: "40%",
           hoverBackgroundColor: "white",
@@ -51,7 +52,16 @@ const BarChart = () => {
   }, []);
 
   return (
-    <Grid item container xs={9}>
+    <Grid
+      item
+      container
+      xs={12}
+      sm={12}
+      md={9}
+      lg={9}
+      xl={9}
+      style={{ order: 7 }}
+    >
       <Paper
         elevation={3}
         style={{
@@ -60,29 +70,31 @@ const BarChart = () => {
           alignItems: "flex-end",
           color: "white",
           width: "100%",
+          height: matcheslg ? "200px" : "100%",
         }}
       >
         <Line
           data={chartDatam}
-          height={100}
-          options={{
-            responsive: true,
-            // scales: {
-            //   xAxes: [
-            //     {
-            //       gridLines: "none",
-            //     },
-            //   ],
+          height={matcheslg ? 33 : 100}
+          width={matcheslg ? 50 : null}
+          // options={{
+          //   responsive: true,
+          // }}
+          // scales: {
+          //   xAxes: [
+          //     {
+          //       gridLines: "none",
+          //     },
+          //   ],
 
-            //   yAxes: [
-            //     {
-            //       gridLines: {
-            //         color: "white",
-            //       },
-            //     },
-            //   ],
-            // },
-          }}
+          //   yAxes: [
+          //     {
+          //       gridLines: {
+          //         color: "white",
+          //       },
+          //     },
+          //   ],
+          // },
         />
       </Paper>
     </Grid>

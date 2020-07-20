@@ -1,9 +1,15 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Donut = () => {
   const [chartDatam, setChartData] = useState({});
+
+  const matcheslg = useMediaQuery("(min-width:1280px)");
+  const matchesxl = useMediaQuery("(max-width:1919px)");
+  const matchesmd = useMediaQuery("(min-width:960px)");
+  const matcheslgmax = useMediaQuery("(max-width:1279px)");
 
   const chart = () => {
     setChartData({
@@ -20,11 +26,6 @@ const Donut = () => {
           // Specify bar border width
         },
       ],
-
-      options: {
-        responsive: true, // Instruct chart js to respond nicely.
-        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-      },
     });
   };
 
@@ -40,7 +41,36 @@ const Donut = () => {
         height={300}
         style={{ cursor: "pointer" }}
         options={{
-          responsive: true,
+          // responsive: true, // Instruct chart js to respond nicely.
+          // maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+
+          legend:
+            matcheslg && matchesxl
+              ? {
+                  display: true,
+                  labels: {
+                    boxWidth: 10,
+                    fontSize: 9,
+                    padding: 5,
+                  },
+                }
+              : matchesmd && matcheslgmax
+              ? {
+                  display: true,
+                  labels: {
+                    boxWidth: 10,
+                    fontSize: 9,
+                    padding: 5,
+                  },
+                }
+              : {
+                  display: true,
+                  labels: {
+                    boxWidth: 40,
+                    fontSize: 12,
+                    padding: 10,
+                  },
+                },
         }}
       />
     </div>
