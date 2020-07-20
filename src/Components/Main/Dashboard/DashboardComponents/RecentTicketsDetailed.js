@@ -138,6 +138,16 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "0.9em",
     },
   },
+
+  marginright: {
+    padding: "0px",
+    justifyContent: "center",
+
+    [theme.breakpoints.up("sm")]: {
+      justifyContent: "flex-end",
+      paddingRight: "20px",
+    },
+  },
 }));
 
 const RecentTicketsDetailed = () => {
@@ -214,12 +224,7 @@ const RecentTicketsDetailed = () => {
             {" "}
             <Typography className={classes.titletext}>Company</Typography>
           </Grid>{" "}
-          <Grid
-            item
-            container
-            xs={2}
-            style={{ justifyContent: "flex-end", paddingRight: "20px" }}
-          >
+          <Grid item container xs={2} className={classes.marginright}>
             {" "}
             <Typography className={classes.titletext}>Date</Typography>
           </Grid>{" "}
@@ -261,12 +266,7 @@ const RecentTicketsDetailed = () => {
               Company 1
             </Typography>
           </Grid>{" "}
-          <Grid
-            item
-            container
-            xs={2}
-            style={{ justifyContent: "flex-end", paddingRight: "20px" }}
-          >
+          <Grid item container xs={2} className={classes.marginright}>
             {" "}
             <Typography className={classes.ticketsdetailed}>Date 1</Typography>
           </Grid>{" "}
@@ -307,12 +307,7 @@ const RecentTicketsDetailed = () => {
               Company 2
             </Typography>
           </Grid>{" "}
-          <Grid
-            item
-            container
-            xs={2}
-            style={{ justifyContent: "flex-end", paddingRight: "20px" }}
-          >
+          <Grid item container xs={2} className={classes.marginright}>
             {" "}
             <Typography className={classes.ticketsdetailed}>Date 2</Typography>
           </Grid>{" "}
@@ -353,12 +348,7 @@ const RecentTicketsDetailed = () => {
               Company 3
             </Typography>
           </Grid>{" "}
-          <Grid
-            item
-            container
-            xs={2}
-            style={{ justifyContent: "flex-end", paddingRight: "20px" }}
-          >
+          <Grid item container xs={2} className={classes.marginright}>
             {" "}
             <Typography className={classes.ticketsdetailed}>Date 3</Typography>
           </Grid>{" "}
@@ -399,12 +389,7 @@ const RecentTicketsDetailed = () => {
               Company 4
             </Typography>
           </Grid>{" "}
-          <Grid
-            item
-            container
-            xs={2}
-            style={{ justifyContent: "flex-end", paddingRight: "20px" }}
-          >
+          <Grid item container xs={2} className={classes.marginright}>
             {" "}
             <Typography className={classes.ticketsdetailed}>Date 4</Typography>
           </Grid>{" "}

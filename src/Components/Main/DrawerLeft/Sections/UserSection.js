@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext";
+import { useDash } from "../../../Context/DashContext";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -46,12 +47,17 @@ const useStyles = makeStyles((theme) => ({
 
 const UserSection = () => {
   const { data } = useContext(AuthContext);
+  const { setOpenLeft } = useDash();
 
   const classes = useStyles();
 
+  const closeDrawer = () => {
+    setOpenLeft(false);
+  };
+
   return (
     <Grid container className={classes.usersection}>
-      <Link to="/account">
+      <Link to="/account" onClick={closeDrawer}>
         <Grid item xs={12} className={classes.avatargrid}>
           <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
         </Grid>

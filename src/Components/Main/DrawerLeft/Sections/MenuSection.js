@@ -13,6 +13,7 @@ import Users from "./MenuItems/Users";
 import Tickets from "./MenuItems/Tickets";
 import Organization from "./MenuItems/Organization";
 import { Link } from "react-router-dom";
+import { useDash } from "../../../Context/DashContext";
 
 const useStyles = makeStyles((theme) => ({
   menusection: {
@@ -129,7 +130,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuSection = () => {
+  const { setOpenLeft } = useDash();
   const classes = useStyles();
+
+  const closeDrawer = () => {
+    setOpenLeft(false);
+  };
 
   return (
     <Grid container className={classes.menusection}>
@@ -144,6 +150,7 @@ const MenuSection = () => {
           justifyContent: "flex-start",
           width: "100%",
         }}
+        onClick={closeDrawer}
       >
         <Button classes={{ root: classes.buttonlist }}>
           <Grid item container xs={12} alignItems="center">

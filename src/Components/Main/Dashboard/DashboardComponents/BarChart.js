@@ -75,26 +75,26 @@ const BarChart = () => {
       >
         <Line
           data={chartDatam}
-          height={matcheslg ? 33 : 100}
-          width={matcheslg ? 50 : null}
-          // options={{
-          //   responsive: true,
-          // }}
-          // scales: {
-          //   xAxes: [
-          //     {
-          //       gridLines: "none",
-          //     },
-          //   ],
+          height={100}
+          options={{
+            responsive: true,
 
-          //   yAxes: [
-          //     {
-          //       gridLines: {
-          //         color: "white",
-          //       },
-          //     },
-          //   ],
-          // },
+            scales: {
+              xAxes: [
+                {
+                  gridLines: "none",
+                },
+              ],
+
+              yAxes: [
+                {
+                  gridLines: {
+                    color: "#5F6063",
+                  },
+                },
+              ],
+            },
+          }}
         />
       </Paper>
     </Grid>

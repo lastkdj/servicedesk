@@ -139,11 +139,8 @@ const AppBarComponent = () => {
           />
         </Tabs>
       </AppBar>
-
       <General value={value} TabPanel={TabPanel} />
-
       <Security value={value} TabPanel={TabPanel} />
-
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>
