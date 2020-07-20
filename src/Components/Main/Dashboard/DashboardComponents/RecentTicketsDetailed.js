@@ -116,6 +116,28 @@ const useStyles = makeStyles((theme) => ({
   order: {
     order: 9,
   },
+
+  titletext: {
+    fontSize: "0.8em",
+    fontWeight: "500",
+    color: "#e6e5e8",
+    margin: "10px 0px ",
+
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "1em",
+    },
+  },
+
+  ticketsdetailed: {
+    fontSize: "0.7em",
+    fontWeight: "400",
+    color: "#e6e5e8",
+    margin: "10px 10px ",
+
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "0.9em",
+    },
+  },
 }));
 
 const RecentTicketsDetailed = () => {
@@ -178,55 +200,19 @@ const RecentTicketsDetailed = () => {
         >
           <Grid item container xs={3}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "1em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Description
-            </Typography>
+            <Typography className={classes.titletext}>Description</Typography>
           </Grid>
           <Grid item container xs={3} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "1em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              User
-            </Typography>
+            <Typography className={classes.titletext}>User</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "1em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Type
-            </Typography>
+            <Typography className={classes.titletext}>Type</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "1em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Company
-            </Typography>
+            <Typography className={classes.titletext}>Company</Typography>
           </Grid>{" "}
           <Grid
             item
@@ -235,29 +221,13 @@ const RecentTicketsDetailed = () => {
             style={{ justifyContent: "flex-end", paddingRight: "20px" }}
           >
             {" "}
-            <Typography
-              style={{
-                fontSize: "1em",
-                fontWeight: "500",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Date
-            </Typography>
+            <Typography className={classes.titletext}>Date</Typography>
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
           <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Description 1
             </Typography>
           </Grid>
@@ -276,41 +246,18 @@ const RecentTicketsDetailed = () => {
               <Avatar alt="avatar" src={Image} className={classes.small} />
             </Grid>
             <Grid item>
-              <Typography
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#e6e5e8",
-                  margin: "10px 10px ",
-                }}
-              >
+              <Typography className={classes.ticketsdetailed}>
                 Ricardo Garcia
               </Typography>
             </Grid>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Type 1
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Type 1</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Company 1
             </Typography>
           </Grid>{" "}
@@ -321,29 +268,13 @@ const RecentTicketsDetailed = () => {
             style={{ justifyContent: "flex-end", paddingRight: "20px" }}
           >
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Date 1
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Date 1</Typography>
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
           <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Description 2
             </Typography>
           </Grid>
@@ -361,41 +292,18 @@ const RecentTicketsDetailed = () => {
               <Avatar alt="avatar" src={Image2} className={classes.small} />
             </Grid>
             <Grid item>
-              <Typography
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#e6e5e8",
-                  margin: "10px 10px ",
-                }}
-              >
+              <Typography className={classes.ticketsdetailed}>
                 Peneiro Lupirico
               </Typography>
             </Grid>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Type 2
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Type 2</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Company 2
             </Typography>
           </Grid>{" "}
@@ -406,29 +314,13 @@ const RecentTicketsDetailed = () => {
             style={{ justifyContent: "flex-end", paddingRight: "20px" }}
           >
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Date 2
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Date 2</Typography>
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
           <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Description 3
             </Typography>
           </Grid>
@@ -446,41 +338,18 @@ const RecentTicketsDetailed = () => {
               <Avatar alt="avatar" src={Image3} className={classes.small} />
             </Grid>
             <Grid item>
-              <Typography
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#e6e5e8",
-                  margin: "10px 10px ",
-                }}
-              >
+              <Typography className={classes.ticketsdetailed}>
                 Lucho Gusto
               </Typography>
             </Grid>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Type 3
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Type 3</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Company 3
             </Typography>
           </Grid>{" "}
@@ -491,29 +360,13 @@ const RecentTicketsDetailed = () => {
             style={{ justifyContent: "flex-end", paddingRight: "20px" }}
           >
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Date 3
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Date 3</Typography>
           </Grid>{" "}
         </Grid>
         <Grid item xs={12} container className={classes.ticketgrid}>
           <Grid item container xs={3} sm={3} md={2} lg={2} xl={3}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Description 4
             </Typography>
           </Grid>
@@ -531,41 +384,18 @@ const RecentTicketsDetailed = () => {
               <Avatar alt="avatar" src={Image4} className={classes.small} />
             </Grid>
             <Grid item>
-              <Typography
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: "400",
-                  color: "#e6e5e8",
-                  margin: "10px 10px ",
-                }}
-              >
+              <Typography className={classes.ticketsdetailed}>
                 Abraham Nones
               </Typography>
             </Grid>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Type 4
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Type 4</Typography>
           </Grid>
           <Grid item container xs={2} style={{ justifyContent: "center" }}>
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
+            <Typography className={classes.ticketsdetailed}>
               Company 4
             </Typography>
           </Grid>{" "}
@@ -576,16 +406,7 @@ const RecentTicketsDetailed = () => {
             style={{ justifyContent: "flex-end", paddingRight: "20px" }}
           >
             {" "}
-            <Typography
-              style={{
-                fontSize: "0.9em",
-                fontWeight: "400",
-                color: "#e6e5e8",
-                margin: "10px 0px ",
-              }}
-            >
-              Date 4
-            </Typography>
+            <Typography className={classes.ticketsdetailed}>Date 4</Typography>
           </Grid>{" "}
         </Grid>
       </Paper>

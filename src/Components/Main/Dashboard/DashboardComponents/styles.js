@@ -3,11 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   quadrapapers: {
     backgroundColor: "#282C34",
-    padding: "10px",
+    padding: "20px",
     display: "flex",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("sm")]: {
+      padding: "10px",
+    },
+    [theme.breakpoints.up("md")]: {
+      padding: "10px",
+    },
     [theme.breakpoints.up("lg")]: {
       padding: "10px",
     },
@@ -24,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   paperinfo: {
-    fontSize: "1em",
+    fontSize: "1.2em",
     fontWeight: "500",
     color: "#e6e5e8",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("sm")]: { fontSize: "1em" },
+    [theme.breakpoints.up("md")]: { fontSize: "1em" },
     [theme.breakpoints.up("lg")]: {
       fontSize: "1em",
     },
@@ -63,11 +67,17 @@ const useStyles = makeStyles((theme) => ({
 
   iconstyle: {
     fontSize: "1em",
-    width: "1em",
-    height: "1em",
+    width: "0.7em",
+    height: "0.7em",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("sm")]: {
+      width: "0.7em",
+      height: "0.7em",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "0.7em",
+      height: "0.7em",
+    },
     [theme.breakpoints.up("lg")]: {
       width: "0.7em",
       height: "0.7em",

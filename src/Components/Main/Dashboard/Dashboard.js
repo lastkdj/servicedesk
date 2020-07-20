@@ -13,11 +13,10 @@ import BarChart from "./DashboardComponents/BarChart";
 import FirebaseApp from "../../../FireBase/FireBaseConfig";
 import Assigments from "./DashboardComponents/Assignments";
 import { makeStyles } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   dashgrid: {
-    marginLeft: "20px",
-    marginRight: "20px",
     justifyContent: "center",
 
     [theme.breakpoints.up("sm")]: {
@@ -58,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
+  const matches = useMediaQuery("(max-width:375px)");
   const classes = useStyles();
 
   return (
@@ -80,7 +80,8 @@ const Dashboard = () => {
           <ActiveUsers />
           <News />
           <DataDonut />
-          <BarChart />
+          {!matches ? <BarChart /> : null}
+
           <Assigments />
           <RecentTicketsDetailed />
         </Grid>

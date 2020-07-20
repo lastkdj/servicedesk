@@ -4,7 +4,7 @@ const DashContext = createContext();
 
 export function DashProvider(props) {
   const [openRight, setOpenRight] = useState(false);
-  const [openLeft, setOpenLeft] = useState(true);
+  const [openLeft, setOpenLeft] = useState(false);
 
   const value = useMemo(() => {
     return {
