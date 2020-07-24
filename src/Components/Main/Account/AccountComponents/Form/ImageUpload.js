@@ -213,6 +213,7 @@ const ImageUpload = () => {
     const file = e.target.files[0];
     const storageRef = FirebaseApp.storage().ref();
     let fileext = file.type.split("/");
+    console.log(file);
     if (
       fileext[1] === "jpg" ||
       fileext[1] === "jpeg" ||

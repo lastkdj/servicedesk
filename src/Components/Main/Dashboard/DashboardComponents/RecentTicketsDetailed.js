@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     marginLeft: "10px",
 
-    [theme.breakpoints.up("sm")]: {},
     [theme.breakpoints.up("md")]: {
       marginLeft: "0px",
     },
@@ -31,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   gridpadding: {
-    [theme.breakpoints.up("sm")]: {},
     [theme.breakpoints.up("md")]: {
       paddingLeft: "10px",
     },
@@ -49,8 +47,6 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       width: theme.spacing(3),
       height: theme.spacing(3),
@@ -75,8 +71,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#e6e5e8",
     margin: "11px 0px",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       fontSize: "1em",
       margin: "0px",
@@ -90,8 +84,6 @@ const useStyles = makeStyles((theme) => ({
   iconbutton: {
     color: "#fff",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       padding: "0px",
     },
@@ -103,8 +95,6 @@ const useStyles = makeStyles((theme) => ({
   iconstyle: {
     color: "#e6e5e8",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       fontSize: "1rem",
     },

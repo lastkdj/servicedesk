@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -70,32 +70,36 @@ const BarChart = () => {
           alignItems: "flex-end",
           color: "white",
           width: "100%",
-          height: matcheslg ? "200px" : "100%",
+          // height: matcheslg ? "200px" : "100%",
         }}
       >
-        <Line
-          data={chartDatam}
-          height={100}
-          options={{
-            responsive: true,
+        {!matcheslg ? (
+          <Line
+            data={chartDatam}
+            height={100}
+            options={{
+              responsive: true,
 
-            scales: {
-              xAxes: [
-                {
-                  gridLines: "none",
-                },
-              ],
-
-              yAxes: [
-                {
-                  gridLines: {
-                    color: "#5F6063",
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: "none",
                   },
-                },
-              ],
-            },
-          }}
-        />
+                ],
+
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "#5F6063",
+                    },
+                  },
+                ],
+              },
+            }}
+          />
+        ) : (
+          <Bar data={chartDatam} />
+        )}
       </Paper>
     </Grid>
   );

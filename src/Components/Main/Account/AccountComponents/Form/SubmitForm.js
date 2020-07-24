@@ -54,6 +54,7 @@ const SubmitForm = () => {
         .update({
           firstName: name,
           lastName: lastname,
+          fullname: name + " " + lastname,
           phonenumber: phone,
           country: country,
           company: company,

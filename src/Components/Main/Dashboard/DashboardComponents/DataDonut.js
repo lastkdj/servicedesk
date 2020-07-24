@@ -11,8 +11,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     color: "white",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       padding: "10px",
     },
@@ -25,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1em",
     fontWeight: "500",
     color: "#e6e5e8",
-
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       fontSize: "1em",
     },
@@ -40,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
 
-    [theme.breakpoints.up("sm")]: {},
-    [theme.breakpoints.up("md")]: {},
     [theme.breakpoints.up("lg")]: {
       marginBottom: "10px",
     },

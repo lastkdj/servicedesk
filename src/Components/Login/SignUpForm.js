@@ -29,6 +29,7 @@ function signupUser(userDetails, setError, setOpen, goLogin) {
             .set({
               firstName: name,
               lastName: lastname,
+              fullname: name + " " + lastname,
               email: email,
               password: password,
             });

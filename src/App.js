@@ -6,13 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Background from "./Imagenes/background.jpg";
 import PasswordReset from "./Components/Login/views/PasswordReset";
-// import { UserProvider } from "./Components/Context/UserContext";
 import SnackBar from "./Components/Login/Snackbars";
 import LinearIndeterminate from "./Components/Login/Loading";
 import { AuthContext } from "./Components/Context/AuthContext";
 import Main from "./Components/Main/MainView/Main";
-// import { DashProvider } from "./Components/Context/DashContext";
-// import { StylesProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   wall: {
