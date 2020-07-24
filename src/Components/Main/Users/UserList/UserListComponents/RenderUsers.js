@@ -7,7 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MediaCard from "./UserCard";
+import Popover from "@material-ui/core/Popover";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
@@ -79,9 +81,21 @@ const useStyles = makeStyles(() => ({
 
 const RenderUsers = (props) => {
   const [checked, setChecked] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const handleChecked = (event) => {
     setChecked(event.target.checked);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   useEffect(() => {
@@ -106,7 +120,13 @@ const RenderUsers = (props) => {
           className={classes.checkbox}
         />
       </Grid>
-      <Grid item container xs={3} style={{ marginLeft: "30px" }}>
+      <Grid
+        item
+        container
+        xs={3}
+        style={{ marginLeft: "30px", cursor: "pointer" }}
+        onClick={handleClick}
+      >
         <Grid item style={{ margin: "0px 10px" }}>
           {" "}
           <Avatar
@@ -131,6 +151,22 @@ const RenderUsers = (props) => {
           </Typography>
         </Grid>
       </Grid>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <MediaCard user={props.user} />
+      </Popover>
       <Grid item container xs={2} style={{ justifyContent: "center" }}>
         {" "}
         <Typography className={classes.titletext}>
