@@ -17,6 +17,13 @@ const useStyles = makeStyles({
   media: {
     height: 140,
   },
+
+  initials: {
+    fontSize: "5em",
+    fontWeight: "600",
+    textAlign: "center",
+    color: "white",
+  },
 });
 
 export default function MediaCard(props) {
@@ -29,7 +36,22 @@ export default function MediaCard(props) {
           className={classes.media}
           image={props.user.photoUrl}
           title="Contemplative Reptile"
-        />
+          style={{
+            backgroundColor: props.user.defaultAvatar,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {" "}
+          {props.user.photoUrl === undefined ? (
+            <Typography className={classes.initials}>
+              {props.user.firstName && props.user.lastName
+                ? props.user.firstName.charAt(0) + props.user.lastName.charAt(0)
+                : null}
+            </Typography>
+          ) : null}
+        </CardMedia>
         <CardContent style={{ width: "300px" }}>
           <Typography
             gutterBottom

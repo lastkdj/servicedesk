@@ -34,17 +34,14 @@ const CompanyFilter = (event, dispatch, depa) => {
         dispatch({ type: "fetch", value: dataArray });
       });
   } else if (event === "" && depa === "") {
-    userRef
-      .limit(10)
-      .get()
-      .then((snapshot) => {
-        const dataArray = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          dataArray.push(data);
-        });
-        dispatch({ type: "fetch", value: dataArray });
+    userRef.get().then((snapshot) => {
+      const dataArray = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        dataArray.push(data);
       });
+      dispatch({ type: "fetch", value: dataArray });
+    });
   } else {
     userRef
       .where("company", "==", event)

@@ -110,7 +110,7 @@ const Search = (props) => {
           variant="outlined"
           className={classes.root}
           onChange={props.handleChange}
-          labelWidth={70}
+          labelwidth={70}
           placeholder="Search Employee"
           InputLabelProps={{
             classes: {

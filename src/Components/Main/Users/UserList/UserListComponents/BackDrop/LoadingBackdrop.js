@@ -1,7 +1,6 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
-import { useAccount } from "../../../../../Context/AccountContext";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -15,15 +14,12 @@ const useStyles = makeStyles((theme) => ({
   colorPrimary: {},
 }));
 
-const SimpleBackdrop = () => {
+const SimpleBackdrop = (props) => {
   const classes = useStyles();
-
-  const { state } = useAccount();
-  const { loading } = state;
 
   return (
     <div>
-      {loading ? (
+      {props.loading ? (
         <CircularProgress thickness={5} className={classes.backdrop} />
       ) : null}
     </div>

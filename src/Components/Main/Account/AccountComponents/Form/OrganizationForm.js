@@ -213,17 +213,7 @@ const OrganizationForm = () => {
       field: "country",
       value: organization.country === undefined ? "" : organization.country,
     });
-
-    // document.getElementById("company").value = organization.company;
-    // document.getElementById("department").value = organization.department;
   }, [organization]);
-
-  // useEffect(() => {
-
-  //   document.getElementById("job").value =
-  //     data.job === undefined ? "" : data.job;
-  //   document.getElementById("country").value = data.country;
-  // }, [data.company, data.department, data.country, data.job]);
 
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import UserAppBar from "./UserAppBar";
@@ -7,11 +7,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import RenderUsers from "./RenderUsers";
+import SimpleBackdrop from "./BackDrop/LoadingFetch";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
     backgroundColor: "#282C34",
-
+    flexDirection: "column",
     display: "flex",
   },
 
@@ -77,9 +79,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const PaperList = (props) => {
-  const { userData } = props.state;
+  const { userData, moreData } = props.state;
   const [search, setSearch] = useState("");
   const [checked, setChecked] = React.useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const handleChecked = (event) => {
     setChecked(event.target.checked);
@@ -94,6 +97,16 @@ const PaperList = (props) => {
   });
 
   const classes = useStyles();
+
+  const fetchMoreData = () => {
+    setTimeout(() => {
+      if (moreData < props.userFetch) {
+        props.dispatch({ type: "moreData", value: moreData });
+      } else {
+        setHasMore(false);
+      }
+    }, 500);
+  };
 
   return (
     <Grid item xs={12}>
@@ -113,7 +126,7 @@ const PaperList = (props) => {
               alignItems: "center",
             }}
           >
-            <Grid item>
+            <Grid item xs={1}>
               {" "}
               <Checkbox
                 checked={checked}
@@ -138,16 +151,31 @@ const PaperList = (props) => {
               {" "}
               <Typography className={classes.titletext}>Join Date</Typography>
             </Grid>{" "}
-            <Grid item container xs={2} className={classes.marginright}>
+            <Grid item container xs={1} className={classes.marginright}>
               {" "}
               <Typography className={classes.titletext}>Actions</Typography>
             </Grid>{" "}
           </Grid>
-
-          {filteredNames.map((user) => {
-            return <RenderUsers user={user} checked={checked} />;
-          })}
+          <Grid item xs={12}>
+            <InfiniteScroll
+              dataLength={moreData}
+              next={fetchMoreData}
+              hasMore={hasMore}
+              loader={moreData < props.userFetch ? <SimpleBackdrop /> : null}
+            >
+              {filteredNames.slice(0, moreData).map((user) => {
+                return <RenderUsers user={user} checked={checked} />;
+              })}
+            </InfiniteScroll>
+          </Grid>
         </Grid>
+        <Grid
+          item={12}
+          style={{
+            justifyContent: "flex-end",
+            display: "flex",
+          }}
+        ></Grid>
       </Paper>
     </Grid>
   );

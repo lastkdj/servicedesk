@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext";
 import { useDash } from "../../../Context/DashContext";
+import { deepPurple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     justifySelf: "center",
     cursor: "pointer",
     transition: "0.4s",
+    color: theme.palette.getContrastText(deepPurple[500]),
   },
 
   paper: {
@@ -43,10 +45,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "16px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12);",
   },
+
+  initials: { fontSize: "1.4em", fontWeight: "600", textDecoration: "none" },
 }));
 
 const UserSection = () => {
-  const { data } = useContext(AuthContext);
+  const { data, hex } = useContext(AuthContext);
   const { setOpenLeft } = useDash();
 
   const classes = useStyles();
@@ -57,9 +61,24 @@ const UserSection = () => {
 
   return (
     <Grid container className={classes.usersection}>
-      <Link to="/account" onClick={closeDrawer}>
+      <Link
+        to="/account"
+        onClick={closeDrawer}
+        style={{ textDecoration: "none" }}
+      >
         <Grid item xs={12} className={classes.avatargrid}>
-          <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
+          <Avatar
+            alt="avatar"
+            src={data.photoUrl}
+            className={classes.small}
+            style={{ backgroundColor: `${data.defaultAvatar}` }}
+          >
+            <Typography className={classes.initials}>
+              {data.firstName && data.lastName
+                ? data.firstName.charAt(0) + data.lastName.charAt(0)
+                : null}
+            </Typography>
+          </Avatar>
         </Grid>
       </Link>
 

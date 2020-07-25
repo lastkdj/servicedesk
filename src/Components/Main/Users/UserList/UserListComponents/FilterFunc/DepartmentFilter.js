@@ -30,17 +30,14 @@ const DepartmentFilter = (event, dispatch, comp) => {
         dispatch({ type: "fetch", value: dataArray });
       });
   } else if (event === "" && comp === "") {
-    userRef
-      .limit(10)
-      .get()
-      .then((snapshot) => {
-        const dataArray = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          dataArray.push(data);
-        });
-        dispatch({ type: "fetch", value: dataArray });
+    userRef.get().then((snapshot) => {
+      const dataArray = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        dataArray.push(data);
       });
+      dispatch({ type: "fetch", value: dataArray });
+    });
   } else {
     userRef
       .where("department", "==", event)

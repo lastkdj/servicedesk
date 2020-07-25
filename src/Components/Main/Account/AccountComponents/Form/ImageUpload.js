@@ -11,6 +11,10 @@ import SBC from "../../../../../Imagenes/sbc.jpg";
 import FREY from "../../../../../Imagenes/freyLogo.jpg";
 import TA from "../../../../../Imagenes/TALogo.jpg";
 import { AuthContext } from "../../../../Context/AuthContext";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -27,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
     justifySelf: "center",
     cursor: "pointer",
     transition: "0.4s",
+    color: theme.palette.getContrastText(deepPurple[500]),
+    backgroundColor: deepPurple[500],
   },
 
   usertext: {
@@ -203,10 +209,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     lineHeight: "1.334",
   },
+
+  initials: { fontSize: "2.2em", fontWeight: "700" },
 }));
 
 const ImageUpload = () => {
-  const { data } = useContext(AuthContext);
+  const { data, hex } = useContext(AuthContext);
+  const [error, setError] = React.useState(false);
+
   const classes = useStyles();
 
   const handleChange = async (e) => {
@@ -241,14 +251,36 @@ const ImageUpload = () => {
         )
         .then(() => {});
     } else {
-      console.log("No es un formato valido");
+      setError(true);
     }
   };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleError = () => {
+    setError(false);
+  };
+
+  const nameInitial = data.firstName;
+  const lastnameInitial = data.lastName;
 
   return (
     <Grid container>
       <Grid item xs={12} className={classes.avatargrid}>
-        <Avatar alt="avatar" src={data.photoUrl} className={classes.small} />
+        <Avatar
+          alt="avatar"
+          src={data.photoUrl}
+          className={classes.small}
+          style={{ backgroundColor: `${data.defaultAvatar}` }}
+        >
+          <Typography className={classes.initials}>
+            {nameInitial && lastnameInitial
+              ? nameInitial.charAt(0) + lastnameInitial.charAt(0)
+              : null}
+          </Typography>
+        </Avatar>
       </Grid>
 
       <Grid item xs={12}>
@@ -334,6 +366,10 @@ const ImageUpload = () => {
             Upload Picture
           </Button>
         </label>
+
+        <Snackbar open={error} autoHideDuration={4000} onClose={handleError}>
+          <Alert severity="error">Invalid Image Format</Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );

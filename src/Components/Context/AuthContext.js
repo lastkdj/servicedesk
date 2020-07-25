@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState({});
+  const [hex, setHex] = useState("#ffffff");
 
   useEffect(() => {
     FirebaseApp.auth().onAuthStateChanged(function (user) {
@@ -24,6 +25,9 @@ export const AuthProvider = ({ children }) => {
             });
         };
         uploading();
+        const randomColor =
+          "#" + Math.floor(Math.random() * 16777215).toString(16);
+        setHex(randomColor);
       } else {
         setUser(null);
       }
@@ -31,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, data }}>
+    <AuthContext.Provider value={{ user, data, hex }}>
       {children}
     </AuthContext.Provider>
   );

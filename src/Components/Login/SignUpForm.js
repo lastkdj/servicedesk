@@ -13,9 +13,13 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { withRouter } from "react-router-dom";
 import FirebaseApp from "../../FireBase/FireBaseConfig";
 import { useUsuario } from "../Context/UserContext";
+import moment from "moment";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 
-function signupUser(userDetails, setError, setOpen, goLogin) {
+function signupUser(userDetails, setError, setOpen, goLogin, hex) {
   const { name, lastname, email, password } = userDetails;
+
   setOpen(true);
   return FirebaseApp.auth()
     .createUserWithEmailAndPassword(email, password)
@@ -23,6 +27,8 @@ function signupUser(userDetails, setError, setOpen, goLogin) {
       FirebaseApp.auth()
         .currentUser.updateProfile({ displayName: name + " " + lastname })
         .then(() => {
+          const utcDate = Date.now();
+          const newDate = moment(utcDate).format("dddd Do MMMM YYYY");
           FirebaseApp.firestore()
             .collection("users")
             .doc(FirebaseApp.auth().currentUser.uid)
@@ -32,13 +38,14 @@ function signupUser(userDetails, setError, setOpen, goLogin) {
               fullname: name + " " + lastname,
               email: email,
               password: password,
+              joinDate: newDate,
+              timeStamp: utcDate,
+              defaultAvatar: hex,
             });
           setOpen(false);
           goLogin();
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -47,6 +54,7 @@ function signupUser(userDetails, setError, setOpen, goLogin) {
 }
 
 const SingUpForm = (props) => {
+  const { hex } = useContext(AuthContext);
   const { setError, setOpen } = useUsuario();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,7 +71,7 @@ const SingUpForm = (props) => {
 
   const signUp = (e) => {
     e.preventDefault();
-    signupUser(userDetails, setError, setOpen, goLogin);
+    signupUser(userDetails, setError, setOpen, goLogin, hex);
   };
 
   const goLogin = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import TA from "../../../../../Imagenes/ta.jpg";
 import SBC from "../../../../../Imagenes/sbc2.jpg";
@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
-import { useEffect, useState } from "react";
 import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 
@@ -77,6 +76,8 @@ const useStyles = makeStyles(() => ({
       backgroundColor: "#363B47",
     },
   },
+
+  initials: { fontSize: "0.8em", fontWeight: "600" },
 }));
 
 const RenderUsers = (props) => {
@@ -111,7 +112,7 @@ const RenderUsers = (props) => {
       className={classes.ticketgrid}
       style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : null}
     >
-      <Grid item>
+      <Grid item xs={1}>
         {" "}
         <Checkbox
           checked={checked}
@@ -132,8 +133,19 @@ const RenderUsers = (props) => {
           <Avatar
             alt="avatar"
             src={props.user.photoUrl}
-            style={{ width: "42px", height: "42px" }}
-          />{" "}
+            className={classes.small}
+            style={{
+              backgroundColor: `${props.user.defaultAvatar}`,
+              width: "42px",
+              height: "42px",
+            }}
+          >
+            <Typography className={classes.initials}>
+              {props.user.firstName && props.user.lastName
+                ? props.user.firstName.charAt(0) + props.user.lastName.charAt(0)
+                : null}
+            </Typography>
+          </Avatar>
         </Grid>
         <Grid>
           {" "}
@@ -207,9 +219,11 @@ const RenderUsers = (props) => {
       </Grid>
       <Grid item container xs={2} style={{ justifyContent: "center" }}>
         {" "}
-        <Typography className={classes.titletext}>Join Date</Typography>
+        <Typography className={classes.titletext}>
+          {props.user.joinDate}
+        </Typography>
       </Grid>{" "}
-      <Grid item container xs={2} className={classes.marginright}>
+      <Grid item container xs={1} className={classes.marginright}>
         {" "}
         <Typography className={classes.titletext}>More Info</Typography>
       </Grid>{" "}
