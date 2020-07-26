@@ -22,10 +22,10 @@ function submitReducer(state, action) {
       };
     }
 
-    case "nextTen": {
+    case "copyfetch": {
       return {
         ...state,
-        nextTen: action.value,
+        OriginuserData: action.value,
       };
     }
 
@@ -43,11 +43,11 @@ function submitReducer(state, action) {
 }
 
 const initialState = {
-  comp: "",
-  depa: "",
-  nextTen: 0,
+  comp: "All",
+  depa: "All",
   moreData: 10,
   userData: [],
+  OriginuserData: [],
 };
 
 const GeneralState = () => {
@@ -59,18 +59,22 @@ const GeneralState = () => {
 
   useEffect(() => {
     setLoading(true);
-    userRef.get().then((snapshot) => {
-      const dataArray = [];
-      setUserFetch(snapshot.docs.length);
-      var lastVisible = snapshot.docs[snapshot.docs.length - 1];
-      dispatch({ type: "nextTen", value: lastVisible });
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        dataArray.push(data);
+    userRef
+      .orderBy("firstName")
+      .get()
+      .then((snapshot) => {
+        const dataArray = [];
+        setUserFetch(snapshot.docs.length);
+        var lastVisible = snapshot.docs[snapshot.docs.length - 1];
+        dispatch({ type: "nextTen", value: lastVisible });
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          dataArray.push(data);
+        });
+        dispatch({ type: "fetch", value: dataArray });
+        dispatch({ type: "copyfetch", value: dataArray });
+        setLoading(false);
       });
-      dispatch({ type: "fetch", value: dataArray });
-      setLoading(false);
-    });
   }, []);
 
   return (

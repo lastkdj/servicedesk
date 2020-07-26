@@ -28,18 +28,20 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
         .currentUser.updateProfile({ displayName: name + " " + lastname })
         .then(() => {
           const utcDate = Date.now();
-          const newDate = moment(utcDate).format("dddd Do MMMM YYYY");
+          const newDate = moment(utcDate).format(
+            "dddd Do MMMM YYYY, h:mm:ss a"
+          );
           FirebaseApp.firestore()
             .collection("users")
             .doc(FirebaseApp.auth().currentUser.uid)
             .set({
-              firstName: name,
-              lastName: lastname,
+              firstName: name.charAt(0).toUpperCase() + name.slice(1),
+              lastName: lastname.charAt(0).toUpperCase() + lastname.slice(1),
               fullname: name + " " + lastname,
               email: email,
               password: password,
               joinDate: newDate,
-              timeStamp: utcDate,
+              usercreation_timeStamp: utcDate,
               defaultAvatar: hex,
             });
           setOpen(false);
@@ -81,7 +83,6 @@ const SingUpForm = (props) => {
   return (
     <form className={classes.formsignup} noValidate>
       <Grid container spacing={2} justify="center">
-        {/* <Grid container item xs={12} className={classes.firstlast}> */}
         <Grid xs={12} sm={5} className={classes.usernamesignup}>
           <InputBase
             placeholder="Nombre"

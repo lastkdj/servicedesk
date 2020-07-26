@@ -32,7 +32,7 @@ const UserList = () => {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container style={{ justifyContent: "center" }}>
       <Grid container item xs={12} style={{ padding: "24px" }} spacing={2}>
         <Grid item xs={10}>
           <Breadcrumbs

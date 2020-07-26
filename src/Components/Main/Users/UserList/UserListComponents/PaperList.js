@@ -114,7 +114,12 @@ const PaperList = (props) => {
         <Grid container item={12}>
           <UserAppBar />
 
-          <Search search={search} handleChange={handleChange} />
+          <Search
+            search={search}
+            handleChange={handleChange}
+            userData={userData}
+            dispatch={props.dispatch}
+          />
 
           <Grid
             item
@@ -126,7 +131,7 @@ const PaperList = (props) => {
               alignItems: "center",
             }}
           >
-            <Grid item xs={1}>
+            <Grid item>
               {" "}
               <Checkbox
                 checked={checked}
@@ -151,7 +156,7 @@ const PaperList = (props) => {
               {" "}
               <Typography className={classes.titletext}>Join Date</Typography>
             </Grid>{" "}
-            <Grid item container xs={1} className={classes.marginright}>
+            <Grid item container xs={2} className={classes.marginright}>
               {" "}
               <Typography className={classes.titletext}>Actions</Typography>
             </Grid>{" "}

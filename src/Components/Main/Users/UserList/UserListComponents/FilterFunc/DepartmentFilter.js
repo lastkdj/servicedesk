@@ -1,55 +1,24 @@
-import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
-
-const DepartmentFilter = (event, dispatch, comp) => {
+const DepartmentFilter = (event, dispatch, OriginuserData, comp) => {
   dispatch({ type: "field", field: "depa", value: event });
 
-  var userRef = FirebaseApp.firestore().collection("users");
-  if (event === "" && comp !== "") {
-    userRef
-      .where("company", "==", comp)
-      .get()
-      .then((snapshot) => {
-        const dataArray = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          dataArray.push(data);
-        });
-        dispatch({ type: "fetch", value: dataArray });
-      });
-  } else if (comp !== "") {
-    userRef
-      .where("department", "==", event)
-      .where("company", "==", comp)
-      .get()
-      .then((snapshot) => {
-        const dataArray = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          dataArray.push(data);
-        });
-        dispatch({ type: "fetch", value: dataArray });
-      });
-  } else if (event === "" && comp === "") {
-    userRef.get().then((snapshot) => {
-      const dataArray = [];
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        dataArray.push(data);
-      });
-      dispatch({ type: "fetch", value: dataArray });
+  if (event === "All" && comp !== "All") {
+    const NoDepabutCompArray = OriginuserData.filter(function (user) {
+      return user.company === comp;
     });
+    dispatch({ type: "fetch", value: NoDepabutCompArray });
+  } else if (comp !== "All") {
+    const DepabutCompArray = OriginuserData.filter(function (user) {
+      return user.company === comp && user.department === event;
+    });
+
+    dispatch({ type: "fetch", value: DepabutCompArray });
+  } else if (event === "All" && comp === "All") {
+    dispatch({ type: "fetch", value: OriginuserData });
   } else {
-    userRef
-      .where("department", "==", event)
-      .get()
-      .then((snapshot) => {
-        const dataArray = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          dataArray.push(data);
-        });
-        dispatch({ type: "fetch", value: dataArray });
-      });
+    const DepaArray = OriginuserData.filter(function (user) {
+      return user.department === event;
+    });
+    dispatch({ type: "fetch", value: DepaArray });
   }
 };
 

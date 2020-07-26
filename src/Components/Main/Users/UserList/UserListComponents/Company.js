@@ -4,7 +4,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import { makeStyles } from "@material-ui/core/styles";
 import CompanyFilter from "./FilterFunc/CompanyFilter";
 import DepartmentFilter from "./FilterFunc/DepartmentFilter";
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const sb = "Soletanche Bachy";
 const frey = "Freyssinet";
 const ta = "Tierra Armada";
-
+const all = "All";
 const it = "IT Department";
 const acc = "Accounting";
 const st = "Study";
@@ -91,6 +90,7 @@ const Company = (props) => {
               CompanyFilter(
                 event.target.value,
                 props.dispatch,
+                props.state.OriginuserData,
                 props.state.depa
               )
             }
@@ -100,7 +100,7 @@ const Company = (props) => {
               PopoverClasses: { paper: classes.backcompany },
             }}
           >
-            <MenuItem value={""}>All</MenuItem>
+            <MenuItem value={all}>All</MenuItem>
             <MenuItem value={sb}>Soletanche Bachy</MenuItem>
             <MenuItem value={frey}>Freyssinet</MenuItem>
             <MenuItem value={ta}>Tierra Armada</MenuItem>
@@ -131,6 +131,7 @@ const Company = (props) => {
               DepartmentFilter(
                 event.target.value,
                 props.dispatch,
+                props.state.OriginuserData,
                 props.state.comp
               )
             }
@@ -140,7 +141,7 @@ const Company = (props) => {
               PopoverClasses: { paper: classes.backcompany },
             }}
           >
-            <MenuItem value="">All</MenuItem>
+            <MenuItem value={all}>All</MenuItem>
             <MenuItem value={it}>IT Department</MenuItem>
             <MenuItem value={acc}>Accounting</MenuItem>
             <MenuItem value={st}>Study</MenuItem>

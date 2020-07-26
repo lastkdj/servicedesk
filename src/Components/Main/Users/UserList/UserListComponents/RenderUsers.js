@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
+import moment from "moment";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
@@ -112,7 +113,7 @@ const RenderUsers = (props) => {
       className={classes.ticketgrid}
       style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : null}
     >
-      <Grid item xs={1}>
+      <Grid item>
         {" "}
         <Checkbox
           checked={checked}
@@ -220,10 +221,12 @@ const RenderUsers = (props) => {
       <Grid item container xs={2} style={{ justifyContent: "center" }}>
         {" "}
         <Typography className={classes.titletext}>
-          {props.user.joinDate}
+          {moment(props.user.usercreation_timeStamp).format(
+            "MMMM Do YYYY, h:mm:ss a"
+          )}
         </Typography>
       </Grid>{" "}
-      <Grid item container xs={1} className={classes.marginright}>
+      <Grid item container xs={2} className={classes.marginright}>
         {" "}
         <Typography className={classes.titletext}>More Info</Typography>
       </Grid>{" "}

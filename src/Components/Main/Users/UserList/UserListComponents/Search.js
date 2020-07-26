@@ -10,6 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
+const alpha = "Alphabetical";
 const newest = "Newest Users";
 const oldest = "Oldest Users";
 
@@ -100,6 +101,30 @@ const Search = (props) => {
     setSort(event.target.value);
   };
 
+  const sortAplha = () => {
+    const newArray = props.userData.sort((a, b) => {
+      return a.firstName > b.firstName ? 1 : -1;
+    });
+
+    props.dispatch({ type: "fetch", value: newArray });
+  };
+
+  const sortOld = () => {
+    const newArray = props.userData.sort((a, b) => {
+      return a.usercreation_timeStamp > b.usercreation_timeStamp ? 1 : -1;
+    });
+
+    props.dispatch({ type: "fetch", value: newArray });
+  };
+
+  const sortNew = () => {
+    const newArray = props.userData.sort((a, b) => {
+      return b.usercreation_timeStamp > a.usercreation_timeStamp ? 1 : -1;
+    });
+
+    props.dispatch({ type: "fetch", value: newArray });
+  };
+
   return (
     <Grid container item xs={12} style={{ justifyContent: "space-between" }}>
       <Grid item xs={4} style={{ padding: "20px" }}>
@@ -156,8 +181,15 @@ const Search = (props) => {
               PopoverClasses: { paper: classes.backcompany },
             }}
           >
-            <MenuItem value={newest}>Newest Users</MenuItem>
-            <MenuItem value={oldest}>Older Users</MenuItem>
+            <MenuItem value={alpha} onClick={sortAplha}>
+              A to Z
+            </MenuItem>
+            <MenuItem value={newest} onClick={sortNew}>
+              Newest Users
+            </MenuItem>
+            <MenuItem value={oldest} onClick={sortOld}>
+              Older Users
+            </MenuItem>
           </Select>
         </FormControl>
       </Grid>
