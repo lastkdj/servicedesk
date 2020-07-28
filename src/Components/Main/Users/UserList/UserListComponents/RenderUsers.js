@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import TA from "../../../../../Imagenes/ta.jpg";
 import SBC from "../../../../../Imagenes/sbc2.jpg";
@@ -10,6 +10,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
+import AreYouSure from "./AreYouSure";
+import { useUserList } from "../../../../Context/UserListContext";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
@@ -82,8 +84,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const RenderUsers = (props) => {
-  const [checked, setChecked] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { state, dispatch } = useUserList();
+  const [checked, setChecked] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -93,7 +96,17 @@ const RenderUsers = (props) => {
   const id = open ? "simple-popover" : undefined;
 
   const handleChecked = (event) => {
-    setChecked(event.target.checked);
+    if (!checked) {
+      props.setcheckRef(props.checkRef + 1);
+      setChecked(event.target.checked);
+    } else if (!checked && props.checkRef > 0) {
+      setChecked(event.target.checked);
+    } else if (checked && props.checkRef > 0) {
+      setChecked(event.target.checked);
+      props.setcheckRef(props.checkRef - 1);
+    } else {
+      setChecked(event.target.checked);
+    }
   };
 
   const handleClick = (event) => {
@@ -101,10 +114,22 @@ const RenderUsers = (props) => {
   };
 
   useEffect(() => {
-    setChecked(props.checked);
-  }, [props.checked]);
+    if (checked) {
+      dispatch({ type: "selected", value: props.user.uid });
+    }
+  }, [checked]);
+
+  useEffect(() => {
+    if (props.checkRef === 1) {
+      props.setDelEdit(true);
+    } else if (props.checkRef === 0 || props.checkRef > 1) {
+      props.setDelEdit(false);
+    } else {
+    }
+  }, [props.checkRef]);
 
   const classes = useStyles();
+
   return (
     <Grid
       item
@@ -230,6 +255,7 @@ const RenderUsers = (props) => {
         {" "}
         <Typography className={classes.titletext}>More Info</Typography>
       </Grid>{" "}
+      <AreYouSure currentUser={props.user.uid} checked={checked} />
     </Grid>
   );
 };

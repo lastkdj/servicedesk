@@ -9,6 +9,10 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 
+// exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
+//   // ...
+// });
+
 // exports.newUserSignup = functions.auth.user().onCreate((user) => {
 //   return admin.firestore().collection("users").doc(user.uid).set({
 //     email: user.email,
@@ -21,13 +25,23 @@ admin.initializeApp();
 // });
 
 // exports.addRequest = functions.https.onCall((data, context) => {
-//   if (!context.auth) {
-//     throw new functions.https.HttpsError("unauthenticated", "Logeate papa");
-//   }
-//   return admin.firestore().collection("users").doc("Usuario1").set({
-//     name: data.name,
-//     lastname: data.lastname,
-//     email: data.email,
-//     password: data.password,
-//   });
+
 // });
+
+exports.callDisable = functions.https.onCall((data, context) => {
+  const user = data.uid;
+
+  admin
+    .auth()
+    .updateUser(user, {
+      disabled: true,
+    })
+    .then(() => {
+      console.log("Successfully disabled");
+    })
+    .catch((error) => {
+      console.log("Something went wrong", error);
+    });
+
+  return console.log("User Disabled", user);
+});

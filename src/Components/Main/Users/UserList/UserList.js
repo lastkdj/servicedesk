@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import GeneralState from "./UserListComponents/GeneralReducer";
+import AddUser from "./UserListComponents/AddUser";
 
 const useStyles = makeStyles((theme) => ({
   breadtext: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserList = () => {
+  const [newUser, setNewUser] = React.useState(false);
   const classes = useStyles();
 
   return (
@@ -61,10 +63,12 @@ const UserList = () => {
             type="submit"
             color="primary"
             className="submit"
+            onClick={() => setNewUser(true)}
           >
             Add New User
           </Button>
         </Grid>
+        <AddUser newUser={newUser} setNewUser={setNewUser} />
         <GeneralState />
       </Grid>
     </Grid>

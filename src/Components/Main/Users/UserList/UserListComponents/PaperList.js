@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import UserAppBar from "./UserAppBar";
 import Search from "./Search";
 import Grid from "@material-ui/core/Grid";
@@ -9,6 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import RenderUsers from "./RenderUsers";
 import SimpleBackdrop from "./BackDrop/LoadingFetch";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Button } from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
+import { useUserList } from "../../../../Context/UserListContext";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
@@ -76,17 +80,24 @@ const useStyles = makeStyles(() => ({
       backgroundColor: "#363B47",
     },
   },
+
+  button: {
+    backgroundColor: "#8A85FF",
+    color: "white",
+
+    "&:hover": {
+      backgroundColor: "#5A55DA",
+    },
+  },
 }));
 
-const PaperList = (props) => {
-  const { userData, moreData } = props.state;
+const PaperList = () => {
+  const { state, dispatch } = useUserList();
+  const { userData, moreData, userFetch, error, success } = state;
   const [search, setSearch] = useState("");
-  const [checked, setChecked] = React.useState(false);
   const [hasMore, setHasMore] = useState(true);
-
-  const handleChecked = (event) => {
-    setChecked(event.target.checked);
-  };
+  const [DelEdit, setDelEdit] = useState(false);
+  const [checkRef, setcheckRef] = useState(0);
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -100,12 +111,28 @@ const PaperList = (props) => {
 
   const fetchMoreData = () => {
     setTimeout(() => {
-      if (moreData < props.userFetch) {
-        props.dispatch({ type: "moreData", value: moreData });
+      if (moreData < userFetch) {
+        dispatch({ type: "moreData", value: moreData });
       } else {
         setHasMore(false);
       }
     }, 500);
+  };
+
+  const deletedUser = () => {
+    dispatch({ type: "deleted", value: true });
+  };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleSuccess = () => {
+    dispatch({ type: "success", value: false });
+  };
+
+  const handleError = () => {
+    dispatch({ type: "error", value: false });
   };
 
   return (
@@ -118,58 +145,139 @@ const PaperList = (props) => {
             search={search}
             handleChange={handleChange}
             userData={userData}
-            dispatch={props.dispatch}
+            dispatch={dispatch}
           />
 
-          <Grid
-            item
-            xs={12}
-            container
-            style={{
-              padding: "10px",
-              borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
-              alignItems: "center",
-            }}
-          >
-            <Grid item>
-              {" "}
-              <Checkbox
-                checked={checked}
-                onChange={handleChecked}
-                inputProps={{ "aria-label": "primary checkbox" }}
-                className={classes.checkbox}
-              />
+          {DelEdit ? (
+            <Fade in={true}>
+              <Grid
+                item
+                xs={12}
+                container
+                style={{
+                  padding: "10px",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+                  alignItems: "center",
+                }}
+              >
+                <Grid item style={{ margin: "10px" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    className={classes.button}
+                    style={{ marginBottom: "0px" }}
+                    onClick={deletedUser}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+                <Grid item style={{ margin: "10px" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    className={classes.button}
+                    style={{ marginBottom: "0px" }}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+              </Grid>
+            </Fade>
+          ) : (
+            <Grid
+              item
+              xs={12}
+              container
+              style={{
+                padding: "10px",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+                alignItems: "center",
+                height: "77px",
+              }}
+            >
+              <Grid
+                item
+                container
+                xs={3}
+                style={{
+                  marginLeft: "30px",
+                  height: "36px",
+                  marginBottom: "10px",
+                }}
+              >
+                {" "}
+                <Typography className={classes.titletext}>User</Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={2}
+                style={{
+                  justifyContent: "center",
+                  height: "36px",
+                  marginBottom: "10px",
+                }}
+              >
+                {" "}
+                <Typography className={classes.titletext}>
+                  Department
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={2}
+                style={{
+                  justifyContent: "center",
+                  height: "36px",
+                  marginBottom: "10px",
+                }}
+              >
+                {" "}
+                <Typography className={classes.titletext}>Company</Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={2}
+                style={{
+                  justifyContent: "center",
+                  height: "36px",
+                  marginBottom: "10px",
+                }}
+              >
+                {" "}
+                <Typography className={classes.titletext}>Join Date</Typography>
+              </Grid>{" "}
+              <Grid item container xs={2} className={classes.marginright}>
+                {" "}
+                <Typography
+                  className={classes.titletext}
+                  style={{ height: "36px", marginBottom: "10px" }}
+                >
+                  Actions
+                </Typography>
+              </Grid>{" "}
             </Grid>
-            <Grid item container xs={3} style={{ marginLeft: "30px" }}>
-              {" "}
-              <Typography className={classes.titletext}>User</Typography>
-            </Grid>
-            <Grid item container xs={2} style={{ justifyContent: "center" }}>
-              {" "}
-              <Typography className={classes.titletext}>Department</Typography>
-            </Grid>
-            <Grid item container xs={2} style={{ justifyContent: "center" }}>
-              {" "}
-              <Typography className={classes.titletext}>Company</Typography>
-            </Grid>
-            <Grid item container xs={2} style={{ justifyContent: "center" }}>
-              {" "}
-              <Typography className={classes.titletext}>Join Date</Typography>
-            </Grid>{" "}
-            <Grid item container xs={2} className={classes.marginright}>
-              {" "}
-              <Typography className={classes.titletext}>Actions</Typography>
-            </Grid>{" "}
-          </Grid>
+          )}
           <Grid item xs={12}>
             <InfiniteScroll
               dataLength={moreData}
               next={fetchMoreData}
               hasMore={hasMore}
-              loader={moreData < props.userFetch ? <SimpleBackdrop /> : null}
+              loader={moreData < userFetch ? <SimpleBackdrop /> : null}
             >
               {filteredNames.slice(0, moreData).map((user) => {
-                return <RenderUsers user={user} checked={checked} />;
+                return (
+                  <RenderUsers
+                    user={user}
+                    setDelEdit={setDelEdit}
+                    checkRef={checkRef}
+                    setcheckRef={setcheckRef}
+                  />
+                );
               })}
             </InfiniteScroll>
           </Grid>
@@ -182,6 +290,12 @@ const PaperList = (props) => {
           }}
         ></Grid>
       </Paper>
+      <Snackbar open={success} autoHideDuration={4000} onClose={handleSuccess}>
+        <Alert severity="success">The User has been successfully Removed</Alert>
+      </Snackbar>
+      <Snackbar open={error} autoHideDuration={4000} onClose={handleError}>
+        <Alert severity="error">You can't remove yourself</Alert>
+      </Snackbar>
     </Grid>
   );
 };

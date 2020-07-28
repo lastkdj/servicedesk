@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import CompanyFilter from "./FilterFunc/CompanyFilter";
 import DepartmentFilter from "./FilterFunc/DepartmentFilter";
+import { useUserList } from "../../../../Context/UserListContext";
 
 const useStyles = makeStyles((theme) => ({
   rootcompany: {
@@ -58,9 +59,10 @@ const hua = "450 Huatacondo";
 const piq = "452 Pique Inco";
 const cand = "453 Candelaria";
 
-const Company = (props) => {
+const Company = () => {
   const classes = useStyles();
-  const { comp, depa } = props.state;
+  const { state, dispatch } = useUserList();
+  const { comp, depa, OriginuserData } = state;
   const [opencomp, setOpenComp] = useState(false);
   const [opendepa, setOpenDepa] = useState(false);
 
@@ -87,12 +89,7 @@ const Company = (props) => {
               setOpenComp(true);
             }}
             onChange={(event) =>
-              CompanyFilter(
-                event.target.value,
-                props.dispatch,
-                props.state.OriginuserData,
-                props.state.depa
-              )
+              CompanyFilter(event.target.value, dispatch, OriginuserData, depa)
             }
             label="Company"
             classes={{ icon: classes.popupcompany }}
@@ -130,9 +127,9 @@ const Company = (props) => {
             onChange={(event) =>
               DepartmentFilter(
                 event.target.value,
-                props.dispatch,
-                props.state.OriginuserData,
-                props.state.comp
+                dispatch,
+                OriginuserData,
+                comp
               )
             }
             label="Department"

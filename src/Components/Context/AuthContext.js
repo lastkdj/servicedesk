@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState({});
-  const [hex, setHex] = useState("#ffffff");
+  const [hex, setHex] = useState("#842CB7");
 
   useEffect(() => {
     FirebaseApp.auth().onAuthStateChanged(function (user) {

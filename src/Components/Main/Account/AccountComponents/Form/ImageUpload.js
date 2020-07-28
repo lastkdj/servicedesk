@@ -13,8 +13,7 @@ import TA from "../../../../../Imagenes/TALogo.jpg";
 import { AuthContext } from "../../../../Context/AuthContext";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import { useEffect } from "react";
+import { deepPurple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   avatargrid: {
@@ -154,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
       height: "150px",
       justifyContent: "center",
       flexDirection: "column",
-      padding: "50px 40px 40px 107px",
+      padding: "50px 40px 40px 115px",
       backgroundRepeat: "no-repeat",
     },
   },
@@ -214,7 +213,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ImageUpload = () => {
-  const { data, hex } = useContext(AuthContext);
+  const { data } = useContext(AuthContext);
   const [error, setError] = React.useState(false);
 
   const classes = useStyles();
@@ -223,7 +222,7 @@ const ImageUpload = () => {
     const file = e.target.files[0];
     const storageRef = FirebaseApp.storage().ref();
     let fileext = file.type.split("/");
-    console.log(file);
+
     if (
       fileext[1] === "jpg" ||
       fileext[1] === "jpeg" ||

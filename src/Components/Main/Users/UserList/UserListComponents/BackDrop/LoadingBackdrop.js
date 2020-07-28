@@ -1,6 +1,7 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
+import { useUserList } from "../../../../../Context/UserListContext";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -14,12 +15,14 @@ const useStyles = makeStyles((theme) => ({
   colorPrimary: {},
 }));
 
-const SimpleBackdrop = (props) => {
+const SimpleBackdrop = () => {
+  const { state } = useUserList();
+  const { loading } = state;
   const classes = useStyles();
 
   return (
     <div>
-      {props.loading ? (
+      {loading ? (
         <CircularProgress thickness={5} className={classes.backdrop} />
       ) : null}
     </div>
