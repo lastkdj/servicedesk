@@ -13,6 +13,7 @@ import WarningOutlinedIcon from "@material-ui/icons/WarningOutlined";
 import Astro from "../../../../../Imagenes/backastro.jpg";
 import { useUserList } from "../../../../Context/UserListContext";
 import SimpleBackdrop from "./BackDrop/LoadingBackdrop";
+import Zoom from "@material-ui/core/Zoom";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,23 +34,17 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Zoom direction="up" ref={ref} {...props} />;
 });
 
-const AreYouSure = (props) => {
+const AreYouSure = () => {
   const { state, dispatch } = useUserList();
-  const { toDelete, deleted, selected, loading } = state;
+  const { deleted, selected, loading } = state;
   const classes = useStyles();
 
   const handleClose = () => {
     dispatch({ type: "deleted", value: false });
   };
-
-  const newArray = toDelete;
-
-  useEffect(() => {
-    newArray.push(props.currentUser);
-  }, []);
 
   const onClicky = () => {
     dispatch({ type: "loading", value: true });
@@ -76,81 +71,79 @@ const AreYouSure = (props) => {
   };
 
   return (
-    <div>
-      <Dialog
-        open={deleted}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-        PaperProps={{
-          classes: { root: classes.root },
-        }}
-      >
-        <SimpleBackdrop />
-        <Grid style={{ backdropFilter: "brightness(60%)" }}>
-          <DialogTitle
-            id="alert-dialog-slide-title"
-            style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.12)" }}
+    <Dialog
+      open={deleted}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-slide-title"
+      aria-describedby="alert-dialog-slide-description"
+      PaperProps={{
+        classes: { root: classes.root },
+      }}
+    >
+      <SimpleBackdrop />
+      <Grid>
+        <DialogTitle
+          id="alert-dialog-slide-title"
+          style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.12)" }}
+        >
+          ARE YOU SURE?
+        </DialogTitle>
+        <DialogContent style={{ display: "flex", margin: "20px 0px" }}>
+          <WarningOutlinedIcon
+            style={{ margin: "10px 20px 10px 10px", color: "#F3B604" }}
+          />
+          <DialogContentText
+            id="alert-dialog-slide-description"
+            style={{ color: "white", fontWeight: "400" }}
           >
-            ARE YOU SURE?
-          </DialogTitle>
-          <DialogContent style={{ display: "flex", margin: "20px 0px" }}>
-            <WarningOutlinedIcon
-              style={{ margin: "10px 20px 10px 10px", color: "#F3B604" }}
-            />
-            <DialogContentText
-              id="alert-dialog-slide-description"
-              style={{ color: "white", fontWeight: "400" }}
+            This action will deleted the user and all the information regarding
+            this entry, are you sure about this movement?...
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Grid
+            item
+            xs={3}
+            style={{
+              marginLeft: "10px",
+            }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary"
+              className={classes.button}
+              onClick={handleClose}
             >
-              This action will deleted the user and all the information
-              regarding this entry, are you sure about this movement?...
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Grid
-              item
-              xs={3}
-              style={{
-                marginLeft: "10px",
-              }}
+              Cancel
+            </Button>
+          </Grid>
+          <Grid
+            item
+            xs={3}
+            style={{
+              marginLeft: "20px",
+              marginRight: "10px",
+            }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary"
+              className={classes.button}
+              onClick={onClicky}
+              disabled={loading}
             >
-              <Button
-                fullWidth
-                variant="contained"
-                type="submit"
-                color="primary"
-                className={classes.button}
-                onClick={handleClose}
-              >
-                Cancel
-              </Button>
-            </Grid>
-            <Grid
-              item
-              xs={3}
-              style={{
-                marginLeft: "20px",
-                marginRight: "10px",
-              }}
-            >
-              <Button
-                fullWidth
-                variant="contained"
-                type="submit"
-                color="primary"
-                className={classes.button}
-                onClick={onClicky}
-                disabled={loading}
-              >
-                Delete
-              </Button>
-            </Grid>
-          </DialogActions>
-        </Grid>
-      </Dialog>
-    </div>
+              Delete
+            </Button>
+          </Grid>
+        </DialogActions>
+      </Grid>
+    </Dialog>
   );
 };
 

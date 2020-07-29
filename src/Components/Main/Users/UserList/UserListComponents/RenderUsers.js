@@ -255,7 +255,6 @@ const RenderUsers = (props) => {
         {" "}
         <Typography className={classes.titletext}>More Info</Typography>
       </Grid>{" "}
-      <AreYouSure currentUser={props.user.uid} checked={checked} />
     </Grid>
   );
 };

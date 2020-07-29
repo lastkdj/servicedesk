@@ -13,6 +13,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Button } from "@material-ui/core";
 import Fade from "@material-ui/core/Fade";
 import { useUserList } from "../../../../Context/UserListContext";
+import AreYouSure from "./AreYouSure";
 
 const useStyles = makeStyles(() => ({
   quadrapapers: {
@@ -140,7 +141,7 @@ const PaperList = () => {
       <Paper elevation={3} className={classes.quadrapapers}>
         <Grid container item={12}>
           <UserAppBar />
-
+          <AreYouSure />
           <Search
             search={search}
             handleChange={handleChange}
