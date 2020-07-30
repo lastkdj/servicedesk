@@ -28,6 +28,7 @@ admin.initializeApp();
 
 // });
 
+// Disable an User
 exports.callDisable = functions.https.onCall((data, context) => {
   const user = data.uid;
 
@@ -46,6 +47,7 @@ exports.callDisable = functions.https.onCall((data, context) => {
   return console.log("User Disabled", user);
 });
 
+//Cloud Function, create a new user, and store user Data in Cloud Firestore
 exports.addUser = functions.https.onCall((data, context) => {
   const firstName = data.firstName;
   const lastname = data.lastname;
@@ -77,6 +79,7 @@ exports.addUser = functions.https.onCall((data, context) => {
           firstName: firstName,
           lastName: lastname,
           fullname: firstName + " " + lastname,
+          email: email,
           phonenumber: phonenumber,
           country: country,
           company: company,
@@ -88,13 +91,14 @@ exports.addUser = functions.https.onCall((data, context) => {
           defaultAvatar: defaultAvatar,
         })
         .then(function () {
-          console.log("Document successfully written!");
+          return "user successfully created";
         })
         .catch(function (error) {
           console.error("Error writing document: ", error);
         });
     })
     .catch(function (error) {
-      console.log("Error creating new user:", error);
+      var error = error.code;
+      return error;
     });
 });

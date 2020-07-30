@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Zoom from "@material-ui/core/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,6 +15,11 @@ import { Typography } from "@material-ui/core";
 import { useAccount } from "../../../../Context/AccountContext";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import moment from "moment";
+import ProgressBar from "../../../../Login/ProgressBar";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import AddUserLoad from "./AddUserLoad";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -199,11 +204,20 @@ const AddUser = (props) => {
     job,
   } = state;
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [depa, setDepa] = useState("");
   const [opendepa, setOpenDepa] = useState(false);
   const [comp, setComp] = useState("");
   const [opencomp, setOpenComp] = useState(false);
   const [password, setPassword] = useState("");
+  const [count, setCount] = useState("");
+  const nameRef = useRef();
+  const lastnameRef = useRef();
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const jobRef = useRef();
+  const passwordRef = useRef();
 
   const classes = useStyles();
 
@@ -222,14 +236,14 @@ const AddUser = (props) => {
   };
 
   const onSubmit = () => {
+    setLoading(true);
     const utcDate = Date.now();
     const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
     const addUser = FirebaseApp.functions().httpsCallable("addUser");
     addUser({
-      firstName: name,
-      lastname: lastname,
+      firstName: name.charAt(0).toUpperCase() + name.slice(1),
+      lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
       fullname: name + " " + lastname,
       email: email,
       password: password,
@@ -242,10 +256,74 @@ const AddUser = (props) => {
       joinDate: newDate,
       usercreation_timeStamp: utcDate,
       defaultAvatar: randomColor,
-    }).then(() => {
-      console.log("Se hizo muy bien");
+    }).then((result) => {
+      if (result.data === null) {
+        setError("auth/successfully-created");
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setError(result.data);
+      }
+
+      console.log("Contrasenia papi ", result.data);
     });
   };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setError("");
+  };
+
+  useEffect(() => {
+    if (error === "auth/successfully-created") {
+      dispatch({
+        type: "field",
+        field: "name",
+        value: "",
+      });
+      nameRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "lastname",
+        value: "",
+      });
+      lastnameRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "phone",
+        value: "",
+      });
+      phoneRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "email",
+        value: "",
+      });
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+      setPassword("");
+      dispatch({
+        type: "field",
+        field: "job",
+        value: "",
+      });
+      jobRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "country",
+        value: "",
+      });
+      setCount("");
+      setComp("");
+      setDepa("");
+    }
+  }, [error]);
 
   return (
     <Dialog
@@ -259,6 +337,7 @@ const AddUser = (props) => {
         classes: { root: classes.root },
       }}
     >
+      <AddUserLoad loading={loading} />
       <Grid container xs={12} spacing={2} style={{ justifyContent: "center" }}>
         <Grid
           item
@@ -288,6 +367,7 @@ const AddUser = (props) => {
           <Grid container item xs={6} spacing={2}>
             <Grid item xs={6}>
               <TextField
+                inputRef={nameRef}
                 label="First Name"
                 variant="outlined"
                 required
@@ -309,6 +389,7 @@ const AddUser = (props) => {
             </Grid>
             <Grid item xs={6}>
               <TextField
+                inputRef={lastnameRef}
                 label="Last Name"
                 variant="outlined"
                 required
@@ -330,6 +411,7 @@ const AddUser = (props) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                inputRef={emailRef}
                 label="Email Address"
                 variant="outlined"
                 required
@@ -352,7 +434,7 @@ const AddUser = (props) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="outlined-helperText"
+                inputRef={passwordRef}
                 variant="outlined"
                 required
                 label="Password"
@@ -370,16 +452,105 @@ const AddUser = (props) => {
                 }}
               />
             </Grid>
+            <ProgressBar password={password} />
           </Grid>
           <Grid
             container
             item
             xs={6}
             spacing={2}
-            style={{ justifyContent: "center" }}
+            style={{ justifyContent: "center", marginLeft: "10px" }}
           >
-            {name + " " + lastname}
-            {email}
+            <Grid
+              item
+              xs={12}
+              style={{
+                justifyContent: "center",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+              }}
+            >
+              {" "}
+              <Typography
+                style={{
+                  fontWeight: "500",
+                  fontSize: "1.5em",
+                  textAlign: "center",
+                  height: "36px",
+                }}
+              >
+                {name.charAt(0).toUpperCase() +
+                  name.slice(1) +
+                  " " +
+                  lastname.charAt(0).toUpperCase() +
+                  lastname.slice(1)}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Email Address: <span style={{ color: "#adb0bb" }}>{email}</span>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Phone Number: <span style={{ color: "#adb0bb" }}>{phone}</span>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Country: <span style={{ color: "#adb0bb" }}>{country}</span>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Job Position: <span style={{ color: "#adb0bb" }}>{job}</span>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Company: <span style={{ color: "#adb0bb" }}>{comp}</span>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "#e6e5e8",
+                }}
+              >
+                Department: <span style={{ color: "#adb0bb" }}>{depa}</span>
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -415,6 +586,7 @@ const AddUser = (props) => {
           >
             <Grid item xs={4}>
               <TextField
+                inputRef={phoneRef}
                 label="Phone Number"
                 variant="outlined"
                 placeholder="Ex +56949651721"
@@ -449,8 +621,8 @@ const AddUser = (props) => {
                   fullWidth
                   labelId="demo-simple-select-outlined-label"
                   id="company"
-                  open={opencomp}
                   value={comp}
+                  open={opencomp}
                   onChange={handleCompany}
                   onClose={() => {
                     setOpenComp(false);
@@ -473,7 +645,7 @@ const AddUser = (props) => {
             </Grid>
             <Grid item xs={4}>
               <TextField
-                id="job"
+                inputRef={jobRef}
                 label="Job Position"
                 variant="outlined"
                 placeholder="Analyst"
@@ -518,6 +690,7 @@ const AddUser = (props) => {
                 renderOption={(option) => (
                   <React.Fragment>{option.label}</React.Fragment>
                 )}
+                value={count}
                 onChange={(event, value) =>
                   dispatch({
                     type: "field",
@@ -528,7 +701,6 @@ const AddUser = (props) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    value={params.label}
                     label="Choose a country"
                     variant="outlined"
                     className={classes.rootcountry}
@@ -558,8 +730,8 @@ const AddUser = (props) => {
                   fullWidth
                   labelId="demo-simple-select-outlined-label"
                   id="department"
-                  open={opendepa}
                   value={depa}
+                  open={opendepa}
                   onChange={handledepartment}
                   onClose={() => {
                     setOpenDepa(false);
@@ -586,6 +758,7 @@ const AddUser = (props) => {
             </Grid>
             <Grid item xs={4}>
               <Button
+                disabled={loading}
                 fullWidth
                 variant="contained"
                 type="submit"
@@ -600,6 +773,25 @@ const AddUser = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      {error === "auth/email-already-exists" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert severity="error">Email already in Use</Alert>
+        </Snackbar>
+      ) : error === "auth/invalid-email" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert severity="error">Invalid email format</Alert>
+        </Snackbar>
+      ) : error === "auth/invalid-password" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert severity="error">
+            The password must contain at least 6 characters
+          </Alert>
+        </Snackbar>
+      ) : error === "auth/successfully-created" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert severity="success">The user been created</Alert>
+        </Snackbar>
+      ) : null}
     </Dialog>
   );
 };
