@@ -14,8 +14,9 @@ import { Button } from "@material-ui/core";
 import Fade from "@material-ui/core/Fade";
 import { useUserList } from "../../../../Context/UserListContext";
 import AreYouSure from "./AreYouSure";
+import { useMediaQuery } from "react-responsive";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   quadrapapers: {
     backgroundColor: "#282C34",
     flexDirection: "column",
@@ -37,8 +38,14 @@ const useStyles = makeStyles(() => ({
   },
 
   marginright: {
-    padding: "0px",
-    justifyContent: "center",
+    display: "none",
+
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-end",
+      padding: "0px",
+    },
   },
 
   checkbox: {
@@ -90,6 +97,49 @@ const useStyles = makeStyles(() => ({
       backgroundColor: "#5A55DA",
     },
   },
+
+  titlemenu: {
+    padding: "10px",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+    alignItems: "center",
+    height: "77px",
+
+    [theme.breakpoints.up("sm")]: {
+      padding: "10px",
+      borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+      alignItems: "center",
+      height: "77px",
+    },
+
+    [theme.breakpoints.up("md")]: {
+      padding: "10px",
+      borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+      alignItems: "center",
+      height: "77px",
+      paddingLeft: "80px",
+    },
+  },
+
+  titlejoin: {
+    display: "none",
+
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-end",
+      height: "36px",
+      marginBottom: "10px",
+    },
+  },
+
+  titleuser: {
+    marginLeft: "0px",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "30px",
+      justifyContent: "flex-start",
+    },
+  },
 }));
 
 const PaperList = () => {
@@ -99,6 +149,8 @@ const PaperList = () => {
   const [hasMore, setHasMore] = useState(true);
   const [DelEdit, setDelEdit] = useState(false);
   const [checkRef, setcheckRef] = useState(0);
+
+  const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -139,7 +191,7 @@ const PaperList = () => {
   return (
     <Grid item xs={12}>
       <Paper elevation={3} className={classes.quadrapapers}>
-        <Grid container item={12}>
+        <Grid container item xs={12}>
           <UserAppBar />
           <AreYouSure />
           <Search
@@ -191,22 +243,17 @@ const PaperList = () => {
               item
               xs={12}
               container
-              style={{
-                padding: "10px",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
-                alignItems: "center",
-                height: "77px",
-              }}
+              className={classes.titlemenu}
+              style={isPhone ? { display: "none" } : null}
             >
               <Grid
                 item
                 container
-                xs={3}
-                style={{
-                  marginLeft: "30px",
-                  height: "36px",
-                  marginBottom: "10px",
-                }}
+                xs={6}
+                sm={4}
+                md={3}
+                className={classes.titleuser}
+                style={isPhone ? { justifyContent: "center" } : null}
               >
                 {" "}
                 <Typography className={classes.titletext}>User</Typography>
@@ -214,12 +261,11 @@ const PaperList = () => {
               <Grid
                 item
                 container
-                xs={2}
-                style={{
-                  justifyContent: "center",
-                  height: "36px",
-                  marginBottom: "10px",
-                }}
+                xs={3}
+                sm={4}
+                md={2}
+                className={classes.usermenu}
+                style={isPhone ? { display: "none" } : null}
               >
                 {" "}
                 <Typography className={classes.titletext}>
@@ -229,38 +275,39 @@ const PaperList = () => {
               <Grid
                 item
                 container
-                xs={2}
-                style={{
-                  justifyContent: "center",
-                  height: "36px",
-                  marginBottom: "10px",
-                }}
+                xs={6}
+                sm={4}
+                md={2}
+                className={classes.usermenu}
+                style={isPhone ? { justifyContent: "center" } : null}
               >
                 {" "}
                 <Typography className={classes.titletext}>Company</Typography>
               </Grid>
-              <Grid
-                item
-                container
-                xs={2}
-                style={{
-                  justifyContent: "center",
-                  height: "36px",
-                  marginBottom: "10px",
-                }}
-              >
-                {" "}
-                <Typography className={classes.titletext}>Join Date</Typography>
-              </Grid>{" "}
-              <Grid item container xs={2} className={classes.marginright}>
-                {" "}
-                <Typography
-                  className={classes.titletext}
-                  style={{ height: "36px", marginBottom: "10px" }}
+              {isPhone ? null : (
+                <Grid
+                  item
+                  container
+                  xs={0}
+                  sm={2}
+                  className={classes.titlejoin}
                 >
-                  Actions
-                </Typography>
-              </Grid>{" "}
+                  <Typography className={classes.titletext}>
+                    Join Date
+                  </Typography>
+                </Grid>
+              )}
+              {isPhone ? null : (
+                <Grid
+                  item
+                  container
+                  xs={0}
+                  sm={2}
+                  className={classes.marginright}
+                >
+                  <Typography className={classes.titletext}>Actions</Typography>
+                </Grid>
+              )}
             </Grid>
           )}
           <Grid item xs={12}>

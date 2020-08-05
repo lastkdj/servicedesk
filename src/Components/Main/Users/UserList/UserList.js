@@ -8,7 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import GeneralState from "./UserListComponents/GeneralReducer";
-import AddUser from "./UserListComponents/AddUser";
+import AddUser from "./UserListComponents/AddUserComponent/AddUser";
+import { useMediaQuery } from "react-responsive";
 
 const useStyles = makeStyles((theme) => ({
   breadtext: {
@@ -27,16 +28,42 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     marginBottom: "15px",
   },
+
+  button: {
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "0.575rem",
+    },
+
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "0.875rem",
+    },
+  },
 }));
 
 const UserList = () => {
   const [newUser, setNewUser] = React.useState(false);
   const classes = useStyles();
 
+  const isLaptop = useMediaQuery({ query: "(max-device-width: 1280px)" });
+  const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
+
   return (
     <Grid container style={{ justifyContent: "center" }}>
-      <Grid container item xs={12} style={{ padding: "24px" }} spacing={2}>
-        <Grid item xs={10}>
+      <Grid
+        container
+        item
+        xs={12}
+        style={
+          isPhone
+            ? { paddingTop: "15px", justifyContent: "center" }
+            : { padding: "24px", justifyContent: "center" }
+        }
+        spacing={2}
+      >
+        <Grid item xs={8} sm={9} md={10} lg={10} xl={10}>
           <Breadcrumbs
             separator={
               <NavigateNextIcon fontSize="small" style={{ color: "#adb0bb" }} />
@@ -55,7 +82,15 @@ const UserList = () => {
             User List
           </Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid
+          item
+          xs={4}
+          sm={3}
+          md={2}
+          lg={2}
+          xl={2}
+          className={classes.button}
+        >
           <Button
             startIcon={<AddCircleIcon />}
             fullWidth
@@ -64,6 +99,7 @@ const UserList = () => {
             color="primary"
             className="submit"
             onClick={() => setNewUser(true)}
+            style={{ fontSize: isLaptop ? "0.575rem" : "0.875rem" }}
           >
             Add New User
           </Button>

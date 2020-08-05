@@ -10,10 +10,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
-import AreYouSure from "./AreYouSure";
+import { useMediaQuery } from "react-responsive";
+
 import { useUserList } from "../../../../Context/UserListContext";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   quadrapapers: {
     backgroundColor: "#282C34",
 
@@ -21,10 +22,21 @@ const useStyles = makeStyles(() => ({
   },
 
   titletext: {
-    fontSize: "0.9em",
+    fontSize: "0.7em",
     fontWeight: "400",
     color: "#e6e5e8",
     alignText: "center",
+
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "0.7em",
+    },
+
+    [theme.breakpoints.up("xl")]: {
+      fontSize: "0.9em",
+    },
   },
 
   ticketsdetailed: {
@@ -81,12 +93,58 @@ const useStyles = makeStyles(() => ({
   },
 
   initials: { fontSize: "0.8em", fontWeight: "600" },
+
+  small: {
+    width: "42px",
+    height: "42px",
+
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {
+      width: "30px",
+      height: "30px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "30px",
+      height: "30px",
+    },
+
+    [theme.breakpoints.up("xl")]: {
+      width: "42px",
+      height: "42px",
+    },
+  },
+
+  companyimg: {
+    width: "42px",
+    height: "42px",
+    margin: "0px 10px",
+
+    [theme.breakpoints.up("sm")]: {},
+
+    [theme.breakpoints.up("md")]: {
+      width: "25px",
+      height: "25px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "25px",
+      height: "25px",
+    },
+
+    [theme.breakpoints.up("xl")]: {
+      width: "42px",
+      height: "42px",
+      margin: "0px 10px",
+    },
+  },
 }));
 
 const RenderUsers = (props) => {
-  const { state, dispatch } = useUserList();
+  const { dispatch } = useUserList();
   const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const isTablet = useMediaQuery({ query: "(max-device-width: 600px)" });
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -147,11 +205,16 @@ const RenderUsers = (props) => {
           className={classes.checkbox}
         />
       </Grid>
+
       <Grid
         item
         container
-        xs={3}
-        style={{ marginLeft: "30px", cursor: "pointer" }}
+        xs={10}
+        sm={5}
+        md={1}
+        lg={3}
+        xl={3}
+        style={!isTablet ? { marginLeft: "30px", cursor: "pointer" } : null}
         onClick={handleClick}
       >
         <Grid item style={{ margin: "0px 10px" }}>
@@ -162,8 +225,6 @@ const RenderUsers = (props) => {
             className={classes.small}
             style={{
               backgroundColor: `${props.user.defaultAvatar}`,
-              width: "42px",
-              height: "42px",
             }}
           >
             <Typography className={classes.initials}>
@@ -179,9 +240,8 @@ const RenderUsers = (props) => {
             {props.user.fullname}
           </Typography>
           <Typography
+            className={classes.titletext}
             style={{
-              fontSize: "0.9em",
-              fontWeight: "400",
               color: "#adb0bb",
             }}
           >
@@ -205,56 +265,80 @@ const RenderUsers = (props) => {
       >
         <MediaCard user={props.user} />
       </Popover>
-      <Grid item container xs={2} style={{ justifyContent: "center" }}>
-        {" "}
-        <Typography className={classes.titletext}>
-          {props.user.department}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        container
-        xs={2}
-        style={{
-          justifyContent: "flex-end",
-          alignItems: "center",
-          paddingRight: "30px",
-        }}
-      >
-        {" "}
-        <Typography className={classes.titletext}>
-          {props.user.company}
-        </Typography>
-        <Avatar
-          alt="avatar"
-          src={
-            props.user.company === "Soletanche Bachy"
-              ? SBC
-              : props.user.company === "Freyssinet"
-              ? FREY
-              : props.user.company === "Tierra Armada"
-              ? TA
-              : ""
-          }
+      {!isTablet ? (
+        <Grid
+          item
+          container
+          xs={3}
+          sm={3}
+          md={1}
+          lg={2}
+          xl={2}
+          style={{ justifyContent: "center" }}
+        >
+          {" "}
+          <Typography className={classes.titletext}>
+            {props.user.department}
+          </Typography>
+        </Grid>
+      ) : null}
+      {!isTablet ? (
+        <Grid
+          item
+          container
+          xs={3}
+          sm={4}
+          md={1}
+          lg={2}
+          xl={2}
           style={{
-            width: "42px",
-            height: "42px",
-            margin: "0px 10px",
+            justifyContent: "flex-end",
+            alignItems: "center",
           }}
-        />
-      </Grid>
-      <Grid item container xs={2} style={{ justifyContent: "center" }}>
-        {" "}
-        <Typography className={classes.titletext}>
-          {moment(props.user.usercreation_timeStamp).format(
-            "MMMM Do YYYY, h:mm:ss a"
-          )}
-        </Typography>
-      </Grid>{" "}
-      <Grid item container xs={2} className={classes.marginright}>
-        {" "}
-        <Typography className={classes.titletext}>More Info</Typography>
-      </Grid>{" "}
+        >
+          {" "}
+          <Typography className={classes.titletext}>
+            {props.user.company}
+          </Typography>
+          <Avatar
+            alt="avatar"
+            src={
+              props.user.company === "Soletanche Bachy"
+                ? SBC
+                : props.user.company === "Freyssinet"
+                ? FREY
+                : props.user.company === "Tierra Armada"
+                ? TA
+                : ""
+            }
+            className={classes.companyimg}
+          />
+        </Grid>
+      ) : null}
+      {!isTablet ? (
+        <Grid item container xs={2} style={{ justifyContent: "center" }}>
+          <Typography className={classes.titletext}>
+            {moment(props.user.usercreation_timeStamp).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            )}
+          </Typography>
+        </Grid>
+      ) : null}
+      {!isTablet ? (
+        <Grid
+          item
+          container
+          xs={2}
+          sm={2}
+          md={1}
+          lg={2}
+          xl={2}
+          className={classes.marginright}
+        >
+          {" "}
+          <Typography className={classes.titletext}>More Info</Typography>
+        </Grid>
+      ) : null}
     </Grid>
   );
 };

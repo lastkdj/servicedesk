@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 import { Link } from "react-router-dom";
+import { useDash } from "../../../../Context/DashContext";
 
 const useStyles = makeStyles((theme) => ({
   menuicon: {
@@ -113,10 +114,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Users = () => {
   const classes = useStyles();
+
+  const { setOpenLeft } = useDash();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
+  };
+
+  const closeDrawer = () => {
+    setOpenLeft(false);
   };
 
   return (
@@ -163,6 +170,7 @@ const Users = () => {
               justifyContent: "flex-start",
               width: "100%",
             }}
+            onClick={closeDrawer}
           >
             <Button classes={{ root: classes.buttonlist }}>
               <Grid

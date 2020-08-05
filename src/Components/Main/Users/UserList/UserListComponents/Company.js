@@ -68,7 +68,7 @@ const Company = () => {
 
   return (
     <React.Fragment>
-      <Grid item xs={2}>
+      <Grid item xs={6} sm={4} md={2} lg={2} xl={2}>
         <FormControl variant="outlined" className={classes.rootcompany}>
           <InputLabel
             id="demo-simple-select-outlined-label"
@@ -104,7 +104,7 @@ const Company = () => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={6} sm={4} md={2} lg={2} xl={2}>
         <FormControl variant="outlined" className={classes.rootcompany}>
           <InputLabel
             id="demo-simple-select-outlined-label"

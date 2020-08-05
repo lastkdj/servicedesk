@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "react-responsive";
 
 const alpha = "Alphabetical";
 const newest = "Newest Users";
@@ -97,6 +98,8 @@ const Search = (props) => {
   const [sort, setSort] = useState("");
   const [opensort, setOpenSort] = useState(false);
 
+  const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
+
   const handleSort = (event) => {
     setSort(event.target.value);
   };
@@ -127,7 +130,15 @@ const Search = (props) => {
 
   return (
     <Grid container item xs={12} style={{ justifyContent: "space-between" }}>
-      <Grid item xs={4} style={{ padding: "20px" }}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        lg={4}
+        xl={4}
+        style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+      >
         <TextField
           value={props.search}
           type="text"
@@ -154,7 +165,15 @@ const Search = (props) => {
           }}
         />
       </Grid>
-      <Grid item xs={2} style={{ padding: "20px" }}>
+      <Grid
+        item
+        xs={12}
+        sm={4}
+        md={2}
+        lg={2}
+        xl={2}
+        style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+      >
         <FormControl variant="outlined" className={classes.rootcompany}>
           <InputLabel
             id="demo-simple-select-outlined-label"

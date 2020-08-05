@@ -62,6 +62,7 @@ const initialState = {
   name: "",
   lastname: "",
   email: "",
+  password: "",
   phone: "",
   country: "",
   company: "",
