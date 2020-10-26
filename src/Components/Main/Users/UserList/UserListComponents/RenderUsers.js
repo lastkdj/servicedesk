@@ -406,26 +406,27 @@ const RenderUsers = (props) => {
           className={classes.marginright}
          
         >
-          {" "}
-          <Tooltip placement="right-end" title={!disable ? "Disable Account" : "Enable Account"} arrow>
+          {props.user.uid !== FirebaseApp.auth().currentUser.uid ?  <Tooltip placement="right-end" title={!disable ? "Disable Account" : "Enable Account"} arrow>
             
+         
+            <Button
+                      variant="contained"
+                      type="submit"
+                      color="primary"
+                      className={classes.button}
+                      style={{ marginBottom: "0px"}, !disable ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
+                      onClick={disableUser}
+                      disabled={loading}
+                    >
+                      {loading ? (
+          <CircularProgress thickness={5} size={18} className={classes.buttonProgress} />
+        ) : null}
+        {disable ? "Activate" : "Disable"}
+                      
+                    </Button>
+                    </Tooltip>: null}
+          {" "}
           
-          <Button
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                    className={classes.button}
-                    style={{ marginBottom: "0px"}, !disable ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
-                    onClick={disableUser}
-                    disabled={loading}
-                  >
-                    {loading ? (
-        <CircularProgress thickness={5} size={18} className={classes.buttonProgress} />
-      ) : null}
-      {disable ? "Activate" : "Disable"}
-                    
-                  </Button>
-                  </Tooltip>
         </Grid>
       ) : null}
     </Grid>
