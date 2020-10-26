@@ -11,7 +11,10 @@ import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
-
+import Button from "@material-ui/core/Button"
+import Tooltip from "@material-ui/core/Tooltip"
+import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
+import CircularProgress from "@material-ui/core/CircularProgress"
 import { useUserList } from "../../../../Context/UserListContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -137,14 +140,42 @@ const useStyles = makeStyles((theme) => ({
       margin: "0px 10px",
     },
   },
+
+  button: {
+    backgroundColor: "#8A85FF",
+    color: "white",
+    textAlign: "center",
+
+    "&:hover": {
+      backgroundColor: "#5A55DA",
+    },
+  },
+
+  buttonProgress: {
+ 
+    color: "#8a85ff",
+    position: 'absolute',
+   
+  },
 }));
 
 const RenderUsers = (props) => {
-  const { dispatch } = useUserList();
+  const { dispatch, state } = useUserList();
+
+  const { success } = state;
   const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [disable, setDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const isTablet = useMediaQuery({ query: "(max-device-width: 600px)" });
+
+  useEffect(() => {
+    if (success === true) {
+      setChecked(false);
+      props.setcheckRef(props.checkRef - 1);
+    }
+  }, [success]);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -171,6 +202,44 @@ const RenderUsers = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const disableUser =() => {
+    if (!disable){
+      setLoading(true)
+    if ( props.user.uid !== FirebaseApp.auth().currentUser.uid) {
+      const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
+      callDisable({ uid: props.user.uid }).then((result) => {
+        setDisable(!disable);
+        setLoading(false)
+            console.log(" User Disabled from existence");
+          });
+     
+    } else {
+      dispatch({ type: "loading", value: false });
+      dispatch({ type: "error", value: true });
+
+      console.log("No te podes autosuicidar");
+    }
+
+  } else {
+    setLoading(true)
+    if ( props.user.uid !== FirebaseApp.auth().currentUser.uid) {
+      const callEnable = FirebaseApp.functions().httpsCallable("callEnable");
+      callEnable({ uid: props.user.uid }).then((result) => {
+        setDisable(!disable);
+        setLoading(false)
+            console.log(" User Renewed");
+          });
+     
+    } else {
+      dispatch({ type: "loading", value: false });
+      dispatch({ type: "error", value: true });
+
+      console.log("No te podes autoactivar");
+    }
+  }
+
+  };
+
   useEffect(() => {
     if (checked) {
       dispatch({ type: "selected", value: props.user.uid });
@@ -186,6 +255,7 @@ const RenderUsers = (props) => {
     }
   }, [props.checkRef]);
 
+
   const classes = useStyles();
 
   return (
@@ -194,7 +264,7 @@ const RenderUsers = (props) => {
       xs={12}
       container
       className={classes.ticketgrid}
-      style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : null}
+      style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : disable ? {backgroundColor: "rgba(255, 255, 255, 0.3)"} : null}
     >
       <Grid item>
         {" "}
@@ -334,9 +404,28 @@ const RenderUsers = (props) => {
           lg={2}
           xl={2}
           className={classes.marginright}
+         
         >
           {" "}
-          <Typography className={classes.titletext}>More Info</Typography>
+          <Tooltip placement="right-end" title={!disable ? "Disable Account" : "Enable Account"} arrow>
+            
+          
+          <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    className={classes.button}
+                    style={{ marginBottom: "0px"}, !disable ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
+                    onClick={disableUser}
+                    disabled={loading}
+                  >
+                    {loading ? (
+        <CircularProgress thickness={5} size={18} className={classes.buttonProgress} />
+      ) : null}
+      {disable ? "Activate" : "Disable"}
+                    
+                  </Button>
+                  </Tooltip>
         </Grid>
       ) : null}
     </Grid>

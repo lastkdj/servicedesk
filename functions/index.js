@@ -47,6 +47,24 @@ exports.callDisable = functions.https.onCall((data, context) => {
   return console.log("User Disabled", user);
 });
 
+exports.callEnable = functions.https.onCall((data, context) => {
+  const user = data.uid;
+
+  admin
+    .auth()
+    .updateUser(user, {
+      disabled: false,
+    })
+    .then(() => {
+      console.log("Successfully Enabled");
+    })
+    .catch((error) => {
+      console.log("Something went wrong", error);
+    });
+
+  return console.log("User Enabled", user);
+});
+
 //Cloud Function, create a new user, and store user Data in Cloud Firestore
 exports.addUser = functions.https.onCall((data, context) => {
   const firstName = data.firstName;

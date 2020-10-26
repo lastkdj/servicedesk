@@ -15,6 +15,7 @@ import Fade from "@material-ui/core/Fade";
 import { useUserList } from "../../../../Context/UserListContext";
 import AreYouSure from "./AreYouSure";
 import { useMediaQuery } from "react-responsive";
+import EditUser from "./EditUser/EditUser";
 
 const useStyles = makeStyles((theme) => ({
   quadrapapers: {
@@ -149,6 +150,7 @@ const PaperList = () => {
   const [hasMore, setHasMore] = useState(true);
   const [DelEdit, setDelEdit] = useState(false);
   const [checkRef, setcheckRef] = useState(0);
+  const [editUser, setEditUser] = useState(false);
 
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
@@ -192,6 +194,7 @@ const PaperList = () => {
     <Grid item xs={12}>
       <Paper elevation={3} className={classes.quadrapapers}>
         <Grid container item xs={12}>
+          <EditUser editUser={editUser} setEditUser={setEditUser} />
           <UserAppBar />
           <AreYouSure />
           <Search
@@ -232,6 +235,9 @@ const PaperList = () => {
                     color="primary"
                     className={classes.button}
                     style={{ marginBottom: "0px" }}
+                    onClick={() => {
+                      setEditUser(true);
+                    }}
                   >
                     Edit
                   </Button>
