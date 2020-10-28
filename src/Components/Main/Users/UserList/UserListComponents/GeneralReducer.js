@@ -8,7 +8,8 @@ import { useUserList } from "../../../../Context/UserListContext";
 
 const GeneralState = () => {
   const { state, dispatch } = useUserList();
-
+  const {reFetch} = state
+ 
   var userRef = FirebaseApp.firestore().collection("users");
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const GeneralState = () => {
       dispatch({ type: "copyfetch", value: dataArray });
       dispatch({ type: "loading", value: false });
     });
-  }, []);
+  }, [reFetch]);
 
   return (
     <Grid item container spacing={2} xs={12}>

@@ -43,6 +43,7 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
               joinDate: newDate,
               usercreation_timeStamp: utcDate,
               defaultAvatar: hex,
+              disabled: "false",
               uid: FirebaseApp.auth().currentUser.uid,
             });
           setOpen(false);

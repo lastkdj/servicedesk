@@ -90,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 10px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
     alignItems: "center",
+    
     "&:hover": {
       backgroundColor: "#363B47",
     },
@@ -100,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
   small: {
     width: "42px",
     height: "42px",
+    
 
     [theme.breakpoints.up("sm")]: {},
 
@@ -165,7 +167,7 @@ const RenderUsers = (props) => {
   const { success } = state;
   const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [disable, setDisable] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const isTablet = useMediaQuery({ query: "(max-device-width: 600px)" });
@@ -203,42 +205,42 @@ const RenderUsers = (props) => {
   };
 
   const disableUser =() => {
-    if (!disable){
+    if (props.user.disabled === "false"){
       setLoading(true)
-    if ( props.user.uid !== FirebaseApp.auth().currentUser.uid) {
       const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
       callDisable({ uid: props.user.uid }).then((result) => {
-        setDisable(!disable);
         setLoading(false)
-            console.log(" User Disabled from existence");
-          });
-     
-    } else {
-      dispatch({ type: "loading", value: false });
-      dispatch({ type: "error", value: true });
-
-      console.log("No te podes autosuicidar");
-    }
-
+        
+        FirebaseApp.firestore()
+        .collection("users")
+        .doc(props.user.uid)
+        .update({
+          disabled: "true"
+        })
+        .then(() => {
+          console.log("done, disabled")
+        });
+       
+      });
   } else {
     setLoading(true)
-    if ( props.user.uid !== FirebaseApp.auth().currentUser.uid) {
       const callEnable = FirebaseApp.functions().httpsCallable("callEnable");
       callEnable({ uid: props.user.uid }).then((result) => {
-        setDisable(!disable);
+       
         setLoading(false)
-            console.log(" User Renewed");
-          });
-     
-    } else {
-      dispatch({ type: "loading", value: false });
-      dispatch({ type: "error", value: true });
-
-      console.log("No te podes autoactivar");
-    }
+        FirebaseApp.firestore()
+        .collection("users")
+        .doc(props.user.uid)
+        .update({
+          disabled: "false"
+        })
+        .then(() => {
+          console.log("done, enabled")
+        });
+       
+  })
   }
-
-  };
+}
 
   useEffect(() => {
     if (checked) {
@@ -258,13 +260,15 @@ const RenderUsers = (props) => {
 
   const classes = useStyles();
 
+
+
   return (
     <Grid
       item
       xs={12}
       container
       className={classes.ticketgrid}
-      style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : disable ? {backgroundColor: "rgba(255, 255, 255, 0.3)"} : null}
+      style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : props.user.disabled === "true" ? {backgroundColor: "rgba(255, 255, 255, 0.3)"} : null}
     >
       <Grid item>
         {" "}
@@ -279,7 +283,7 @@ const RenderUsers = (props) => {
       <Grid
         item
         container
-        xs={10}
+        xs={7}
         sm={5}
         md={1}
         lg={3}
@@ -394,7 +398,7 @@ const RenderUsers = (props) => {
           </Typography>
         </Grid>
       ) : null}
-      {!isTablet ? (
+      
         <Grid
           item
           container
@@ -406,7 +410,7 @@ const RenderUsers = (props) => {
           className={classes.marginright}
          
         >
-          {props.user.uid !== FirebaseApp.auth().currentUser.uid ?  <Tooltip placement="right-end" title={!disable ? "Disable Account" : "Enable Account"} arrow>
+          {props.user.uid !== FirebaseApp.auth().currentUser.uid ?  <Tooltip placement="right-end" title={props.user.disabled === "true" ? "Enable Account" : "Disable Account" } arrow>
             
          
             <Button
@@ -414,21 +418,21 @@ const RenderUsers = (props) => {
                       type="submit"
                       color="primary"
                       className={classes.button}
-                      style={{ marginBottom: "0px"}, !disable ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
+                      style={{ marginBottom: "0px"}, props.user.disabled === "false" ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
                       onClick={disableUser}
                       disabled={loading}
                     >
                       {loading ? (
           <CircularProgress thickness={5} size={18} className={classes.buttonProgress} />
         ) : null}
-        {disable ? "Activate" : "Disable"}
+        {props.user.disabled === "true" ? "Activate" : "Disable"}
                       
                     </Button>
                     </Tooltip>: null}
           {" "}
           
         </Grid>
-      ) : null}
+      
     </Grid>
   );
 };

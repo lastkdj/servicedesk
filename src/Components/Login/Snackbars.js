@@ -23,25 +23,25 @@ const Snackbars = () => {
     <div>
       {error === "auth/email-already-in-use" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">El Email ya esta siendo usado</Alert>
+          <Alert severity="error">The Email is already in use</Alert>
         </Snackbar>
       ) : error === "auth/invalid-email" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">El Email no tiene un formato valido</Alert>
+          <Alert severity="error">The Email has an invalid format</Alert>
         </Snackbar>
       ) : error === "auth/weak-password" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
           <Alert severity="error">
-            La contraseña debe tener al menos 6 caracteres
+            The password must have at least 6 characters
           </Alert>
         </Snackbar>
       ) : error === "auth/wrong-password" || error === "auth/user-not-found" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">Email o Contraseña Incorrectos</Alert>
+          <Alert severity="error">Wrong email or password</Alert>
         </Snackbar>
       ) : error === "auth/user-disabled" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">El Email ha sido deshabilitado</Alert>
+          <Alert severity="error">Account disabled</Alert>
         </Snackbar>
       ) : null}
     </div>

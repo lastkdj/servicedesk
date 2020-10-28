@@ -10,10 +10,14 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "react-responsive";
+import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 
 const alpha = "Alphabetical";
 const newest = "Newest Users";
 const oldest = "Oldest Users";
+const active = "Active Users";
+const disabled = "Disabled Users";
+const All = "All";
 
 const useStyles = makeStyles((theme) => ({
   rootcompany: {
@@ -97,11 +101,19 @@ const Search = (props) => {
   const classes = useStyles();
   const [sort, setSort] = useState("");
   const [opensort, setOpenSort] = useState(false);
+  const [active, setActive] = useState("");
+  const [openactive, setOpenActive] = useState(false);
+  
+  
 
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
   const handleSort = (event) => {
     setSort(event.target.value);
+  };
+
+  const handleActive = (event) => {
+    setActive(event.target.value);
   };
 
   const sortAplha = () => {
@@ -126,6 +138,39 @@ const Search = (props) => {
     });
 
     props.dispatch({ type: "fetch", value: newArray });
+  };
+
+  const sortAll = () => {
+    props.dispatch({ type: "fetch", value: props.OriginuserData });
+  }
+
+  const sortActive = () => {
+    FirebaseApp.firestore()
+    .collection("users")
+    .where("disabled", "==", "false").get().then(function(querySnapshot) {
+      const dataArray = [];
+      querySnapshot.forEach(function(doc) {
+        console.log(doc.data())
+        const data = doc.data()
+        dataArray.push(data)
+        props.dispatch({ type: "fetch", value: dataArray });
+      })
+    })
+     
+  };
+
+  const sortDisabled = () => {
+    FirebaseApp.firestore()
+    .collection("users")
+    .where("disabled", "==", "true").get().then(function(querySnapshot) {
+      const dataArray = [];
+      querySnapshot.forEach(function(doc) {
+        console.log(doc.data())
+        const data = doc.data()
+        dataArray.push(data)
+        props.dispatch({ type: "fetch", value: dataArray });
+      })
+    })
   };
 
   return (
@@ -165,13 +210,63 @@ const Search = (props) => {
           }}
         />
       </Grid>
+      <Grid item container  md={8}
+        lg={8}
+        xl={8} style={{justifyContent: "flex-end"}}>
       <Grid
         item
         xs={12}
         sm={4}
         md={2}
-        lg={2}
-        xl={2}
+        lg={3}
+        xl={3}
+        style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+      >
+        <FormControl variant="outlined" className={classes.rootcompany}>
+          <InputLabel
+            id="demo-simple-select-outlined-label"
+            style={{ color: "white" }}
+          >
+            Active/Disable
+          </InputLabel>
+          <Select
+            fullWidth
+            labelId="demo-simple-select-outlined-label"
+            id="company"
+            open={openactive}
+            value={active}
+            onClose={() => {
+              setOpenActive(false);
+            }}
+            onOpen={() => {
+              setOpenActive(true);
+            }}
+            onChange={handleActive}
+            label="Company"
+            classes={{ icon: classes.popupcompany }}
+            MenuProps={{
+              PopoverClasses: { paper: classes.backcompany },
+            }}
+          >
+            <MenuItem value={All} onClick={sortAll}>
+              All
+            </MenuItem>
+            <MenuItem value={active} onClick={sortActive}>
+              Active Users
+            </MenuItem>
+            <MenuItem value={disabled} onClick={sortDisabled}>
+              Disabled Users
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={4}
+        md={2}
+        lg={3}
+        xl={3}
         style={isPhone ? { padding: "13px" } : { padding: "20px" }}
       >
         <FormControl variant="outlined" className={classes.rootcompany}>
@@ -209,8 +304,10 @@ const Search = (props) => {
             <MenuItem value={oldest} onClick={sortOld}>
               Older Users
             </MenuItem>
+           
           </Select>
         </FormControl>
+      </Grid>
       </Grid>
     </Grid>
   );

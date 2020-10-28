@@ -81,6 +81,14 @@ function submitReducer(state, action) {
       };
     }
 
+    case "refetch": {
+      return {
+        ...state,
+        reFetch: action.value,
+      };
+    }
+
+
     default:
       break;
   }
@@ -99,6 +107,7 @@ const initialState = {
   selected: "",
   error: false,
   success: false,
+  reFetch: false,
 };
 
 export function UserListProvider(props) {

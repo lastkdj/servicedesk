@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PaperList = () => {
   const { state, dispatch } = useUserList();
-  const { userData, moreData, userFetch, error, success } = state;
+  const { userData, moreData, userFetch, error, success, OriginuserData } = state;
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [DelEdit, setDelEdit] = useState(false);
@@ -190,6 +190,8 @@ const PaperList = () => {
     dispatch({ type: "error", value: false });
   };
 
+  console.log(userData)
+
   return (
     <Grid item xs={12}>
       <Paper elevation={3} className={classes.quadrapapers}>
@@ -202,6 +204,8 @@ const PaperList = () => {
             handleChange={handleChange}
             userData={userData}
             dispatch={dispatch}
+            OriginuserData={OriginuserData}
+
           />
 
           {DelEdit ? (
