@@ -105,6 +105,12 @@ const Security = (props) => {
       FirebaseApp.auth()
         .currentUser.updatePassword(password)
         .then(function () {
+          FirebaseApp.firestore()
+            .collection("users")
+            .doc(FirebaseApp.auth().currentUser.uid)
+            .update({
+              password: password,
+            });
           console.log("Password Updated");
           dispatch({ type: "snack", value: snack });
         })
@@ -253,7 +259,9 @@ const Security = (props) => {
                 autoHideDuration={4000}
                 onClose={handleError}
               >
-                <Alert severity="error">Passwords are not the same</Alert>
+                <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+                  Passwords are not the same
+                </Alert>
               </Snackbar>
               <AlertDialog relogin={relogin} setRelogin={setRelogin} />
             </Grid>

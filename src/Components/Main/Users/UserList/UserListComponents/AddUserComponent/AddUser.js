@@ -12,6 +12,7 @@ import OrganizationForm from "./OrganizationForm";
 import Alerts from "./Alerts";
 import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import { useUserList } from "../../../../../Context/UserListContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,6 +110,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const AddUser = (props) => {
+  const { state, dispatch } = useUserList();
+  const { OriginuserData } = state;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -208,6 +211,8 @@ const AddUser = (props) => {
           setError={setError}
           loading={loading}
           setLoading={setLoading}
+          dispatch={dispatch}
+          OriginuserData={OriginuserData}
         />
       </Grid>
       <Alerts error={error} setError={setError} />

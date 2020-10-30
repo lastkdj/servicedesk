@@ -145,7 +145,14 @@ const useStyles = makeStyles((theme) => ({
 
 const PaperList = () => {
   const { state, dispatch } = useUserList();
-  const { userData, moreData, userFetch, error, success, OriginuserData } = state;
+  const {
+    userData,
+    moreData,
+    userFetch,
+    error,
+    success,
+    OriginuserData,
+  } = state;
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [DelEdit, setDelEdit] = useState(false);
@@ -190,8 +197,6 @@ const PaperList = () => {
     dispatch({ type: "error", value: false });
   };
 
-  console.log(userData)
-
   return (
     <Grid item xs={12}>
       <Paper elevation={3} className={classes.quadrapapers}>
@@ -205,7 +210,6 @@ const PaperList = () => {
             userData={userData}
             dispatch={dispatch}
             OriginuserData={OriginuserData}
-
           />
 
           {DelEdit ? (
@@ -275,7 +279,9 @@ const PaperList = () => {
                 sm={4}
                 md={2}
                 className={classes.usermenu}
-                style={isPhone ? { display: "none" } : null}
+                style={
+                  isPhone ? { display: "none" } : { justifyContent: "center" }
+                }
               >
                 {" "}
                 <Typography className={classes.titletext}>
@@ -289,7 +295,11 @@ const PaperList = () => {
                 sm={4}
                 md={2}
                 className={classes.usermenu}
-                style={isPhone ? { justifyContent: "center" } : null}
+                style={
+                  isPhone
+                    ? { justifyContent: "center" }
+                    : { justifyContent: "flex-end" }
+                }
               >
                 {" "}
                 <Typography className={classes.titletext}>Company</Typography>

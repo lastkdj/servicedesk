@@ -18,21 +18,31 @@ const Alerts = (props) => {
     <Grid>
       {props.error === "auth/email-already-exists" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
-          <Alert severity="error">Email already in Use</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Email already in Use
+          </Alert>
         </Snackbar>
       ) : props.error === "auth/invalid-email" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
-          <Alert severity="error">Invalid email format</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Invalid email format
+          </Alert>
         </Snackbar>
       ) : props.error === "auth/invalid-password" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
-          <Alert severity="error">
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
             The password must contain at least 6 characters
           </Alert>
         </Snackbar>
       ) : props.error === "auth/successfully-created" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
           <Alert severity="success">The user been created</Alert>
+        </Snackbar>
+      ) : props.error === "Missing Fields" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Missing Fields
+          </Alert>
         </Snackbar>
       ) : null}
     </Grid>

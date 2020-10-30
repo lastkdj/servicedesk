@@ -23,25 +23,33 @@ const Snackbars = () => {
     <div>
       {error === "auth/email-already-in-use" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">The Email is already in use</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            The Email is already in use
+          </Alert>
         </Snackbar>
       ) : error === "auth/invalid-email" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">The Email has an invalid format</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            The Email has an invalid format
+          </Alert>
         </Snackbar>
       ) : error === "auth/weak-password" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
             The password must have at least 6 characters
           </Alert>
         </Snackbar>
       ) : error === "auth/wrong-password" || error === "auth/user-not-found" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">Wrong email or password</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Wrong email or password
+          </Alert>
         </Snackbar>
       ) : error === "auth/user-disabled" ? (
         <Snackbar open={true} autoHideDuration={3000} onClose={handleClose}>
-          <Alert severity="error">Account disabled</Alert>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Account disabled
+          </Alert>
         </Snackbar>
       ) : null}
     </div>

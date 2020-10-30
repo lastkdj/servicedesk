@@ -58,7 +58,7 @@ const SignForm = (props) => {
         <LockIcon className={classes.accounticon} />
         <InputBase
           classes={{ input: classes.input }}
-          placeholder="Contraseña"
+          placeholder="Password"
           required
           fullWidth
           name="password"
@@ -93,7 +93,7 @@ const SignForm = (props) => {
             disabled={open}
             onClick={signIn}
           >
-            Inicia Sesion
+            Sign In
           </Button>
         </Grid>
         <Grid item xs={12} className={classes.registrate}>
@@ -102,17 +102,17 @@ const SignForm = (props) => {
             className={classes.textcolor}
             onClick={() => props.history.push("/passwordreset")}
           >
-            Olvidaste la Contraseña?
+            Forgot your password?
           </Link>
         </Grid>
         <Grid item xs={12} className={classes.registrate}>
+          Dont have an account already?{" "}
           <Link
             variant="body2"
             className={classes.registrate}
             onClick={() => props.history.push("/signup")}
           >
-            No tienes una cuenta?{" "}
-            <span className={classes.span}>Registrate</span>
+            <span className={classes.span}>Register</span>
           </Link>
         </Grid>
       </Grid>

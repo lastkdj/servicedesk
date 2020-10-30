@@ -23,7 +23,7 @@ const SignIn = () => {
           <AccountCircleIcon className={classes.icon} />
         </Avatar>
         <Typography component="h1" variant="h5" className={classes.textcolor}>
-          Inicia Sesion
+          Log in
         </Typography>
         <SignInForm />
       </div>

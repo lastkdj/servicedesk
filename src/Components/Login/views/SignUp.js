@@ -23,7 +23,7 @@ const SignUp = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" className={classes.textcolor}>
-          Registrate
+          Register
         </Typography>
         <SingUpForm />
       </div>

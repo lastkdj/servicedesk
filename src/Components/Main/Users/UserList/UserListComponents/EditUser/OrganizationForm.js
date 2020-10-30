@@ -149,6 +149,16 @@ const useStyles = makeStyles((theme) => ({
   popupcompany: {
     color: "white",
   },
+
+  button: {
+    backgroundColor: "#8A85FF",
+    color: "white",
+    textAlign: "center",
+
+    "&:hover": {
+      backgroundColor: "#5A55DA",
+    },
+  },
 }));
 
 const OrganizationForm = (props) => {
@@ -229,8 +239,8 @@ const OrganizationForm = (props) => {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const addUser = FirebaseApp.functions().httpsCallable("addUser");
     addUser({
-      firstName: name.charAt(0).toUpperCase() + name.slice(1),
-      lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
+      // firstName: name.charAt(0).toUpperCase() + name.slice(1),
+      // lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
       fullname: name + " " + lastname,
       email: email,
       password: password,
@@ -254,6 +264,9 @@ const OrganizationForm = (props) => {
 
       console.log("Contrasenia papi ", result.data);
     });
+  };
+  const onCancel = () => {
+    props.setEdituser(false);
   };
 
   const classes = useStyles();
@@ -447,19 +460,49 @@ const OrganizationForm = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-          <Button
-            disabled={props.loading}
-            fullWidth
-            variant="contained"
-            type="submit"
-            color="primary"
-            className="submit"
-            style={{ marginBottom: "0px", height: "56px" }}
-            onClick={onSubmit}
-          >
-            Submit
-          </Button>
+        <Grid
+          item
+          container
+          xs={12}
+          sm={4}
+          md={4}
+          lg={4}
+          xl={4}
+          style={{ justifyContent: "space-between" }}
+        >
+          <Grid item container xs={5} style={{ marginRight: "10px" }}>
+            <Button
+              disabled={props.loading}
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary"
+              className={classes.button}
+              style={{
+                marginBottom: "0px",
+                height: "56px",
+                backgroundColor: "#B20453",
+              }}
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
+          </Grid>
+
+          <Grid item container xs={6}>
+            <Button
+              disabled={props.loading}
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary"
+              className="submit"
+              style={{ marginBottom: "0px", height: "56px" }}
+              onClick={onSubmit}
+            >
+              Save
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

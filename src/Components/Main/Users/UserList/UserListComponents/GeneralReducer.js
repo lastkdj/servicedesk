@@ -29,6 +29,9 @@ const GeneralState = () => {
     });
   }, [reFetch]);
 
+  
+  
+
   return (
     <Grid item container spacing={2} xs={12}>
       <Company state={state} dispatch={dispatch} />

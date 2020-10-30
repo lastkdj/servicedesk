@@ -153,7 +153,6 @@ const useStyles = makeStyles((theme) => ({
 
 const OrganizationForm = (props) => {
   const { dispatch, state } = useAccount();
-
   const {
     password,
     email,
@@ -223,37 +222,50 @@ const OrganizationForm = (props) => {
   }, [props.error]);
 
   const onSubmit = () => {
-    props.setLoading(true);
-    const utcDate = Date.now();
-    const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    const addUser = FirebaseApp.functions().httpsCallable("addUser");
-    addUser({
-      firstName: name.charAt(0).toUpperCase() + name.slice(1),
-      lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
-      fullname: name + " " + lastname,
-      email: email,
-      password: password,
-      phonenumber: phone,
-      country: country,
-      company: company,
-      department: department,
-      job: job,
-      publicinfo: true,
-      joinDate: newDate,
-      usercreation_timeStamp: utcDate,
-      defaultAvatar: randomColor,
-    }).then((result) => {
-      if (result.data === null) {
-        props.setError("auth/successfully-created");
-        props.setLoading(false);
-      } else {
-        props.setLoading(false);
-        props.setError(result.data);
-      }
+    if (job === "") {
+      props.setError("Missing Fields");
+    } else if (company === "") {
+      props.setError("Missing Fields");
+    } else if (department === "") {
+      props.setError("Missing Fields");
+    } else if (country === "") {
+      props.setError("Missing Fields");
+    } else {
+      props.setLoading(true);
+      const utcDate = Date.now();
+      const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
+      const randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16);
+      const addUser = FirebaseApp.functions().httpsCallable("addUser");
+      addUser({
+        firstName: name.charAt(0).toUpperCase() + name.slice(1),
+        lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
+        fullname: name + " " + lastname,
+        email: email,
+        password: password,
+        phonenumber: phone,
+        country: country,
+        company: company,
+        department: department,
+        job: job,
+        publicinfo: true,
+        joinDate: newDate,
+        usercreation_timeStamp: utcDate,
+        defaultAvatar: randomColor,
+        disabled: "false",
+      }).then((result) => {
+        if (result.data === null) {
+          props.dispatch({ type: "fetch", value: props.OriginuserData });
+          props.setError("auth/successfully-created");
+          props.setLoading(false);
+        } else {
+          props.setLoading(false);
+          props.setError(result.data);
+        }
 
-      console.log("Contrasenia papi ", result.data);
-    });
+        console.log("Contrasenia papi ", result.data);
+      });
+    }
   };
 
   const classes = useStyles();
@@ -281,7 +293,7 @@ const OrganizationForm = (props) => {
             inputRef={phoneRef}
             label="Phone Number"
             variant="outlined"
-            placeholder="Ex +56949651721"
+            placeholder="Ex +56949651721 Optional"
             className={classes.textfieldroot}
             onChange={(ev) =>
               dispatch({

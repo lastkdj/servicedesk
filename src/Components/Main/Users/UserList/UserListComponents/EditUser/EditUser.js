@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Zoom from "@material-ui/core/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +12,8 @@ import OrganizationForm from "./OrganizationForm";
 import Alerts from "./Alerts";
 import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import { useUserList } from "../../../../../Context/UserListContext";
+import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,8 +111,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditUser = (props) => {
+  const { state, dispatch } = useUserList();
+  const { selected } = state;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [profile, setProfile] = useState({});
 
   const classes = useStyles();
 
@@ -122,9 +127,27 @@ const EditUser = (props) => {
     setError("firstload");
   }, []);
 
+  useEffect(() => {
+    if (selected !== "") {
+      var docRef = FirebaseApp.firestore().collection("users").doc(selected);
+      docRef
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            setProfile(doc.data());
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  }, [selected]);
+
   return (
     <Dialog
-      open={props.EditUser}
+      open={props.editUser}
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
@@ -187,8 +210,8 @@ const EditUser = (props) => {
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          <ProfileForm error={error} />
-          <Summary />
+          <ProfileForm error={error} profile={profile} selected={selected} />
+          <Summary profile={profile} />
         </Grid>
         <Grid
           item
@@ -208,6 +231,8 @@ const EditUser = (props) => {
           setError={setError}
           loading={loading}
           setLoading={setLoading}
+          editUser={props.editUser}
+          setEditUser={props.setEditUser}
         />
       </Grid>
       <Alerts error={error} setError={setError} />

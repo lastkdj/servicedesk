@@ -81,6 +81,7 @@ exports.addUser = functions.https.onCall((data, context) => {
   const joinDate = data.joinDate;
   const usercreation_timeStamp = data.usercreation_timeStamp;
   const defaultAvatar = data.defaultAvatar;
+  const disabled = data.disabled;
 
   return admin
     .auth()
@@ -107,6 +108,7 @@ exports.addUser = functions.https.onCall((data, context) => {
           joinDate: joinDate,
           usercreation_timeStamp: usercreation_timeStamp,
           defaultAvatar: defaultAvatar,
+          disabled: disabled,
         })
         .then(function () {
           return "user successfully created";

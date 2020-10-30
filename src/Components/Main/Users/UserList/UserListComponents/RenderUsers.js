@@ -11,10 +11,10 @@ import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
-import Button from "@material-ui/core/Button"
-import Tooltip from "@material-ui/core/Tooltip"
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
-import CircularProgress from "@material-ui/core/CircularProgress"
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useUserList } from "../../../../Context/UserListContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 10px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
     alignItems: "center",
-    
+
     "&:hover": {
       backgroundColor: "#363B47",
     },
@@ -101,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
   small: {
     width: "42px",
     height: "42px",
-    
 
     [theme.breakpoints.up("sm")]: {},
 
@@ -154,16 +153,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttonProgress: {
- 
     color: "#8a85ff",
-    position: 'absolute',
-   
+    position: "absolute",
   },
 }));
 
 const RenderUsers = (props) => {
   const { dispatch, state } = useUserList();
-
   const { success } = state;
   const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -204,43 +200,40 @@ const RenderUsers = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const disableUser =() => {
-    if (props.user.disabled === "false"){
-      setLoading(true)
+  const disableUser = () => {
+    if (props.user.disabled === "false") {
+      setLoading(true);
       const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
       callDisable({ uid: props.user.uid }).then((result) => {
-        setLoading(false)
-        
+        setLoading(false);
+
         FirebaseApp.firestore()
-        .collection("users")
-        .doc(props.user.uid)
-        .update({
-          disabled: "true"
-        })
-        .then(() => {
-          console.log("done, disabled")
-        });
-       
+          .collection("users")
+          .doc(props.user.uid)
+          .update({
+            disabled: "true",
+          })
+          .then(() => {
+            console.log("done, disabled");
+          });
       });
-  } else {
-    setLoading(true)
+    } else {
+      setLoading(true);
       const callEnable = FirebaseApp.functions().httpsCallable("callEnable");
       callEnable({ uid: props.user.uid }).then((result) => {
-       
-        setLoading(false)
+        setLoading(false);
         FirebaseApp.firestore()
-        .collection("users")
-        .doc(props.user.uid)
-        .update({
-          disabled: "false"
-        })
-        .then(() => {
-          console.log("done, enabled")
-        });
-       
-  })
-  }
-}
+          .collection("users")
+          .doc(props.user.uid)
+          .update({
+            disabled: "false",
+          })
+          .then(() => {
+            console.log("done, enabled");
+          });
+      });
+    }
+  };
 
   useEffect(() => {
     if (checked) {
@@ -257,10 +250,7 @@ const RenderUsers = (props) => {
     }
   }, [props.checkRef]);
 
-
   const classes = useStyles();
-
-
 
   return (
     <Grid
@@ -268,7 +258,13 @@ const RenderUsers = (props) => {
       xs={12}
       container
       className={classes.ticketgrid}
-      style={checked ? { backgroundColor: "rgba(138, 133, 255, 0.16)" } : props.user.disabled === "true" ? {backgroundColor: "rgba(255, 255, 255, 0.3)"} : null}
+      style={
+        checked
+          ? { backgroundColor: "rgba(138, 133, 255, 0.16)" }
+          : props.user.disabled === "true"
+          ? { backgroundColor: "rgba(255, 255, 255, 0.3)" }
+          : null
+      }
     >
       <Grid item>
         {" "}
@@ -398,41 +394,53 @@ const RenderUsers = (props) => {
           </Typography>
         </Grid>
       ) : null}
-      
-        <Grid
-          item
-          container
-          xs={2}
-          sm={2}
-          md={1}
-          lg={2}
-          xl={2}
-          className={classes.marginright}
-         
-        >
-          {props.user.uid !== FirebaseApp.auth().currentUser.uid ?  <Tooltip placement="right-end" title={props.user.disabled === "true" ? "Enable Account" : "Disable Account" } arrow>
-            
-         
+
+      <Grid
+        item
+        container
+        xs={2}
+        sm={2}
+        md={1}
+        lg={2}
+        xl={2}
+        className={classes.marginright}
+      >
+        {props.user.uid !== FirebaseApp.auth().currentUser.uid ? (
+          <Tooltip
+            placement="right-end"
+            title={
+              props.user.disabled === "true"
+                ? "Enable Account"
+                : "Disable Account"
+            }
+            arrow
+          >
             <Button
-                      variant="contained"
-                      type="submit"
-                      color="primary"
-                      className={classes.button}
-                      style={{ marginBottom: "0px"}, props.user.disabled === "false" ? {backgroundColor: "#B20453"} : {backgroundColor: "#05CDBB"}}
-                      onClick={disableUser}
-                      disabled={loading}
-                    >
-                      {loading ? (
-          <CircularProgress thickness={5} size={18} className={classes.buttonProgress} />
-        ) : null}
-        {props.user.disabled === "true" ? "Activate" : "Disable"}
-                      
-                    </Button>
-                    </Tooltip>: null}
-          {" "}
-          
-        </Grid>
-      
+              variant="contained"
+              type="submit"
+              color="primary"
+              className={classes.button}
+              style={
+                ({ marginBottom: "0px" },
+                props.user.disabled === "false"
+                  ? { backgroundColor: "#B20453" }
+                  : { backgroundColor: "#28CB00" })
+              }
+              onClick={disableUser}
+              disabled={loading}
+            >
+              {loading ? (
+                <CircularProgress
+                  thickness={5}
+                  size={18}
+                  className={classes.buttonProgress}
+                />
+              ) : null}
+              {props.user.disabled === "true" ? "Activate" : "Disable"}
+            </Button>
+          </Tooltip>
+        ) : null}{" "}
+      </Grid>
     </Grid>
   );
 };

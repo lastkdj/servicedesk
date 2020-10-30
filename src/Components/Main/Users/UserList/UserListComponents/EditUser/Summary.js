@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { useAccount } from "../../../../../Context/AccountContext";
 import { useMediaQuery } from "react-responsive";
 
-const Summary = () => {
+const Summary = (props) => {
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
-  const { state } = useAccount();
+  const { state, dispatch } = useAccount();
+
   const {
     email,
     name,
@@ -17,6 +18,14 @@ const Summary = () => {
     department,
     job,
   } = state;
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "field",
+  //     field: "name",
+  //     value: props.profile.firstName,
+  //   });
+  // }, []);
 
   return (
     <Grid
@@ -47,6 +56,7 @@ const Summary = () => {
             height: "36px",
           }}
         >
+          {" "}
           {name.charAt(0).toUpperCase() +
             name.slice(1) +
             " " +

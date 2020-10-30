@@ -15,7 +15,7 @@ import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 const alpha = "Alphabetical";
 const newest = "Newest Users";
 const oldest = "Oldest Users";
-const active = "Active Users";
+const Active = "Active Users";
 const disabled = "Disabled Users";
 const All = "All";
 
@@ -251,7 +251,7 @@ const Search = (props) => {
             <MenuItem value={All} onClick={sortAll}>
               All
             </MenuItem>
-            <MenuItem value={active} onClick={sortActive}>
+            <MenuItem value={Active} onClick={sortActive}>
               Active Users
             </MenuItem>
             <MenuItem value={disabled} onClick={sortDisabled}>

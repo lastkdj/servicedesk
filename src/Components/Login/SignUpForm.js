@@ -87,7 +87,7 @@ const SingUpForm = (props) => {
       <Grid container spacing={2} justify="center">
         <Grid xs={12} sm={5} className={classes.usernamesignup}>
           <InputBase
-            placeholder="Nombre"
+            placeholder="Name"
             required
             fullWidth
             id="nombre"
@@ -104,7 +104,7 @@ const SingUpForm = (props) => {
 
         <Grid xs={12} sm={5} className={classes.lastname}>
           <InputBase
-            placeholder="Apellido"
+            placeholder="Lastname"
             required
             fullWidth
             id="apellido"
@@ -141,7 +141,7 @@ const SingUpForm = (props) => {
             <LockIcon className={classes.accounticon} />
           </Tooltip>
           <InputBase
-            placeholder="Contraseña"
+            placeholder="Password"
             required
             fullWidth
             name="password"
@@ -154,7 +154,7 @@ const SingUpForm = (props) => {
           />
         </Grid>
         <ProgressBar password={password} />
-        <Grid item xs={11}>
+        {/* <Grid item xs={11}>
           <FormControlLabel
             control={
               <Checkbox
@@ -163,10 +163,10 @@ const SingUpForm = (props) => {
                 className={classes.root}
               />
             }
-            label="Quiero recibir promociones y actualizaciones a traves de este email."
+            label="Would you like to rec"
             className={classes.texto3}
           />
-        </Grid>
+        </Grid> */}
         <Grid container item xs={11} justify="center">
           <Button
             type="submit"
