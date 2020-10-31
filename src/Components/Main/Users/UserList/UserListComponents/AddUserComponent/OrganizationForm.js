@@ -253,6 +253,7 @@ const OrganizationForm = (props) => {
         usercreation_timeStamp: utcDate,
         defaultAvatar: randomColor,
         disabled: "false",
+        createdby: FirebaseApp.auth().currentUser.uid,
       }).then((result) => {
         if (result.data === null) {
           props.dispatch({ type: "fetch", value: props.OriginuserData });

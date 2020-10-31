@@ -9,7 +9,6 @@ import countries from "../../../../Account/AccountComponents/Countries";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { useAccount } from "../../../../../Context/AccountContext";
 import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import moment from "moment";
@@ -152,12 +151,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
-    backgroundColor: "#8A85FF",
+    backgroundColor: "#A735FF",
     color: "white",
-    textAlign: "center",
 
     "&:hover": {
-      backgroundColor: "#5A55DA",
+      backgroundColor: "#791AC2",
     },
   },
 }));
@@ -182,8 +180,6 @@ const OrganizationForm = (props) => {
   const [count, setCount] = useState("");
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
-  const phoneRef = useRef();
-  const jobRef = useRef();
 
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });
@@ -205,13 +201,13 @@ const OrganizationForm = (props) => {
         field: "phone",
         value: "",
       });
-      phoneRef.current.value = "";
+
       dispatch({
         type: "field",
         field: "job",
         value: "",
       });
-      jobRef.current.value = "";
+
       dispatch({
         type: "field",
         field: "company",
@@ -233,49 +229,49 @@ const OrganizationForm = (props) => {
     }
   }, [props.error]);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "field",
-  //     field: "job",
-  //     value: props.profile.job,
-  //   });
-  //   jobRef.current.value = props.profile.job;
-  // }, [props.profile]);
-
-  console.log(job);
-
   const onSubmit = () => {
-    props.setLoading(true);
-    const utcDate = Date.now();
-    const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    const addUser = FirebaseApp.functions().httpsCallable("addUser");
-    addUser({
-      // firstName: name.charAt(0).toUpperCase() + name.slice(1),
-      // lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
-      fullname: name + " " + lastname,
-      email: email,
-      password: password,
-      phonenumber: phone,
-      country: country,
-      company: company,
-      department: department,
-      job: job,
-      publicinfo: true,
-      joinDate: newDate,
-      usercreation_timeStamp: utcDate,
-      defaultAvatar: randomColor,
-    }).then((result) => {
-      if (result.data === null) {
-        props.setError("auth/successfully-created");
-        props.setLoading(false);
-      } else {
-        props.setLoading(false);
-        props.setError(result.data);
-      }
+    if (job === "") {
+      props.setError("Missing Fields");
+    } else if (company === "") {
+      props.setError("Missing Fields");
+    } else if (department === "") {
+      props.setError("Missing Fields");
+    } else if (country === "") {
+      props.setError("Missing Fields");
+    } else {
+      props.setLoading(true);
+      const utcDate = Date.now();
+      const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
+      const randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16);
+      const addUser = FirebaseApp.functions().httpsCallable("addUser");
+      addUser({
+        firstName: name.charAt(0).toUpperCase() + name.slice(1),
+        lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
+        fullname: name + " " + lastname,
+        email: email,
+        password: password,
+        phonenumber: phone,
+        country: country,
+        company: company,
+        department: department,
+        job: job,
+        publicinfo: true,
+        joinDate: newDate,
+        usercreation_timeStamp: utcDate,
+        defaultAvatar: randomColor,
+      }).then((result) => {
+        if (result.data === null) {
+          props.setError("auth/successfully-created");
+          props.setLoading(false);
+        } else {
+          props.setLoading(false);
+          props.setError(result.data);
+        }
 
-      console.log("Contrasenia papi ", result.data);
-    });
+        console.log("Contrasenia papi ", result.data);
+      });
+    }
   };
   const onCancel = () => {
     props.setEditUser(false);
@@ -303,7 +299,6 @@ const OrganizationForm = (props) => {
       >
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <TextField
-            inputRef={phoneRef}
             label="Phone Number"
             variant="outlined"
             placeholder="Ex +56949651721"
@@ -362,7 +357,7 @@ const OrganizationForm = (props) => {
         </Grid>
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <TextField
-            inputRef={jobRef}
+            // inputRef={job}
             label="Job Position"
             variant="outlined"
             placeholder="Analyst"
@@ -508,9 +503,8 @@ const OrganizationForm = (props) => {
               variant="contained"
               type="submit"
               color="primary"
-              className="submit"
-              style={{ marginBottom: "0px", height: "56px" }}
-              onClick={onSubmit}
+              className={classes.button}
+              // onClick={onSubmit}
             >
               Save
             </Button>

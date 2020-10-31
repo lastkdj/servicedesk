@@ -14,6 +14,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { useUserList } from "../../../../../Context/UserListContext";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
+import Topimg from "../../../../../../Imagenes/topimg.jpg";
+import Botimg from "../../../../../../Imagenes/bottomimg.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -111,7 +113,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditUser = (props) => {
-  const { state, dispatch } = useUserList();
+  const { state } = useUserList();
   const { selected } = state;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -174,7 +176,7 @@ const EditUser = (props) => {
           xs={12}
           style={{
             padding: "13px",
-            backgroundColor: "#8a85ff",
+            backgroundImage: `url(${Topimg})`,
             borderRadius: "5px",
             margin: "0px 20px",
             marginBottom: "20px",
@@ -210,16 +212,24 @@ const EditUser = (props) => {
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          <ProfileForm error={error} profile={profile} selected={selected} />
-          <Summary profile={profile} selected={selected} />
+          <ProfileForm
+            error={error}
+            profile={profile}
+            selected={selected}
+            editUser={props.editUser}
+          />
+          <Summary
+            profile={profile}
+            creator={profile.createdby}
+            selected={selected}
+          />
         </Grid>
         <Grid
           item
           xs={12}
           style={{
             padding: "13px",
-
-            backgroundColor: "#8a85ff",
+            backgroundImage: `url(${Botimg})`,
             borderRadius: "5px",
             margin: "20px 20px",
           }}

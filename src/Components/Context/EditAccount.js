@@ -62,6 +62,7 @@ const initialState = {
   company: "",
   department: "",
   job: "",
+  createdby: "",
   snack: false,
   error: false,
   checked: false,

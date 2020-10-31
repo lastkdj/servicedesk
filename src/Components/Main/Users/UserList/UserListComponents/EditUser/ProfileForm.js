@@ -53,6 +53,7 @@ const ProfileForm = (props) => {
   const nameRef = useRef();
   const lastnameRef = useRef();
   const emailRef = useRef();
+
   // const passwordRef = useRef();
 
   useEffect(() => {
@@ -91,6 +92,7 @@ const ProfileForm = (props) => {
   useEffect(() => {
     dispatch({ type: "field", field: "email", value: props.profile.email });
     dispatch({ type: "field", field: "name", value: props.profile.firstName });
+    dispatch({ type: "field", field: "job", value: props.profile.job });
     dispatch({
       type: "field",
       field: "lastname",
@@ -104,11 +106,27 @@ const ProfileForm = (props) => {
           ? ""
           : props.profile.phonenumber,
     });
+    dispatch({
+      type: "field",
+      field: "company",
+      value: props.profile.company === undefined ? "" : props.profile.company,
+    });
+    dispatch({
+      type: "field",
+      field: "department",
+      value:
+        props.profile.department === undefined ? "" : props.profile.department,
+    });
+    dispatch({
+      type: "field",
+      field: "country",
+      value: props.profile.country === undefined ? "" : props.profile.country,
+    });
+
     nameRef.current.value = props.profile.firstName;
     lastnameRef.current.value = props.profile.lastName;
-
     emailRef.current.value = props.profile.email;
-  }, [props.profile]);
+  }, [props.editUser]);
 
   const classes = useStyles();
   return (
