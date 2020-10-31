@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/servicedesk/static/css/main.1edf8696.chunk.css",
-    "main.js": "/servicedesk/static/js/main.5f1f40e5.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.5f1f40e5.chunk.js.map",
+    "main.js": "/servicedesk/static/js/main.9cbd1066.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.9cbd1066.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.2160f772.chunk.js": "/servicedesk/static/js/2.2160f772.chunk.js",
-    "static/js/2.2160f772.chunk.js.map": "/servicedesk/static/js/2.2160f772.chunk.js.map",
+    "static/js/2.46bf0dbd.chunk.js": "/servicedesk/static/js/2.46bf0dbd.chunk.js",
+    "static/js/2.46bf0dbd.chunk.js.map": "/servicedesk/static/js/2.46bf0dbd.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.db81d0d3b73a182e99a1add715971576.js": "/servicedesk/precache-manifest.db81d0d3b73a182e99a1add715971576.js",
+    "precache-manifest.95d2ada8ac12afd81e49161b712ddaf9.js": "/servicedesk/precache-manifest.95d2ada8ac12afd81e49161b712ddaf9.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
     "static/css/main.1edf8696.chunk.css.map": "/servicedesk/static/css/main.1edf8696.chunk.css.map",
-    "static/js/2.2160f772.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.2160f772.chunk.js.LICENSE.txt",
+    "static/js/2.46bf0dbd.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.46bf0dbd.chunk.js.LICENSE.txt",
     "static/media/22.jpg": "/servicedesk/static/media/22.8b95cb46.jpg",
     "static/media/333.jpg": "/servicedesk/static/media/333.4381fb06.jpg",
     "static/media/880447.jpg": "/servicedesk/static/media/880447.073ad846.jpg",
@@ -25,6 +25,7 @@
     "static/media/frey2.jpg": "/servicedesk/static/media/frey2.6e92bf7f.jpg",
     "static/media/freyLogo.jpg": "/servicedesk/static/media/freyLogo.1b7429a4.jpg",
     "static/media/lucho.jpg": "/servicedesk/static/media/lucho.8d582a68.jpg",
+    "static/media/male.svg": "/servicedesk/static/media/male.cd3014db.svg",
     "static/media/index.css": "/servicedesk/static/media/roboto-latin-900-normal.bb1e4dc6.woff",
     "static/media/sbc.jpg": "/servicedesk/static/media/sbc.1493fcaa.jpg",
     "static/media/sbc2.jpg": "/servicedesk/static/media/sbc2.e0d13d8f.jpg",
@@ -34,8 +35,8 @@
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.2160f772.chunk.js",
+    "static/js/2.46bf0dbd.chunk.js",
     "static/css/main.1edf8696.chunk.css",
-    "static/js/main.5f1f40e5.chunk.js"
+    "static/js/main.9cbd1066.chunk.js"
   ]
 }
