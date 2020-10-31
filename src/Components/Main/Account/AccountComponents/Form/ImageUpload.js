@@ -268,18 +268,28 @@ const ImageUpload = () => {
   return (
     <Grid container>
       <Grid item xs={12} className={classes.avatargrid}>
-        <Avatar
-          alt="avatar"
-          src={data.photoUrl}
-          className={classes.small}
-          style={{ backgroundColor: `${data.defaultAvatar}` }}
-        >
-          <Typography className={classes.initials}>
-            {nameInitial && lastnameInitial
-              ? nameInitial.charAt(0) + lastnameInitial.charAt(0)
-              : null}
-          </Typography>
-        </Avatar>
+        <input
+          accept="image/*"
+          style={{ display: "none" }}
+          id="contained-button-file"
+          multiple
+          type="file"
+          onChange={handleChange}
+        />
+        <label htmlFor="contained-button-file">
+          <Avatar
+            alt="avatar"
+            src={data.photoUrl}
+            className={classes.small}
+            style={{ backgroundColor: `${data.defaultAvatar}` }}
+          >
+            <Typography className={classes.initials}>
+              {nameInitial && lastnameInitial
+                ? nameInitial.charAt(0) + lastnameInitial.charAt(0)
+                : null}
+            </Typography>
+          </Avatar>
+        </label>
       </Grid>
 
       <Grid item xs={12}>

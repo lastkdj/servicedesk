@@ -5,6 +5,7 @@ import { UserProvider } from "./UserContext";
 import { AuthProvider } from "./AuthContext";
 import { AccountProvider } from "./AccountContext";
 import { UserListProvider } from "./UserListContext";
+import { EditAccountProvider } from "./EditAccount";
 
 const MaxProvider = (props) => {
   return (
@@ -13,7 +14,9 @@ const MaxProvider = (props) => {
         <DashProvider>
           <UserProvider>
             <StylesProvider injectFirst>
-              <AccountProvider>{props.children}</AccountProvider>
+              <AccountProvider>
+                <EditAccountProvider>{props.children}</EditAccountProvider>
+              </AccountProvider>
             </StylesProvider>
           </UserProvider>
         </DashProvider>

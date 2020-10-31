@@ -44,6 +44,10 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
               usercreation_timeStamp: utcDate,
               defaultAvatar: hex,
               disabled: "false",
+              company: "",
+              department: "",
+              job: "",
+              phonenumber: "",
               uid: FirebaseApp.auth().currentUser.uid,
             });
           setOpen(false);

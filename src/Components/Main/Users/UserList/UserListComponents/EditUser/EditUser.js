@@ -205,13 +205,13 @@ const EditUser = (props) => {
           spacing={2}
           style={{
             borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-            justifyContent: "center",
+            paddingLeft: "20px",
             borderRadius: "5px",
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
           <ProfileForm error={error} profile={profile} selected={selected} />
-          <Summary profile={profile} />
+          <Summary profile={profile} selected={selected} />
         </Grid>
         <Grid
           item

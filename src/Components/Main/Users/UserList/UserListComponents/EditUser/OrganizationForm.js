@@ -13,6 +13,7 @@ import { useAccount } from "../../../../../Context/AccountContext";
 import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import moment from "moment";
+import { useEditAccount } from "../../../../../Context/EditAccount";
 
 //Company
 const sb = "Soletanche Bachy";
@@ -162,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OrganizationForm = (props) => {
-  const { dispatch, state } = useAccount();
+  const { dispatch, state } = useEditAccount();
 
   const {
     password,
@@ -232,6 +233,17 @@ const OrganizationForm = (props) => {
     }
   }, [props.error]);
 
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "field",
+  //     field: "job",
+  //     value: props.profile.job,
+  //   });
+  //   jobRef.current.value = props.profile.job;
+  // }, [props.profile]);
+
+  console.log(job);
+
   const onSubmit = () => {
     props.setLoading(true);
     const utcDate = Date.now();
@@ -266,7 +278,7 @@ const OrganizationForm = (props) => {
     });
   };
   const onCancel = () => {
-    props.setEdituser(false);
+    props.setEditUser(false);
   };
 
   const classes = useStyles();

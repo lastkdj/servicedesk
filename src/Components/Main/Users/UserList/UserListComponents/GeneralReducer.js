@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
 import Company from "./Company";
 import PaperList from "./PaperList";
@@ -8,8 +8,9 @@ import { useUserList } from "../../../../Context/UserListContext";
 
 const GeneralState = () => {
   const { state, dispatch } = useUserList();
-  const {reFetch} = state
- 
+  const { reFetch } = state;
+  const [alamierda, setalamierda] = useState(false);
+
   var userRef = FirebaseApp.firestore().collection("users");
 
   useEffect(() => {
@@ -28,9 +29,6 @@ const GeneralState = () => {
       dispatch({ type: "loading", value: false });
     });
   }, [reFetch]);
-
-  
-  
 
   return (
     <Grid item container spacing={2} xs={12}>
