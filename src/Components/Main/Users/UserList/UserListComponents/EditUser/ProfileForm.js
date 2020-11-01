@@ -44,6 +44,10 @@ const useStyles = makeStyles(() => ({
       color: "#e6e5e8",
     },
   },
+
+  textfield: {
+    alignItems: "center",
+  },
 }));
 
 const ProfileForm = (props) => {
@@ -131,83 +135,17 @@ const ProfileForm = (props) => {
   const classes = useStyles();
   return (
     <Grid container item xs={12} sm={6} md={6} lg={4} xl={4} spacing={2}>
-      <TextField
-        inputRef={nameRef}
-        label="First Name"
-        variant="outlined"
-        required
-        className={classes.textfieldroot}
-        onChange={(ev) =>
-          dispatch({
-            type: "field",
-            field: "name",
-            value: ev.target.value,
-          })
-        }
-        InputLabelProps={{
-          classes: {
-            root: classes.label,
-          },
-          shrink: true,
-        }}
-      />
-
-      <TextField
-        inputRef={lastnameRef}
-        label="Last Name"
-        variant="outlined"
-        required
-        className={classes.textfieldroot}
-        onChange={(ev) =>
-          dispatch({
-            type: "field",
-            field: "lastname",
-            value: ev.target.value,
-          })
-        }
-        InputLabelProps={{
-          classes: {
-            root: classes.label,
-          },
-          shrink: true,
-        }}
-      />
-
-      <TextField
-        inputRef={emailRef}
-        label="Email Address"
-        variant="outlined"
-        required
-        placeholder="Ex sendhelp@nvm.com"
-        className={classes.textfieldroot}
-        onChange={(ev) =>
-          dispatch({
-            type: "field",
-            field: "email",
-            value: ev.target.value,
-          })
-        }
-        InputLabelProps={{
-          classes: {
-            root: classes.label,
-          },
-          shrink: true,
-        }}
-      />
-
-      {/* <Grid item xs={12}>
+      <Grid item container xs={12} className={classes.textfield}>
         <TextField
-          inputRef={passwordRef}
+          inputRef={nameRef}
+          label="First Name"
           variant="outlined"
           required
-          label="Password"
-          type="password"
           className={classes.textfieldroot}
-          placeholder="Password"
           onChange={(ev) =>
             dispatch({
               type: "field",
-              field: "password",
+              field: "name",
               value: ev.target.value,
             })
           }
@@ -218,8 +156,52 @@ const ProfileForm = (props) => {
             shrink: true,
           }}
         />
-      </Grid> */}
-      {/* <ProgressBar password={password} /> */}
+      </Grid>
+      <Grid item container xs={12} className={classes.textfield}>
+        <TextField
+          inputRef={lastnameRef}
+          label="Last Name"
+          variant="outlined"
+          required
+          className={classes.textfieldroot}
+          onChange={(ev) =>
+            dispatch({
+              type: "field",
+              field: "lastname",
+              value: ev.target.value,
+            })
+          }
+          InputLabelProps={{
+            classes: {
+              root: classes.label,
+            },
+            shrink: true,
+          }}
+        />
+      </Grid>
+      <Grid item container xs={12} className={classes.textfield}>
+        <TextField
+          inputRef={emailRef}
+          label="Email Address"
+          variant="outlined"
+          required
+          placeholder="Ex sendhelp@nvm.com"
+          className={classes.textfieldroot}
+          onChange={(ev) =>
+            dispatch({
+              type: "field",
+              field: "email",
+              value: ev.target.value,
+            })
+          }
+          InputLabelProps={{
+            classes: {
+              root: classes.label,
+            },
+            shrink: true,
+          }}
+        />
+      </Grid>
     </Grid>
   );
 };

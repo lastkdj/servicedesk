@@ -132,18 +132,13 @@ const EditUser = (props) => {
   useEffect(() => {
     if (selected !== "") {
       var docRef = FirebaseApp.firestore().collection("users").doc(selected);
-      docRef
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            setProfile(doc.data());
-          } else {
-            console.log("No such document!");
-          }
-        })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
-        });
+      docRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          setProfile(doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      });
     }
   }, [selected]);
 

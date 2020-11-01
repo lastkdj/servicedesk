@@ -9,19 +9,29 @@ import Male from "../../../../../../Imagenes/male.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
-import BlockIcon from "@material-ui/icons/Block";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Edit from "../../../../../../Imagenes/Edit.jpg";
 import Edit2 from "../../../../../../Imagenes/Edit2.jpg";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import MessageIcon from "@material-ui/icons/Message";
+import TA from "../../../../../../Imagenes/talogo2.jpg";
+import SBC from "../../../../../../Imagenes/sbclogo.jpg";
+import FREY from "../../../../../../Imagenes/freylogo2.jpg";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(18),
-    height: theme.spacing(18),
-    boxShadow: "0 0 1px 0 rgba(0,0,0,0.70), 0 3px 4px -2px rgba(0,0,0,0.50)",
+    width: theme.spacing(14),
+    height: theme.spacing(14),
+  },
+
+  complogo: {
+    width: theme.spacing(14),
+    height: theme.spacing(14),
+    opacity: "0.8",
   },
 
   icon: {
@@ -41,6 +51,21 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+
+  button: {
+    backgroundColor: "#8A85FF",
+    color: "white",
+    textAlign: "center",
+
+    "&:hover": {
+      backgroundColor: "#5A55DA",
+    },
+  },
+
+  buttonProgress: {
+    color: "#8a85ff",
+    position: "absolute",
+  },
 }));
 
 const Summary = (props) => {
@@ -49,6 +74,7 @@ const Summary = (props) => {
   const { state, dispatch } = useEditAccount();
   const [creatoruid, setCreatoruid] = useState("");
   const [creatorData, setCreatorData] = useState({});
+  const [loading, setLoading] = useState(false);
   const {
     email,
     name,
@@ -83,6 +109,41 @@ const Summary = (props) => {
     setCreatoruid(props.creator);
   }, [props.creator]);
 
+  const disableUser = () => {
+    if (props.profile.disabled === "false") {
+      setLoading(true);
+      const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
+      callDisable({ uid: props.profile.uid }).then((result) => {
+        setLoading(false);
+
+        FirebaseApp.firestore()
+          .collection("users")
+          .doc(props.profile.uid)
+          .update({
+            disabled: "true",
+          })
+          .then(() => {
+            console.log("done, disabled");
+          });
+      });
+    } else {
+      setLoading(true);
+      const callEnable = FirebaseApp.functions().httpsCallable("callEnable");
+      callEnable({ uid: props.profile.uid }).then((result) => {
+        setLoading(false);
+        FirebaseApp.firestore()
+          .collection("users")
+          .doc(props.profile.uid)
+          .update({
+            disabled: "false",
+          })
+          .then(() => {
+            console.log("done, enabled");
+          });
+      });
+    }
+  };
+
   return (
     <Grid
       container
@@ -97,71 +158,141 @@ const Summary = (props) => {
         marginLeft: isPhone ? null : "10px",
       }}
     >
-      <Grid
-        item
-        container
-        xs={4}
-        style={{ justifyContent: "center", alignItems: "space-between" }}
-      >
-        <Paper
-          elevation={3}
-          style={{
-            backgroundColor: "#B086FF",
-            width: "95%",
-            backgroundImage: `url(${Edit2})`,
-          }}
-        >
-          <Grid
-            item
-            xs={12}
-            container
+      <Grid item container xs={4} style={{ justifyContent: "center" }}>
+        <Grid item container xs={12} style={{ justifyContent: "center" }}>
+          <Paper
+            elevation={3}
             style={{
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "15px 0px",
+              width: "95%",
+              backgroundColor: "#B086FF",
+              backgroundImage: `url(${Edit2})`,
             }}
           >
-            <Avatar
-              alt="avatar"
-              className={classes.large}
-              src={
-                props.profile.photoUrl === undefined
-                  ? Male
-                  : props.profile.photoUrl
-              }
-            ></Avatar>
-          </Grid>
-          <Grid item container style={{ justifyContent: "center" }} xs={12}>
-            <Tooltip title="Search">
-              <Grid item xs={8} className={classes.icon}>
-                <IconButton
-                  aria-label="upload picture"
-                  component="span"
-                  classes={{ root: classes.root }}
-                  // onClick={onClick}
-                >
-                  <CloudUploadIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="upload picture"
-                  component="span"
-                  classes={{ root: classes.root }}
-                  // onClick={onClick}
-                >
-                  <BlockIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="upload picture"
-                  component="span"
-                  classes={{ root: classes.root }}
-                  // onClick={onClick}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Grid>
-            </Tooltip>
-          </Grid>{" "}
-        </Paper>
+            <Grid
+              item
+              xs={12}
+              container
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "15px 0px",
+              }}
+            >
+              <Avatar
+                alt="avatar"
+                className={classes.large}
+                src={
+                  props.profile.photoUrl === undefined
+                    ? Male
+                    : props.profile.photoUrl
+                }
+              ></Avatar>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              container
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "15px 0px",
+              }}
+            >
+              <Typography
+                style={{
+                  fontWeight: "400",
+                  fontSize: "0.8em",
+                  color: "white",
+                }}
+              >
+                Status:{" "}
+                {props.profile.disabled === "true" ? (
+                  <Chip
+                    style={{
+                      backgroundColor: "rgb(178, 4, 83)",
+                      color: "white",
+                    }}
+                    label="Disabled"
+                    size="small"
+                  />
+                ) : (
+                  <Chip
+                    style={{ backgroundColor: "#69C21A", color: "white" }}
+                    label="Active"
+                    size="small"
+                  />
+                )}
+              </Typography>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          style={{
+            justifyContent: "center",
+            marginTop: "5px",
+          }}
+        >
+          <Paper
+            elevation={3}
+            style={{
+              backgroundColor: "#A735FF",
+              width: "95%",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <Grid
+              item
+              container
+              xs={12}
+              style={{ justifyContent: "flex-end", margin: "0px 10px" }}
+            >
+              <IconButton
+                aria-label="upload picture"
+                component="span"
+                classes={{ root: classes.root }}
+                // onClick={onClick}
+              >
+                <MessageIcon />
+              </IconButton>
+              <IconButton
+                aria-label="upload picture"
+                component="span"
+                classes={{ root: classes.root }}
+                // onClick={onClick}
+              >
+                <VerifiedUserIcon />
+              </IconButton>
+
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                className={classes.button}
+                style={
+                  ({ marginBottom: "0px" },
+                  props.profile.disabled === "false"
+                    ? { backgroundColor: "#B20453" }
+                    : { backgroundColor: "#28CB00" })
+                }
+                onClick={disableUser}
+                disabled={loading}
+              >
+                {loading ? (
+                  <CircularProgress
+                    thickness={5}
+                    size={18}
+                    className={classes.buttonProgress}
+                  />
+                ) : null}
+                {props.profile.disabled === "true" ? "Enable" : "Disable"}
+              </Button>
+            </Grid>
+          </Paper>
+        </Grid>
       </Grid>
 
       <Grid
@@ -177,9 +308,10 @@ const Summary = (props) => {
           elevation={3}
           style={{
             backgroundColor: "white",
-            padding: "15px",
+            padding: "13px",
             width: "100%",
             backgroundImage: `url(${Edit})`,
+            backgroundRepeat: "no-repeat",
           }}
         >
           {" "}
@@ -247,61 +379,87 @@ const Summary = (props) => {
               Created By: {creatorData.fullname}
             </Typography>
           </Grid>
-          <Grid item xs={12} style={{ margin: "10px 0px" }}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "#e6e5e8",
-              }}
+          <Grid item container xs={12}>
+            <Grid item container xs={8} style={{ display: "block" }}>
+              <Grid item xs={12} style={{ margin: "10px 0px" }}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "#e6e5e8",
+                  }}
+                >
+                  Email: {email}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} style={{ margin: "10px 0px" }}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "#e6e5e8",
+                  }}
+                >
+                  Phone: {phone}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} style={{ margin: "10px 0px" }}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "#e6e5e8",
+                  }}
+                >
+                  Country: {country}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} style={{ margin: "10px 0px" }}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "#e6e5e8",
+                  }}
+                >
+                  Company: {company}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} style={{ margin: "10px 0px" }}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "#e6e5e8",
+                  }}
+                >
+                  Department: {department}
+                </Typography>
+              </Grid>{" "}
+            </Grid>
+            <Grid
+              item
+              container
+              xs={4}
+              style={{ justifyContent: "flex-end", alignItems: "flex-end" }}
             >
-              Email: {email}
-            </Typography>
+              {company !== "" ? (
+                <Avatar
+                  alt="avatar"
+                  className={classes.complogo}
+                  src={
+                    company === "Soletanche Bachy"
+                      ? SBC
+                      : company === "Freyssinet"
+                      ? FREY
+                      : company === "Tierra Armada"
+                      ? TA
+                      : null
+                  }
+                />
+              ) : null}
+            </Grid>
           </Grid>
-          <Grid item xs={12} style={{ margin: "10px 0px" }}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "#e6e5e8",
-              }}
-            >
-              Phone: {phone}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} style={{ margin: "10px 0px" }}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "#e6e5e8",
-              }}
-            >
-              Country: {country}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} style={{ margin: "10px 0px" }}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "#e6e5e8",
-              }}
-            >
-              Company: {company}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} style={{ margin: "10px 0px" }}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "#e6e5e8",
-              }}
-            >
-              Department: {department}
-            </Typography>
-          </Grid>{" "}
         </Paper>
       </Grid>
     </Grid>

@@ -11,8 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
-import moment from "moment";
 import { useEditAccount } from "../../../../../Context/EditAccount";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 //Company
 const sb = "Soletanche Bachy";
@@ -164,7 +165,6 @@ const OrganizationForm = (props) => {
   const { dispatch, state } = useEditAccount();
 
   const {
-    password,
     email,
     name,
     lastname,
@@ -180,6 +180,15 @@ const OrganizationForm = (props) => {
   const [count, setCount] = useState("");
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
+  const [snack, setSnack] = useState(false);
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleClose = () => {
+    setSnack(!snack);
+  };
 
   const handleCompany = (event) => {
     dispatch({ type: "field", field: "company", value: event.target.value });
@@ -240,39 +249,27 @@ const OrganizationForm = (props) => {
       props.setError("Missing Fields");
     } else {
       props.setLoading(true);
-      const utcDate = Date.now();
-      const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
-      const randomColor =
-        "#" + Math.floor(Math.random() * 16777215).toString(16);
-      const addUser = FirebaseApp.functions().httpsCallable("addUser");
-      addUser({
-        firstName: name.charAt(0).toUpperCase() + name.slice(1),
-        lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
-        fullname: name + " " + lastname,
-        email: email,
-        password: password,
-        phonenumber: phone,
-        country: country,
-        company: company,
-        department: department,
-        job: job,
-        publicinfo: true,
-        joinDate: newDate,
-        usercreation_timeStamp: utcDate,
-        defaultAvatar: randomColor,
-      }).then((result) => {
-        if (result.data === null) {
-          props.setError("auth/successfully-created");
+      FirebaseApp.firestore()
+        .collection("users")
+        .doc(FirebaseApp.auth().currentUser.uid)
+        .update({
+          firstName: name.charAt(0).toUpperCase() + name.slice(1),
+          lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
+          fullname: name + " " + lastname,
+          email: email,
+          phonenumber: phone,
+          country: country,
+          company: company,
+          department: department,
+          job: job,
+        })
+        .then(() => {
+          setSnack(true);
           props.setLoading(false);
-        } else {
-          props.setLoading(false);
-          props.setError(result.data);
-        }
-
-        console.log("Contrasenia papi ", result.data);
-      });
+        });
     }
   };
+
   const onCancel = () => {
     props.setEditUser(false);
   };
@@ -504,13 +501,16 @@ const OrganizationForm = (props) => {
               type="submit"
               color="primary"
               className={classes.button}
-              // onClick={onSubmit}
+              onClick={onSubmit}
             >
               Save
             </Button>
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar open={snack} autoHideDuration={4000} onClose={handleClose}>
+        <Alert severity="success">User info Updated</Alert>
+      </Snackbar>
     </Grid>
   );
 };
