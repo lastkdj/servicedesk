@@ -103,8 +103,6 @@ const Search = (props) => {
   const [opensort, setOpenSort] = useState(false);
   const [active, setActive] = useState("");
   const [openactive, setOpenActive] = useState(false);
-  
-  
 
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
@@ -117,6 +115,7 @@ const Search = (props) => {
   };
 
   const sortAplha = () => {
+    //Orden Alphabetico
     const newArray = props.userData.sort((a, b) => {
       return a.firstName > b.firstName ? 1 : -1;
     });
@@ -125,6 +124,7 @@ const Search = (props) => {
   };
 
   const sortOld = () => {
+    // Filtra los mas Viejos
     const newArray = props.userData.sort((a, b) => {
       return a.usercreation_timeStamp > b.usercreation_timeStamp ? 1 : -1;
     });
@@ -133,6 +133,7 @@ const Search = (props) => {
   };
 
   const sortNew = () => {
+    // Filtra los mas Nuevos
     const newArray = props.userData.sort((a, b) => {
       return b.usercreation_timeStamp > a.usercreation_timeStamp ? 1 : -1;
     });
@@ -142,35 +143,22 @@ const Search = (props) => {
 
   const sortAll = () => {
     props.dispatch({ type: "fetch", value: props.OriginuserData });
-  }
+  };
 
   const sortActive = () => {
-    FirebaseApp.firestore()
-    .collection("users")
-    .where("disabled", "==", "false").get().then(function(querySnapshot) {
-      const dataArray = [];
-      querySnapshot.forEach(function(doc) {
-        console.log(doc.data())
-        const data = doc.data()
-        dataArray.push(data)
-        props.dispatch({ type: "fetch", value: dataArray });
-      })
-    })
-     
+    // Filtra los Activos
+    const activeSort = props.OriginuserData.filter(function (data) {
+      return data.disabled === "false";
+    });
+    props.dispatch({ type: "fetch", value: activeSort });
   };
 
   const sortDisabled = () => {
-    FirebaseApp.firestore()
-    .collection("users")
-    .where("disabled", "==", "true").get().then(function(querySnapshot) {
-      const dataArray = [];
-      querySnapshot.forEach(function(doc) {
-        console.log(doc.data())
-        const data = doc.data()
-        dataArray.push(data)
-        props.dispatch({ type: "fetch", value: dataArray });
-      })
-    })
+    // Filtra los Deshabilitados
+    const disableSort = props.OriginuserData.filter(function (data) {
+      return data.disabled === "true";
+    });
+    props.dispatch({ type: "fetch", value: disableSort });
   };
 
   return (
@@ -210,104 +198,108 @@ const Search = (props) => {
           }}
         />
       </Grid>
-      <Grid item container  md={8}
+      <Grid
+        item
+        container
+        md={8}
         lg={8}
-        xl={8} style={{justifyContent: "flex-end"}}>
-      <Grid
-        item
-        xs={12}
-        sm={4}
-        md={2}
-        lg={3}
-        xl={3}
-        style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+        xl={8}
+        style={{ justifyContent: "flex-end" }}
       >
-        <FormControl variant="outlined" className={classes.rootcompany}>
-          <InputLabel
-            id="demo-simple-select-outlined-label"
-            style={{ color: "white" }}
-          >
-            Active/Disable
-          </InputLabel>
-          <Select
-            fullWidth
-            labelId="demo-simple-select-outlined-label"
-            id="company"
-            open={openactive}
-            value={active}
-            onClose={() => {
-              setOpenActive(false);
-            }}
-            onOpen={() => {
-              setOpenActive(true);
-            }}
-            onChange={handleActive}
-            label="Company"
-            classes={{ icon: classes.popupcompany }}
-            MenuProps={{
-              PopoverClasses: { paper: classes.backcompany },
-            }}
-          >
-            <MenuItem value={All} onClick={sortAll}>
-              All
-            </MenuItem>
-            <MenuItem value={Active} onClick={sortActive}>
-              Active Users
-            </MenuItem>
-            <MenuItem value={disabled} onClick={sortDisabled}>
-              Disabled Users
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={4}
-        md={2}
-        lg={3}
-        xl={3}
-        style={isPhone ? { padding: "13px" } : { padding: "20px" }}
-      >
-        <FormControl variant="outlined" className={classes.rootcompany}>
-          <InputLabel
-            id="demo-simple-select-outlined-label"
-            style={{ color: "white" }}
-          >
-            Sort By
-          </InputLabel>
-          <Select
-            fullWidth
-            labelId="demo-simple-select-outlined-label"
-            id="company"
-            open={opensort}
-            value={sort}
-            onClose={() => {
-              setOpenSort(false);
-            }}
-            onOpen={() => {
-              setOpenSort(true);
-            }}
-            onChange={handleSort}
-            label="Company"
-            classes={{ icon: classes.popupcompany }}
-            MenuProps={{
-              PopoverClasses: { paper: classes.backcompany },
-            }}
-          >
-            <MenuItem value={alpha} onClick={sortAplha}>
-              A to Z
-            </MenuItem>
-            <MenuItem value={newest} onClick={sortNew}>
-              Newest Users
-            </MenuItem>
-            <MenuItem value={oldest} onClick={sortOld}>
-              Older Users
-            </MenuItem>
-           
-          </Select>
-        </FormControl>
-      </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={2}
+          lg={3}
+          xl={3}
+          style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+        >
+          <FormControl variant="outlined" className={classes.rootcompany}>
+            <InputLabel
+              id="demo-simple-select-outlined-label"
+              style={{ color: "white" }}
+            >
+              Active/Disable
+            </InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-outlined-label"
+              id="company"
+              open={openactive}
+              value={active}
+              onClose={() => {
+                setOpenActive(false);
+              }}
+              onOpen={() => {
+                setOpenActive(true);
+              }}
+              onChange={handleActive}
+              label="Company"
+              classes={{ icon: classes.popupcompany }}
+              MenuProps={{
+                PopoverClasses: { paper: classes.backcompany },
+              }}
+            >
+              <MenuItem value={All} onClick={sortAll}>
+                All
+              </MenuItem>
+              <MenuItem value={Active} onClick={sortActive}>
+                Active Users
+              </MenuItem>
+              <MenuItem value={disabled} onClick={sortDisabled}>
+                Disabled Users
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={2}
+          lg={3}
+          xl={3}
+          style={isPhone ? { padding: "13px" } : { padding: "20px" }}
+        >
+          <FormControl variant="outlined" className={classes.rootcompany}>
+            <InputLabel
+              id="demo-simple-select-outlined-label"
+              style={{ color: "white" }}
+            >
+              Sort By
+            </InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-outlined-label"
+              id="company"
+              open={opensort}
+              value={sort}
+              onClose={() => {
+                setOpenSort(false);
+              }}
+              onOpen={() => {
+                setOpenSort(true);
+              }}
+              onChange={handleSort}
+              label="Company"
+              classes={{ icon: classes.popupcompany }}
+              MenuProps={{
+                PopoverClasses: { paper: classes.backcompany },
+              }}
+            >
+              <MenuItem value={alpha} onClick={sortAplha}>
+                A to Z
+              </MenuItem>
+              <MenuItem value={newest} onClick={sortNew}>
+                Newest Users
+              </MenuItem>
+              <MenuItem value={oldest} onClick={sortOld}>
+                Older Users
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Edit from "../../../../../../Imagenes/Edit.jpg";
 import Edit2 from "../../../../../../Imagenes/Edit2.jpg";
-import MessageIcon from "@material-ui/icons/Message";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import TA from "../../../../../../Imagenes/talogo2.jpg";
 import SBC from "../../../../../../Imagenes/sbclogo.jpg";
 import FREY from "../../../../../../Imagenes/freylogo2.jpg";
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#8A85FF",
     color: "white",
     textAlign: "center",
+    height: "80%",
 
     "&:hover": {
       backgroundColor: "#5A55DA",
@@ -159,7 +160,16 @@ const Summary = (props) => {
       }}
     >
       <Grid item container xs={4} style={{ justifyContent: "center" }}>
-        <Grid item container xs={12} style={{ justifyContent: "center" }}>
+        <Grid
+          item
+          container
+          xs={12}
+          style={{
+            justifyContent: "center",
+            height: "81%",
+            alignItems: "stretch",
+          }}
+        >
           <Paper
             elevation={3}
             style={{
@@ -242,13 +252,18 @@ const Summary = (props) => {
               width: "95%",
               alignItems: "center",
               display: "flex",
+              height: "min-content",
             }}
           >
             <Grid
               item
               container
               xs={12}
-              style={{ justifyContent: "flex-end", margin: "0px 10px" }}
+              style={{
+                justifyContent: "flex-end",
+                margin: "0px 5px 0px 0px",
+                alignItems: "center",
+              }}
             >
               <IconButton
                 aria-label="upload picture"
@@ -256,7 +271,7 @@ const Summary = (props) => {
                 classes={{ root: classes.root }}
                 // onClick={onClick}
               >
-                <MessageIcon />
+                <VpnKeyIcon />
               </IconButton>
               <IconButton
                 aria-label="upload picture"
