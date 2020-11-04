@@ -10,9 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import RenderUsers from "./RenderUsers";
 import SimpleBackdrop from "./BackDrop/LoadingFetch";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Button } from "@material-ui/core";
 import Fade from "@material-ui/core/Fade";
 import { useUserList } from "../../../../Context/UserListContext";
+import { useEditAccount } from "../../../../Context/EditAccount";
 import AreYouSure from "./AreYouSure";
 import { useMediaQuery } from "react-responsive";
 import EditUser from "./EditUser/EditUser";
@@ -144,7 +144,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PaperList = () => {
-  const { state, dispatch } = useUserList();
+  const userContext = useUserList();
+  const EditContext = useEditAccount();
+  const { snack } = EditContext.state;
   const {
     userData,
     moreData,
@@ -152,12 +154,16 @@ const PaperList = () => {
     error,
     success,
     OriginuserData,
-  } = state;
+    editUser,
+  } = userContext.state;
+
+  const { dispatch: userDispatch } = userContext;
+  const { dispatch: editDispatch } = EditContext;
+
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [DelEdit, setDelEdit] = useState(false);
   const [checkRef, setcheckRef] = useState(0);
-  const [editUser, setEditUser] = useState(false);
 
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
@@ -171,44 +177,48 @@ const PaperList = () => {
 
   const classes = useStyles();
 
+  const handleClose = () => {
+    editDispatch({ type: "snack", value: snack });
+  };
+
   const fetchMoreData = () => {
     setTimeout(() => {
       if (moreData < userFetch) {
-        dispatch({ type: "moreData", value: moreData });
+        userDispatch({ type: "moreData", value: moreData });
       } else {
         setHasMore(false);
       }
     }, 500);
   };
 
-  const deletedUser = () => {
-    dispatch({ type: "deleted", value: true });
-  };
+  // const deletedUser = () => {
+  //   userDispatch({ type: "deleted", value: true });
+  // };
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 
   const handleSuccess = () => {
-    dispatch({ type: "success", value: false });
+    userDispatch({ type: "success", value: false });
   };
 
   const handleError = () => {
-    dispatch({ type: "error", value: false });
+    userDispatch({ type: "error", value: false });
   };
 
   return (
     <Grid item xs={12}>
       <Paper elevation={3} className={classes.quadrapapers}>
         <Grid container item xs={12}>
-          <EditUser editUser={editUser} setEditUser={setEditUser} />
           <UserAppBar />
           <AreYouSure />
+          <EditUser editUser={editUser} userDispatch={userDispatch} />
           <Search
             search={search}
             handleChange={handleChange}
             userData={userData}
-            dispatch={dispatch}
+            dispatch={userDispatch}
             OriginuserData={OriginuserData}
           />
 
@@ -224,7 +234,7 @@ const PaperList = () => {
                   alignItems: "center",
                 }}
               >
-                <Grid item style={{ margin: "10px" }}>
+                {/* <Grid item style={{ margin: "10px" }}>
                   <Button
                     variant="contained"
                     type="submit"
@@ -249,7 +259,7 @@ const PaperList = () => {
                   >
                     Edit
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Fade>
           ) : (
@@ -363,6 +373,9 @@ const PaperList = () => {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={4000} onClose={handleError}>
         <Alert severity="error">You can't remove yourself</Alert>
+      </Snackbar>
+      <Snackbar open={snack} autoHideDuration={4000} onClose={handleClose}>
+        <Alert severity="success">User info Updated</Alert>
       </Snackbar>
     </Grid>
   );

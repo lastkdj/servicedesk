@@ -6,16 +6,13 @@ import FREY from "../../../../../Imagenes/frey2.jpg";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
 import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
-import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
 import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { useUserList } from "../../../../Context/UserListContext";
+import Actions from "./Actions";
 
 const useStyles = makeStyles((theme) => ({
   quadrapapers: {
@@ -151,29 +148,22 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#5A55DA",
     },
   },
-
-  buttonProgress: {
-    color: "#8a85ff",
-    position: "absolute",
-  },
 }));
 
 const RenderUsers = (props) => {
-  const { dispatch, state } = useUserList();
-  const { success } = state;
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
   const isTablet = useMediaQuery({ query: "(max-device-width: 600px)" });
 
-  useEffect(() => {
-    if (success === true) {
-      setChecked(false);
-      props.setcheckRef(props.checkRef - 1);
-    }
-  }, [success]);
+  // useEffect(() => {
+  //   if (success === true) {
+  //     setChecked(false);
+  //     props.setcheckRef(props.checkRef - 1);
+  //   }
+  // }, [success]);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -182,73 +172,38 @@ const RenderUsers = (props) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const handleChecked = (event) => {
-    if (!checked) {
-      props.setcheckRef(props.checkRef + 1);
-      setChecked(event.target.checked);
-    } else if (!checked && props.checkRef > 0) {
-      setChecked(event.target.checked);
-    } else if (checked && props.checkRef > 0) {
-      setChecked(event.target.checked);
-      props.setcheckRef(props.checkRef - 1);
-    } else {
-      setChecked(event.target.checked);
-    }
-  };
+  // const handleChecked = (event) => {
+  //   if (!checked) {
+  //     props.setcheckRef(props.checkRef + 1);
+  //     setChecked(event.target.checked);
+  //   } else if (!checked && props.checkRef > 0) {
+  //     setChecked(event.target.checked);
+  //   } else if (checked && props.checkRef > 0) {
+  //     setChecked(event.target.checked);
+  //     props.setcheckRef(props.checkRef - 1);
+  //   } else {
+  //     setChecked(event.target.checked);
+  //   }
+  // };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const disableUser = () => {
-    if (props.user.disabled === "false") {
-      setLoading(true);
-      const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
-      callDisable({ uid: props.user.uid }).then((result) => {
-        setLoading(false);
+  // useEffect(() => {
+  //   if (checked) {
+  //     dispatch({ type: "selected", value: props.user.uid });
+  //   }
+  // }, [checked]);
 
-        FirebaseApp.firestore()
-          .collection("users")
-          .doc(props.user.uid)
-          .update({
-            disabled: "true",
-          })
-          .then(() => {
-            console.log("done, disabled");
-          });
-      });
-    } else {
-      setLoading(true);
-      const callEnable = FirebaseApp.functions().httpsCallable("callEnable");
-      callEnable({ uid: props.user.uid }).then((result) => {
-        setLoading(false);
-        FirebaseApp.firestore()
-          .collection("users")
-          .doc(props.user.uid)
-          .update({
-            disabled: "false",
-          })
-          .then(() => {
-            console.log("done, enabled");
-          });
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (checked) {
-      dispatch({ type: "selected", value: props.user.uid });
-    }
-  }, [checked]);
-
-  useEffect(() => {
-    if (props.checkRef === 1) {
-      props.setDelEdit(true);
-    } else if (props.checkRef === 0 || props.checkRef > 1) {
-      props.setDelEdit(false);
-    } else {
-    }
-  }, [props.checkRef]);
+  // useEffect(() => {
+  //   if (props.checkRef === 1) {
+  //     props.setDelEdit(true);
+  //   } else if (props.checkRef === 0 || props.checkRef > 1) {
+  //     props.setDelEdit(false);
+  //   } else {
+  //   }
+  // }, [props.checkRef]);
 
   const classes = useStyles();
 
@@ -259,14 +214,11 @@ const RenderUsers = (props) => {
       container
       className={classes.ticketgrid}
       style={
-        checked
-          ? { backgroundColor: "rgba(138, 133, 255, 0.16)" }
-          : props.user.disabled === "true"
-          ? { backgroundColor: "rgba(255, 255, 255, 0.3)" }
-          : null
+        props.user.disabled === "true" ? { backgroundColor: "#46112C" } : null
       }
     >
-      <Grid item>
+      <Grid item style={{ width: "50px" }}></Grid>
+      {/* <Grid item>
         {" "}
         <Checkbox
           checked={checked}
@@ -274,7 +226,7 @@ const RenderUsers = (props) => {
           inputProps={{ "aria-label": "primary checkbox" }}
           className={classes.checkbox}
         />
-      </Grid>
+      </Grid> */}
 
       <Grid
         item
@@ -404,42 +356,9 @@ const RenderUsers = (props) => {
         lg={2}
         xl={2}
         className={classes.marginright}
+        spacing={1}
       >
-        {props.user.uid !== FirebaseApp.auth().currentUser.uid ? (
-          <Tooltip
-            placement="right-end"
-            title={
-              props.user.disabled === "true"
-                ? "Enable Account"
-                : "Disable Account"
-            }
-            arrow
-          >
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              className={classes.button}
-              style={
-                ({ marginBottom: "0px" },
-                props.user.disabled === "false"
-                  ? { backgroundColor: "#B20453" }
-                  : { backgroundColor: "#28CB00" })
-              }
-              onClick={disableUser}
-              disabled={loading}
-            >
-              {loading ? (
-                <CircularProgress
-                  thickness={5}
-                  size={18}
-                  className={classes.buttonProgress}
-                />
-              ) : null}
-              {props.user.disabled === "true" ? "Activate" : "Disable"}
-            </Button>
-          </Tooltip>
-        ) : null}{" "}
+        <Actions user={props.user} loading={loading} />
       </Grid>
     </Grid>
   );

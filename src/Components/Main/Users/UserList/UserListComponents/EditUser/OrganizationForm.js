@@ -12,7 +12,6 @@ import Grid from "@material-ui/core/Grid";
 import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import { useEditAccount } from "../../../../../Context/EditAccount";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 //Company
@@ -173,6 +172,7 @@ const OrganizationForm = (props) => {
     company,
     department,
     job,
+    snack,
   } = state;
 
   const [opendepa, setOpenDepa] = useState(false);
@@ -180,63 +180,28 @@ const OrganizationForm = (props) => {
   const [count, setCount] = useState("");
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
-  const [snack, setSnack] = useState(false);
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 
-  const handleClose = () => {
-    setSnack(!snack);
-  };
-
   const handleCompany = (event) => {
-    dispatch({ type: "field", field: "company", value: event.target.value });
+    dispatch({
+      type: "field",
+      field: "company",
+      value: event.target.value,
+    });
     setComp(event.target.value);
   };
 
   const handledepartment = (event) => {
-    dispatch({ type: "field", field: "department", value: event.target.value });
+    dispatch({
+      type: "field",
+      field: "department",
+      value: event.target.value,
+    });
     setDepa(event.target.value);
   };
-
-  useEffect(() => {
-    if (
-      props.error === "auth/successfully-created" ||
-      props.error === "firstload"
-    ) {
-      dispatch({
-        type: "field",
-        field: "phone",
-        value: "",
-      });
-
-      dispatch({
-        type: "field",
-        field: "job",
-        value: "",
-      });
-
-      dispatch({
-        type: "field",
-        field: "company",
-        value: "",
-      });
-      setComp("");
-      dispatch({
-        type: "field",
-        field: "department",
-        value: "",
-      });
-      setDepa("");
-      dispatch({
-        type: "field",
-        field: "country",
-        value: "",
-      });
-      setCount("");
-    }
-  }, [props.error]);
 
   const onSubmit = () => {
     if (job === "") {
@@ -251,10 +216,10 @@ const OrganizationForm = (props) => {
       props.setLoading(true);
       FirebaseApp.firestore()
         .collection("users")
-        .doc(FirebaseApp.auth().currentUser.uid)
+        .doc(props.profile.uid)
         .update({
           firstName: name.charAt(0).toUpperCase() + name.slice(1),
-          lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1),
+          lastName: lastname.charAt(0).toUpperCase() + lastname.slice(1),
           fullname: name + " " + lastname,
           email: email,
           phonenumber: phone,
@@ -264,17 +229,19 @@ const OrganizationForm = (props) => {
           job: job,
         })
         .then(() => {
-          setSnack(true);
+          dispatch({ type: "snack", value: snack });
           props.setLoading(false);
+          props.dispatch({ type: "edit", value: props.editUser });
         });
     }
   };
 
   const onCancel = () => {
-    props.setEditUser(false);
+    props.dispatch({ type: "edit", value: props.editUser });
   };
 
   const classes = useStyles();
+
   return (
     <Grid
       container
@@ -508,9 +475,6 @@ const OrganizationForm = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Snackbar open={snack} autoHideDuration={4000} onClose={handleClose}>
-        <Alert severity="success">User info Updated</Alert>
-      </Snackbar>
     </Grid>
   );
 };

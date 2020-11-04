@@ -30,6 +30,7 @@ function submitReducer(state, action) {
       return {
         ...state,
         checked: !action.value,
+        disabled: action.value,
       };
     }
     case "patch": {
@@ -63,6 +64,7 @@ const initialState = {
   department: "",
   job: "",
   createdby: "",
+  disabled: "false",
   snack: false,
   error: false,
   checked: false,

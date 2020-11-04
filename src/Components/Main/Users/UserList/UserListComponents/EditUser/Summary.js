@@ -73,7 +73,6 @@ const Summary = (props) => {
   const classes = useStyles();
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
   const { state, dispatch } = useEditAccount();
-  const [creatoruid, setCreatoruid] = useState("");
   const [creatorData, setCreatorData] = useState({});
   const [loading, setLoading] = useState(false);
   const {
@@ -85,12 +84,18 @@ const Summary = (props) => {
     company,
     department,
     job,
+    disabled,
   } = state;
 
   useEffect(() => {
-    console.log(creatoruid);
-    if (creatoruid !== "" && creatoruid !== undefined) {
-      var docRef = FirebaseApp.firestore().collection("users").doc(creatoruid);
+    console.log(props.profile.createdby);
+    if (
+      props.profile.createdby !== "" &&
+      props.profile.createdby !== undefined
+    ) {
+      var docRef = FirebaseApp.firestore()
+        .collection("users")
+        .doc(props.profile.createdby);
       docRef
         .get()
         .then(function (doc) {
@@ -104,14 +109,10 @@ const Summary = (props) => {
           console.log("Error getting document:", error);
         });
     }
-  }, [creatoruid]);
-
-  useEffect(() => {
-    setCreatoruid(props.creator);
-  }, [props.creator]);
+  }, [props.profile.createdby]);
 
   const disableUser = () => {
-    if (props.profile.disabled === "false") {
+    if (disabled === "false") {
       setLoading(true);
       const callDisable = FirebaseApp.functions().httpsCallable("callDisable");
       callDisable({ uid: props.profile.uid }).then((result) => {
@@ -124,7 +125,7 @@ const Summary = (props) => {
             disabled: "true",
           })
           .then(() => {
-            console.log("done, disabled");
+            dispatch({ type: "switch", value: "true" });
           });
       });
     } else {
@@ -140,6 +141,7 @@ const Summary = (props) => {
           })
           .then(() => {
             console.log("done, enabled");
+            dispatch({ type: "switch", value: "false" });
           });
       });
     }
@@ -216,7 +218,7 @@ const Summary = (props) => {
                 }}
               >
                 Status:{" "}
-                {props.profile.disabled === "true" ? (
+                {disabled === "true" ? (
                   <Chip
                     style={{
                       backgroundColor: "rgb(178, 4, 83)",
@@ -281,30 +283,31 @@ const Summary = (props) => {
               >
                 <VerifiedUserIcon />
               </IconButton>
-
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                className={classes.button}
-                style={
-                  ({ marginBottom: "0px" },
-                  props.profile.disabled === "false"
-                    ? { backgroundColor: "#B20453" }
-                    : { backgroundColor: "#28CB00" })
-                }
-                onClick={disableUser}
-                disabled={loading}
-              >
-                {loading ? (
-                  <CircularProgress
-                    thickness={5}
-                    size={18}
-                    className={classes.buttonProgress}
-                  />
-                ) : null}
-                {props.profile.disabled === "true" ? "Enable" : "Disable"}
-              </Button>
+              {props.profile.uid !== FirebaseApp.auth().currentUser.uid ? (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  className={classes.button}
+                  style={
+                    ({ marginBottom: "0px" },
+                    disabled === "false"
+                      ? { backgroundColor: "#B20453" }
+                      : { backgroundColor: "#28CB00" })
+                  }
+                  onClick={disableUser}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <CircularProgress
+                      thickness={5}
+                      size={18}
+                      className={classes.buttonProgress}
+                    />
+                  ) : null}
+                  {disabled === "true" ? "Enable" : "Disable"}
+                </Button>
+              ) : null}
             </Grid>
           </Paper>
         </Grid>

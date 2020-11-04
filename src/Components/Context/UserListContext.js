@@ -88,6 +88,12 @@ function submitReducer(state, action) {
       };
     }
 
+    case "edit": {
+      return {
+        ...state,
+        editUser: !action.value,
+      };
+    }
 
     default:
       break;
@@ -108,6 +114,7 @@ const initialState = {
   error: false,
   success: false,
   reFetch: false,
+  editUser: false,
 };
 
 export function UserListProvider(props) {

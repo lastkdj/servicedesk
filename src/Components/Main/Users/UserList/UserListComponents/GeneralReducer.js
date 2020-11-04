@@ -8,7 +8,7 @@ import { useUserList } from "../../../../Context/UserListContext";
 
 const GeneralState = () => {
   const { state, dispatch } = useUserList();
-  const { reFetch } = state;
+  const { reFetch, OriginuserData } = state;
 
   var userRef = FirebaseApp.firestore().collection("users");
 

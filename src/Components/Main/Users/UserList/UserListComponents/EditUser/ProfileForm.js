@@ -51,51 +51,20 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ProfileForm = (props) => {
-  const { state, dispatch } = useEditAccount();
+  const { dispatch } = useEditAccount();
 
-  const { password } = state;
   const nameRef = useRef();
   const lastnameRef = useRef();
   const emailRef = useRef();
 
-  // const passwordRef = useRef();
-
   useEffect(() => {
-    if (
-      props.error === "auth/successfully-created" ||
-      props.error === "firstload"
-    ) {
-      dispatch({
-        type: "field",
-        field: "name",
-        value: "",
-      });
-      nameRef.current.value = "";
-      dispatch({
-        type: "field",
-        field: "lastname",
-        value: "",
-      });
-      lastnameRef.current.value = "";
-
-      dispatch({
-        type: "field",
-        field: "email",
-        value: "",
-      });
-      emailRef.current.value = "";
-      // passwordRef.current.value = "";
-      // dispatch({
-      //   type: "field",
-      //   field: "password",
-      //   value: "",
-      // });
-    }
-  }, [props.error]);
-
-  useEffect(() => {
+    dispatch({ type: "switch", value: props.profile.disabled });
     dispatch({ type: "field", field: "email", value: props.profile.email });
-    dispatch({ type: "field", field: "name", value: props.profile.firstName });
+    dispatch({
+      type: "field",
+      field: "name",
+      value: props.profile.firstName,
+    });
     dispatch({ type: "field", field: "job", value: props.profile.job });
     dispatch({
       type: "field",
@@ -130,7 +99,7 @@ const ProfileForm = (props) => {
     nameRef.current.value = props.profile.firstName;
     lastnameRef.current.value = props.profile.lastName;
     emailRef.current.value = props.profile.email;
-  }, [props.editUser]);
+  }, [props.profile]);
 
   const classes = useStyles();
   return (

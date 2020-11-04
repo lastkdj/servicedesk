@@ -13,7 +13,6 @@ import Alerts from "./Alerts";
 import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { useUserList } from "../../../../../Context/UserListContext";
-import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import Topimg from "../../../../../../Imagenes/topimg.jpg";
 import Botimg from "../../../../../../Imagenes/bottomimg.jpg";
 
@@ -113,8 +112,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditUser = (props) => {
-  const { state } = useUserList();
-  const { selected } = state;
+  const { state, dispatch } = useUserList();
+  const { selected, editUser, OriginuserData } = state;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [profile, setProfile] = useState({});
@@ -122,7 +121,7 @@ const EditUser = (props) => {
   const classes = useStyles();
 
   const handleClose = () => {
-    props.setEditUser(false);
+    dispatch({ type: "edit", value: editUser });
   };
 
   useEffect(() => {
@@ -130,21 +129,19 @@ const EditUser = (props) => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     if (selected !== "") {
-      var docRef = FirebaseApp.firestore().collection("users").doc(selected);
-      docRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          setProfile(doc.data());
-        } else {
-          console.log("No such document!");
-        }
+      const fetchEdit = OriginuserData.filter(function (data) {
+        return data.uid === selected;
       });
+      setProfile(fetchEdit[0]);
+      setLoading(false);
     }
   }, [selected]);
 
   return (
     <Dialog
-      open={props.editUser}
+      open={editUser}
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
@@ -207,17 +204,8 @@ const EditUser = (props) => {
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          <ProfileForm
-            error={error}
-            profile={profile}
-            selected={selected}
-            editUser={props.editUser}
-          />
-          <Summary
-            profile={profile}
-            creator={profile.createdby}
-            selected={selected}
-          />
+          <ProfileForm error={error} profile={profile} editUser={editUser} />
+          <Summary profile={profile} creator={profile.createdby} />
         </Grid>
         <Grid
           item
@@ -232,12 +220,13 @@ const EditUser = (props) => {
           <Typography className={classes.userdetails}>Organization</Typography>
         </Grid>
         <OrganizationForm
+          profile={profile}
           error={error}
           setError={setError}
           loading={loading}
           setLoading={setLoading}
-          editUser={props.editUser}
-          setEditUser={props.setEditUser}
+          editUser={editUser}
+          dispatch={dispatch}
         />
       </Grid>
       <Alerts error={error} setError={setError} />

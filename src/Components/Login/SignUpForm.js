@@ -49,6 +49,7 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
               job: "",
               phonenumber: "",
               uid: FirebaseApp.auth().currentUser.uid,
+              createdby: "self",
             });
           setOpen(false);
           goLogin();
