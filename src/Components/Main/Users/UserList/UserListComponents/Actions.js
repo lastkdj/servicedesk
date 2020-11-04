@@ -125,7 +125,11 @@ const Actions = (props) => {
                 : { backgroundColor: "#28CB00" })
             }
             onClick={disableUser}
-            disabled={loading}
+            disabled={
+              props.user.uid !== FirebaseApp.auth().currentUser.uid
+                ? loading
+                : true
+            }
           >
             {loading ? (
               <CircularProgress
