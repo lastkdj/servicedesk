@@ -283,7 +283,7 @@ const RecentTicketsDetailed = () => {
             </Grid>
             <Grid item>
               <Typography className={classes.ticketsdetailed}>
-                Peneiro Lupirico
+                Pedro Lupo
               </Typography>
             </Grid>
           </Grid>

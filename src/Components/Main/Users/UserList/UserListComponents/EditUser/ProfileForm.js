@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useEditAccount } from "../../../../../Context/EditAccount";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   textfieldroot: {
     width: "100%",
     "& label.Mui-focused": {
@@ -48,14 +48,18 @@ const useStyles = makeStyles(() => ({
   textfield: {
     alignItems: "center",
   },
+
+  order: {
+    order: 1,
+  },
 }));
 
 const ProfileForm = (props) => {
   const { dispatch } = useEditAccount();
-
   const nameRef = useRef();
   const lastnameRef = useRef();
   const emailRef = useRef();
+  const phoneRef = useRef();
 
   useEffect(() => {
     dispatch({ type: "switch", value: props.profile.disabled });
@@ -71,14 +75,14 @@ const ProfileForm = (props) => {
       field: "lastname",
       value: props.profile.lastName,
     });
-    dispatch({
-      type: "field",
-      field: "phone",
-      value:
-        props.profile.phonenumber === undefined
-          ? ""
-          : props.profile.phonenumber,
-    });
+    // dispatch({
+    //   type: "field",
+    //   field: "phone",
+    //   value:
+    //     props.profile.phonenumber === undefined
+    //       ? ""
+    //       : props.profile.phonenumber,
+    // });
     dispatch({
       type: "field",
       field: "company",
@@ -103,7 +107,17 @@ const ProfileForm = (props) => {
 
   const classes = useStyles();
   return (
-    <Grid container item xs={12} sm={6} md={6} lg={4} xl={4} spacing={2}>
+    <Grid
+      container
+      item
+      xs={12}
+      sm={6}
+      md={6}
+      lg={4}
+      xl={4}
+      spacing={2}
+      style={{ order: 1 }}
+    >
       <Grid item container xs={12} className={classes.textfield}>
         <TextField
           inputRef={nameRef}
@@ -150,6 +164,7 @@ const ProfileForm = (props) => {
       </Grid>
       <Grid item container xs={12} className={classes.textfield}>
         <TextField
+          disabled
           inputRef={emailRef}
           label="Email Address"
           variant="outlined"

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Zoom from "@material-ui/core/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1000px",
     justifyContent: "center",
     flexDirection: "row",
+    margin: "10px",
   },
 
   button: {
@@ -185,7 +186,7 @@ const EditUser = (props) => {
               component="span"
               classes={{ root: classes.rooticon }}
               onClick={() => {
-                props.setNewUser(false);
+                dispatch({ type: "edit", value: editUser });
               }}
             >
               <CloseOutlinedIcon />

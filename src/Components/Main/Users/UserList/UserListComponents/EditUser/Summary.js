@@ -21,6 +21,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import PassReset from "./PassReset";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -67,12 +68,21 @@ const useStyles = makeStyles((theme) => ({
     color: "#8a85ff",
     position: "absolute",
   },
+
+  order: {
+    order: 3,
+
+    [theme.breakpoints.up("xl")]: {
+      order: 2,
+    },
+  },
 }));
 
 const Summary = (props) => {
   const classes = useStyles();
   const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
   const { state, dispatch } = useEditAccount();
+  const [pass, setPass] = useState(false);
   const [creatorData, setCreatorData] = useState({});
   const [loading, setLoading] = useState(false);
   const {
@@ -140,11 +150,14 @@ const Summary = (props) => {
             disabled: "false",
           })
           .then(() => {
-            console.log("done, enabled");
             dispatch({ type: "switch", value: "false" });
           });
       });
     }
+  };
+
+  const onClick = () => {
+    setPass(!pass);
   };
 
   return (
@@ -159,6 +172,7 @@ const Summary = (props) => {
       style={{
         justifyContent: "center",
         marginLeft: isPhone ? null : "10px",
+        order: 3,
       }}
     >
       <Grid item container xs={4} style={{ justifyContent: "center" }}>
@@ -271,10 +285,11 @@ const Summary = (props) => {
                 aria-label="upload picture"
                 component="span"
                 classes={{ root: classes.root }}
-                // onClick={onClick}
+                onClick={onClick}
               >
                 <VpnKeyIcon />
               </IconButton>
+              <PassReset pass={pass} setPass={setPass} />
               <IconButton
                 aria-label="upload picture"
                 component="span"

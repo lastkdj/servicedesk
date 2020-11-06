@@ -10,8 +10,6 @@ import MediaCard from "./UserCard";
 import Popover from "@material-ui/core/Popover";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
-import FirebaseApp from "../../../../../FireBase/FireBaseConfig";
-import { useUserList } from "../../../../Context/UserListContext";
 import Actions from "./Actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -87,10 +85,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 10px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
     alignItems: "center",
+    justifyContent: "space-around",
 
     "&:hover": {
       backgroundColor: "#363B47",
     },
+
+    [theme.breakpoints.up("xl")]: {},
   },
 
   initials: { fontSize: "0.8em", fontWeight: "600" },
@@ -157,6 +158,7 @@ const RenderUsers = (props) => {
   const [loading, setLoading] = useState(false);
 
   const isTablet = useMediaQuery({ query: "(max-device-width: 600px)" });
+  const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
   // useEffect(() => {
   //   if (success === true) {
@@ -217,7 +219,8 @@ const RenderUsers = (props) => {
         props.user.disabled === "true" ? { backgroundColor: "#46112C" } : null
       }
     >
-      <Grid item style={{ width: "50px" }}></Grid>
+      {!isPhone ? <Grid item style={{ width: "50px" }}></Grid> : null}
+
       {/* <Grid item>
         {" "}
         <Checkbox

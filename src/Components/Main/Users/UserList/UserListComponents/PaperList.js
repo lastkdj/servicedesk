@@ -12,7 +12,7 @@ import SimpleBackdrop from "./BackDrop/LoadingFetch";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Fade from "@material-ui/core/Fade";
 import { useUserList } from "../../../../Context/UserListContext";
-import { useEditAccount } from "../../../../Context/EditAccount";
+import { useSnack } from "../../../../Context/SnackContext";
 import AreYouSure from "./AreYouSure";
 import { useMediaQuery } from "react-responsive";
 import EditUser from "./EditUser/EditUser";
@@ -145,8 +145,8 @@ const useStyles = makeStyles((theme) => ({
 
 const PaperList = () => {
   const userContext = useUserList();
-  const EditContext = useEditAccount();
-  const { snack } = EditContext.state;
+  const snackContext = useSnack();
+  const { snack } = snackContext.state;
   const {
     userData,
     moreData,
@@ -158,7 +158,7 @@ const PaperList = () => {
   } = userContext.state;
 
   const { dispatch: userDispatch } = userContext;
-  const { dispatch: editDispatch } = EditContext;
+  const { dispatch: editDispatch } = snackContext;
 
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
@@ -350,6 +350,7 @@ const PaperList = () => {
               {filteredNames.slice(0, moreData).map((user) => {
                 return (
                   <RenderUsers
+                    key={user.uid}
                     user={user}
                     setDelEdit={setDelEdit}
                     checkRef={checkRef}

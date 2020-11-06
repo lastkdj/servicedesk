@@ -9,10 +9,9 @@ import countries from "../../../../Account/AccountComponents/Countries";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import { useEditAccount } from "../../../../../Context/EditAccount";
-import MuiAlert from "@material-ui/lab/Alert";
+import { useSnack } from "../../../../../Context/SnackContext";
 
 //Company
 const sb = "Soletanche Bachy";
@@ -158,11 +157,21 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#791AC2",
     },
   },
+
+  order: {
+    order: 2,
+
+    [theme.breakpoints.up("xl")]: {
+      order: 3,
+    },
+  },
 }));
 
 const OrganizationForm = (props) => {
   const { dispatch, state } = useEditAccount();
-
+  const snackContext = useSnack();
+  const { snack } = snackContext.state;
+  const { dispatch: snackDispatch } = snackContext;
   const {
     email,
     name,
@@ -172,18 +181,12 @@ const OrganizationForm = (props) => {
     company,
     department,
     job,
-    snack,
   } = state;
 
   const [opendepa, setOpenDepa] = useState(false);
   const [opencomp, setOpenComp] = useState(false);
-  const [count, setCount] = useState("");
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
-
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
 
   const handleCompany = (event) => {
     dispatch({
@@ -229,7 +232,7 @@ const OrganizationForm = (props) => {
           job: job,
         })
         .then(() => {
-          dispatch({ type: "snack", value: snack });
+          snackDispatch({ type: "snack", value: snack });
           props.setLoading(false);
           props.dispatch({ type: "edit", value: props.editUser });
         });
@@ -252,6 +255,7 @@ const OrganizationForm = (props) => {
         justifyContent: "center",
 
         borderRadius: "5px",
+        order: 2,
       }}
     >
       <Grid

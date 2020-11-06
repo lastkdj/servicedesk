@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import { useUserList } from "../../../../Context/UserListContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { useMediaQuery } from "react-responsive";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -40,6 +41,8 @@ const Actions = (props) => {
   const { state, dispatch } = useUserList();
   const { editUser } = state;
   const classes = useStyles();
+
+  const isNotebook = useMediaQuery({ query: "(max-device-width: 1281px)" });
 
   const handleClick = () => {
     dispatch({ type: "selected", value: props.user.uid });
@@ -92,7 +95,7 @@ const Actions = (props) => {
             style={{ backgroundColor: "#11A1CB" }}
             // onClick={}
           >
-            <SearchIcon />
+            <SearchIcon style={isNotebook ? { fontSize: "15px" } : null} />
           </Button>
         </Tooltip>
       </Grid>{" "}
@@ -105,19 +108,16 @@ const Actions = (props) => {
             style={{ backgroundColor: "#A735FF" }}
             onClick={handleClick}
           >
-            <EditIcon />
+            <EditIcon style={isNotebook ? { fontSize: "15px" } : null} />
           </Button>
         </Tooltip>
       </Grid>
       <Grid item>
-        <Tooltip
-          title={props.user.disabled === "false" ? "Disable" : "Activate"}
-        >
+        <span title={props.user.disabled === "false" ? "Disable" : null}>
           <Button
             variant="contained"
             type="submit"
             color="primary"
-            className={classes.button}
             style={
               ({ marginBottom: "0px" },
               props.user.disabled === "false"
@@ -139,12 +139,14 @@ const Actions = (props) => {
               />
             ) : null}
             {props.user.disabled === "false" ? (
-              <BlockIcon />
+              <BlockIcon
+                style={isNotebook ? { fontSize: "15px", minWidth: "0" } : null}
+              />
             ) : (
               <CheckCircleIcon />
             )}
           </Button>
-        </Tooltip>
+        </span>
       </Grid>
     </React.Fragment>
   );
