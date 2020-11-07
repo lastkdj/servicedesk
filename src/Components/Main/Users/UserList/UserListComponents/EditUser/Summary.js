@@ -394,6 +394,7 @@ const Summary = (props) => {
             width: "100%",
             backgroundImage: `url(${Edit})`,
             backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
           <Grid container xs={12}>
