@@ -398,7 +398,7 @@ const Summary = (props) => {
         >
           <Grid container xs={12}>
             {" "}
-            <Grid container item xs={8}>
+            <Grid container item xs={7}>
               <Grid container item xs={12} className={classes.namegrid}>
                 <Typography className={classes.nametypo}>
                   {" "}
@@ -418,7 +418,7 @@ const Summary = (props) => {
               </Grid>
             </Grid>
             {isPhone ? (
-              <Grid container item xs={4} style={{ justifyContent: "center" }}>
+              <Grid container item xs={5} style={{ justifyContent: "center" }}>
                 {" "}
                 <Avatar
                   alt="avatar"
