@@ -11,6 +11,7 @@ import useStyles from "../LoginStyles";
 import CopyRight from "../CopyRight";
 import "../Button.css";
 import SignInForm from "../SignInForm";
+import Logo from "../../../Imagenes/monitor.svg";
 
 const SignIn = () => {
   const classes = useStyles();

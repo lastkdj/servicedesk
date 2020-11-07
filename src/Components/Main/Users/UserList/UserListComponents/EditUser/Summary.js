@@ -25,14 +25,24 @@ import PassReset from "./PassReset";
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+
+    [theme.breakpoints.up("lg")]: {
+      width: theme.spacing(14),
+      height: theme.spacing(14),
+    },
   },
 
   complogo: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
     opacity: "0.8",
+
+    [theme.breakpoints.up("lg")]: {
+      width: theme.spacing(14),
+      height: theme.spacing(14),
+    },
   },
 
   icon: {
@@ -74,6 +84,32 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.up("xl")]: {
       order: 2,
+    },
+  },
+
+  nametypo: {
+    fontWeight: "500",
+    fontSize: "1.2em",
+    color: "white",
+
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "1.5em",
+      height: "36px",
+    },
+  },
+
+  namegrid: {
+    alignItems: "flex-end",
+
+    [theme.breakpoints.up("lg")]: {},
+  },
+
+  description: {
+    fontWeight: "400",
+    fontSize: "0.6em",
+    color: "#e6e5e8",
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "0.8em",
     },
   },
 }));
@@ -172,86 +208,96 @@ const Summary = (props) => {
       style={{
         justifyContent: "center",
         marginLeft: isPhone ? null : "10px",
-        order: 3,
+        order: 1,
+        padding: "25px 15px",
       }}
     >
-      <Grid item container xs={4} style={{ justifyContent: "center" }}>
-        <Grid
-          item
-          container
-          xs={12}
-          style={{
-            justifyContent: "center",
-            height: "81%",
-            alignItems: "stretch",
-          }}
-        >
-          <Paper
-            elevation={3}
+      <Grid
+        item
+        container
+        xs={12}
+        lg={4}
+        xl={4}
+        style={{ justifyContent: "center", order: 2 }}
+      >
+        {!isPhone ? (
+          <Grid
+            item
+            container
+            xs={12}
             style={{
-              width: "95%",
-              backgroundColor: "#B086FF",
-              backgroundImage: `url(${Edit2})`,
+              justifyContent: "center",
+              height: "81%",
+              alignItems: "stretch",
             }}
           >
-            <Grid
-              item
-              xs={12}
-              container
+            <Paper
+              elevation={3}
               style={{
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "15px 0px",
+                width: "95%",
+                backgroundColor: "#B086FF",
+                backgroundImage: `url(${Edit2})`,
               }}
             >
-              <Avatar
-                alt="avatar"
-                className={classes.large}
-                src={
-                  props.profile.photoUrl === undefined
-                    ? Male
-                    : props.profile.photoUrl
-                }
-              ></Avatar>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              container
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "15px 0px",
-              }}
-            >
-              <Typography
+              <Grid
+                item
+                xs={12}
+                container
                 style={{
-                  fontWeight: "400",
-                  fontSize: "0.8em",
-                  color: "white",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "15px 0px",
                 }}
               >
-                Status:{" "}
-                {disabled === "true" ? (
-                  <Chip
-                    style={{
-                      backgroundColor: "rgb(178, 4, 83)",
-                      color: "white",
-                    }}
-                    label="Disabled"
-                    size="small"
-                  />
-                ) : (
-                  <Chip
-                    style={{ backgroundColor: "#69C21A", color: "white" }}
-                    label="Active"
-                    size="small"
-                  />
-                )}
-              </Typography>
-            </Grid>
-          </Paper>
-        </Grid>
+                <Avatar
+                  alt="avatar"
+                  className={classes.large}
+                  src={
+                    props.profile.photoUrl === undefined
+                      ? Male
+                      : props.profile.photoUrl
+                  }
+                ></Avatar>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                container
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "15px 0px",
+                }}
+              >
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "white",
+                  }}
+                >
+                  Status:{" "}
+                  {disabled === "true" ? (
+                    <Chip
+                      style={{
+                        backgroundColor: "rgb(178, 4, 83)",
+                        color: "white",
+                      }}
+                      label="Disabled"
+                      size="small"
+                    />
+                  ) : (
+                    <Chip
+                      style={{ backgroundColor: "#69C21A", color: "white" }}
+                      label="Active"
+                      size="small"
+                    />
+                  )}
+                </Typography>
+              </Grid>
+            </Paper>
+          </Grid>
+        ) : null}
         <Grid
           item
           container
@@ -265,7 +311,7 @@ const Summary = (props) => {
             elevation={3}
             style={{
               backgroundColor: "#A735FF",
-              width: "95%",
+              width: isPhone ? "100%" : "95%",
               alignItems: "center",
               display: "flex",
               height: "min-content",
@@ -330,11 +376,14 @@ const Summary = (props) => {
 
       <Grid
         item
-        xs={8}
+        xs={12}
+        lg={8}
+        xl={8}
         container
         style={{
           justifyContent: "center",
           borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+          order: 1,
         }}
       >
         <Paper
@@ -347,28 +396,77 @@ const Summary = (props) => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          {" "}
-          <Typography
-            style={{
-              fontWeight: "500",
-              fontSize: "1.5em",
-              height: "36px",
-              color: "white",
-            }}
-          >
+          <Grid container xs={12}>
             {" "}
-            {name + " " + lastname}
-          </Typography>
-          <Grid item xs={12}>
-            <Typography
-              style={{
-                fontWeight: "400",
-                fontSize: "0.8em",
-                color: "white",
-              }}
-            >
-              {job}
-            </Typography>
+            <Grid container item xs={8}>
+              <Grid container item xs={12} className={classes.namegrid}>
+                <Typography className={classes.nametypo}>
+                  {" "}
+                  {name + " " + lastname}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography
+                  style={{
+                    fontWeight: "400",
+                    fontSize: "0.8em",
+                    color: "white",
+                  }}
+                >
+                  {job}
+                </Typography>
+              </Grid>
+            </Grid>
+            {isPhone ? (
+              <Grid container item xs={4} style={{ justifyContent: "center" }}>
+                {" "}
+                <Avatar
+                  alt="avatar"
+                  className={classes.large}
+                  src={
+                    props.profile.photoUrl === undefined
+                      ? Male
+                      : props.profile.photoUrl
+                  }
+                ></Avatar>
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "10px 0px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "0.7em",
+                      color: "white",
+                    }}
+                  >
+                    Status:{" "}
+                    {disabled === "true" ? (
+                      <Chip
+                        style={{
+                          backgroundColor: "rgb(178, 4, 83)",
+                          color: "white",
+                        }}
+                        label="Disabled"
+                        size="small"
+                      />
+                    ) : (
+                      <Chip
+                        style={{ backgroundColor: "#69C21A", color: "white" }}
+                        label="Active"
+                        size="small"
+                      />
+                    )}
+                  </Typography>
+                </Grid>
+              </Grid>
+            ) : null}
           </Grid>
           <Grid
             item
@@ -415,57 +513,27 @@ const Summary = (props) => {
           <Grid item container xs={12}>
             <Grid item container xs={8} style={{ display: "block" }}>
               <Grid item xs={12} style={{ margin: "10px 0px" }}>
-                <Typography
-                  style={{
-                    fontWeight: "400",
-                    fontSize: "0.8em",
-                    color: "#e6e5e8",
-                  }}
-                >
+                <Typography className={classes.description}>
                   Email: {email}
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ margin: "10px 0px" }}>
-                <Typography
-                  style={{
-                    fontWeight: "400",
-                    fontSize: "0.8em",
-                    color: "#e6e5e8",
-                  }}
-                >
+                <Typography className={classes.description}>
                   Phone: {phone}
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ margin: "10px 0px" }}>
-                <Typography
-                  style={{
-                    fontWeight: "400",
-                    fontSize: "0.8em",
-                    color: "#e6e5e8",
-                  }}
-                >
+                <Typography className={classes.description}>
                   Country: {country}
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ margin: "10px 0px" }}>
-                <Typography
-                  style={{
-                    fontWeight: "400",
-                    fontSize: "0.8em",
-                    color: "#e6e5e8",
-                  }}
-                >
+                <Typography className={classes.description}>
                   Company: {company}
                 </Typography>
               </Grid>
               <Grid item xs={12} style={{ margin: "10px 0px" }}>
-                <Typography
-                  style={{
-                    fontWeight: "400",
-                    fontSize: "0.8em",
-                    color: "#e6e5e8",
-                  }}
-                >
+                <Typography className={classes.description}>
                   Department: {department}
                 </Typography>
               </Grid>{" "}

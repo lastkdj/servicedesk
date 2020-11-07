@@ -108,7 +108,7 @@ const ProfileForm = (props) => {
       lg={4}
       xl={4}
       spacing={2}
-      style={{ order: 1 }}
+      style={{ order: 2 }}
     >
       <Grid item container xs={12} className={classes.textfield}>
         <TextField

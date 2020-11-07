@@ -85,7 +85,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 10px",
     borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    padding: "10px 35px",
 
     "&:hover": {
       backgroundColor: "#363B47",
@@ -234,7 +235,7 @@ const RenderUsers = (props) => {
       <Grid
         item
         container
-        xs={7}
+        xs={9}
         sm={5}
         md={1}
         lg={3}

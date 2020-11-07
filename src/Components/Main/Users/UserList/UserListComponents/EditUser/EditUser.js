@@ -200,9 +200,9 @@ const EditUser = (props) => {
           spacing={2}
           style={{
             borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingLeft: "20px",
             borderRadius: "5px",
             borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+            justifyContent: "center",
           }}
         >
           <ProfileForm error={error} profile={profile} editUser={editUser} />

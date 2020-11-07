@@ -273,7 +273,6 @@ const OrganizationForm = (props) => {
         justifyContent: "center",
 
         borderRadius: "5px",
-        order: 2,
       }}
     >
       <Grid
