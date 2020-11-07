@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/servicedesk/static/css/main.d949663c.chunk.css",
-    "main.js": "/servicedesk/static/js/main.297db1df.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.297db1df.chunk.js.map",
+    "main.js": "/servicedesk/static/js/main.95741d9b.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.95741d9b.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
     "static/js/2.7b162b94.chunk.js": "/servicedesk/static/js/2.7b162b94.chunk.js",
     "static/js/2.7b162b94.chunk.js.map": "/servicedesk/static/js/2.7b162b94.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.598640cb30a4f3cf87f577f5611d90f5.js": "/servicedesk/precache-manifest.598640cb30a4f3cf87f577f5611d90f5.js",
+    "precache-manifest.a6d779de461dca1164dda5d0ce8f321d.js": "/servicedesk/precache-manifest.a6d779de461dca1164dda5d0ce8f321d.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
     "static/css/main.d949663c.chunk.css.map": "/servicedesk/static/css/main.d949663c.chunk.css.map",
@@ -45,6 +45,6 @@
     "static/css/2.c5f6aa66.chunk.css",
     "static/js/2.7b162b94.chunk.js",
     "static/css/main.d949663c.chunk.css",
-    "static/js/main.297db1df.chunk.js"
+    "static/js/main.95741d9b.chunk.js"
   ]
 }
