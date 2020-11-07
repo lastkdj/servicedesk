@@ -59,7 +59,6 @@ const ProfileForm = (props) => {
   const nameRef = useRef();
   const lastnameRef = useRef();
   const emailRef = useRef();
-  const phoneRef = useRef();
 
   useEffect(() => {
     dispatch({ type: "switch", value: props.profile.disabled });
@@ -69,20 +68,13 @@ const ProfileForm = (props) => {
       field: "name",
       value: props.profile.firstName,
     });
-    dispatch({ type: "field", field: "job", value: props.profile.job });
+
     dispatch({
       type: "field",
       field: "lastname",
       value: props.profile.lastName,
     });
-    // dispatch({
-    //   type: "field",
-    //   field: "phone",
-    //   value:
-    //     props.profile.phonenumber === undefined
-    //       ? ""
-    //       : props.profile.phonenumber,
-    // });
+
     dispatch({
       type: "field",
       field: "company",

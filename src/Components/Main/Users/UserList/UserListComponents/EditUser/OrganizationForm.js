@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -187,6 +187,8 @@ const OrganizationForm = (props) => {
   const [opencomp, setOpenComp] = useState(false);
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
+  const jobRef = useRef("");
+  const phoneRef = useRef("");
 
   const handleCompany = (event) => {
     dispatch({
@@ -243,6 +245,22 @@ const OrganizationForm = (props) => {
     props.dispatch({ type: "edit", value: props.editUser });
   };
 
+  useEffect(() => {
+    dispatch({ type: "field", field: "job", value: props.profile.job });
+    dispatch({
+      type: "field",
+      field: "phone",
+      value:
+        props.profile.phonenumber === undefined
+          ? ""
+          : props.profile.phonenumber,
+    });
+    jobRef.current.value =
+      props.profile.job === undefined ? "" : props.profile.job;
+    phoneRef.current.value =
+      props.profile.phonenumber === undefined ? "" : props.profile.phonenumber;
+  }, [props.profile]);
+
   const classes = useStyles();
 
   return (
@@ -267,6 +285,7 @@ const OrganizationForm = (props) => {
       >
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <TextField
+            inputRef={phoneRef}
             label="Phone Number"
             variant="outlined"
             placeholder="Ex +56949651721"
@@ -325,7 +344,7 @@ const OrganizationForm = (props) => {
         </Grid>
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <TextField
-            // inputRef={job}
+            inputRef={jobRef}
             label="Job Position"
             variant="outlined"
             placeholder="Analyst"
