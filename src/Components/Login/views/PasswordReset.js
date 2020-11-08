@@ -52,7 +52,7 @@ const PasswordReset = (props) => {
           <AccountCircleIcon className={classes.icon} />
         </Avatar>
         <Typography component="h1" variant="h5" className={classes.textcolor}>
-          Ingresa tu Email
+          Insert your Email
         </Typography>
         <form className={classes.form} noValidate>
           <Grid className={classes.username}>
@@ -73,7 +73,7 @@ const PasswordReset = (props) => {
           </Grid>
           <Grid container className={classes.iniciasesioncontainer}>
             <p className={classes.texto2}>
-              Se enviara un correo para restablecer la contraseña
+              This will Send a password reset email to the user
             </p>
             <Grid item xs={10} className={classes.iniciasesion}>
               <Button
@@ -84,7 +84,7 @@ const PasswordReset = (props) => {
                 className="submit"
                 onClick={sendMail}
               >
-                Enviar
+                Send
               </Button>
             </Grid>
           </Grid>
@@ -95,7 +95,7 @@ const PasswordReset = (props) => {
                 className={classes.textcolor}
                 onClick={() => props.history.push("/")}
               >
-                Volver
+                Back
               </Link>
             </Grid>
           </Grid>
@@ -105,7 +105,7 @@ const PasswordReset = (props) => {
         <CopyRight />
       </Box>
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert severity="success">Correo de Enviado!</Alert>
+        <Alert severity="success">Email sent</Alert>
       </Snackbar>
     </Container>
   );
