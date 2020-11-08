@@ -22,7 +22,7 @@ import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import PassReset from "./PassReset";
-import Dialog from "@material-ui/core/Dialog";
+import Popover from "@material-ui/core/Popover";
 import Zoom from "@material-ui/core/Zoom";
 
 const useStyles = makeStyles((theme) => ({
@@ -128,7 +128,7 @@ const Summary = (props) => {
   const [pass, setPass] = useState(false);
   const [creatorData, setCreatorData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [imgopen, setImgopen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const {
     email,
     name,
@@ -141,16 +141,15 @@ const Summary = (props) => {
     disabled,
   } = state;
 
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Zoom direction="up" ref={ref} {...props} />;
-  });
-
   const imgClose = () => {
-    setImgopen(false);
+    setAnchorEl(null);
   };
 
-  const imgOpen = () => {
-    setImgopen(true);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const imgOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   useEffect(() => {
@@ -455,15 +454,21 @@ const Summary = (props) => {
                       : props.profile.photoUrl
                   }
                 ></Avatar>
-                <Dialog
-                  open={imgopen}
-                  TransitionComponent={Transition}
-                  keepMounted
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
                   onClose={imgClose}
-                  aria-labelledby="alert-dialog-slide-title"
-                  aria-describedby="alert-dialog-slide-description"
                   PaperProps={{
-                    style: { borderRadius: "100px" },
+                    style:{borderRadius:"100px"}
+                  }}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
                   }}
                 >
                   <Avatar
@@ -475,7 +480,7 @@ const Summary = (props) => {
                         : props.profile.photoUrl
                     }
                   ></Avatar>
-                </Dialog>
+                </Popover>
                 <Grid
                   item
                   xs={12}
