@@ -126,6 +126,9 @@ const ProfileForm = () => {
                 value: ev.target.value,
               })
             }
+            inputProps={{
+              maxLength: 20,
+            }}
             InputLabelProps={{
               classes: {
                 root: classes.label,
@@ -148,6 +151,9 @@ const ProfileForm = () => {
                 value: ev.target.value,
               })
             }
+            inputProps={{
+              maxLength: 20,
+            }}
             InputLabelProps={{
               classes: {
                 root: classes.label,
@@ -182,13 +188,6 @@ const ProfileForm = () => {
             className={classes.root}
             helperText="This is your login username"
             disabled
-            // onChange={(ev) =>
-            //   dispatch({
-            //     type: "field",
-            //     field: "email",
-            //     value: ev.target.value,
-            //   })
-            // }
             InputLabelProps={{
               classes: {
                 root: classes.label,
@@ -212,7 +211,7 @@ const ProfileForm = () => {
               })
             }
             inputProps={{
-              maxLength: 15,
+              maxLength: 13,
             }}
             InputLabelProps={{
               classes: {

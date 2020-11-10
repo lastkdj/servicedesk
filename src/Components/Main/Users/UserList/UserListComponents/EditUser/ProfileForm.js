@@ -124,6 +124,9 @@ const ProfileForm = (props) => {
               value: ev.target.value,
             })
           }
+          inputProps={{
+            maxLength: 20,
+          }}
           InputLabelProps={{
             classes: {
               root: classes.label,
@@ -146,6 +149,9 @@ const ProfileForm = (props) => {
               value: ev.target.value,
             })
           }
+          inputProps={{
+            maxLength: 20,
+          }}
           InputLabelProps={{
             classes: {
               root: classes.label,

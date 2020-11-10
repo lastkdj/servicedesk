@@ -11,8 +11,6 @@ import moment from "moment";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import Edit from "../../../../../../Imagenes/Edit.jpg";
-import Edit2 from "../../../../../../Imagenes/Edit2.jpg";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import TA from "../../../../../../Imagenes/talogo2.jpg";
 import SBC from "../../../../../../Imagenes/sbclogo.jpg";
@@ -23,7 +21,6 @@ import Chip from "@material-ui/core/Chip";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import PassReset from "./PassReset";
 import Popover from "@material-ui/core/Popover";
-import Zoom from "@material-ui/core/Zoom";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -114,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
   description: {
     fontWeight: "400",
     fontSize: "0.6em",
-    color: "#e6e5e8",
+    color: "#FFFFFF",
     [theme.breakpoints.up("lg")]: {
       fontSize: "0.8em",
     },
@@ -254,8 +251,9 @@ const Summary = (props) => {
               elevation={3}
               style={{
                 width: "95%",
-                backgroundColor: "#B086FF",
-                backgroundImage: `url(${Edit2})`,
+                background: "rgb(138,133,255)",
+                background:
+                  "radial-gradient(circle, rgba(138,133,255,1) 0%, rgba(124,130,250,1) 35%, rgba(94,88,228,1) 98%)",
               }}
             >
               <Grid
@@ -329,7 +327,9 @@ const Summary = (props) => {
           <Paper
             elevation={3}
             style={{
-              backgroundColor: "#A735FF",
+              background: "rgb(138,133,255)",
+              background:
+                "radial-gradient(circle, rgba(138,133,255,1) 0%, rgba(124,130,250,1) 35%, rgba(94,88,228,1) 98%)",
               width: isPhone ? "100%" : "95%",
               alignItems: "center",
               display: "flex",
@@ -415,9 +415,9 @@ const Summary = (props) => {
             backgroundColor: "white",
             padding: "13px",
             width: "100%",
-            backgroundImage: `url(${Edit})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+            background: "rgb(138,133,255)",
+            background:
+              "linear-gradient(58deg, rgba(138,133,255,1) 0%, rgba(127,133,255,1) 46%, rgba(94,88,228,1) 98%)",
           }}
         >
           <Grid container xs={12}>
@@ -460,7 +460,7 @@ const Summary = (props) => {
                   anchorEl={anchorEl}
                   onClose={imgClose}
                   PaperProps={{
-                    style:{borderRadius:"100px"}
+                    style: { borderRadius: "100px" },
                   }}
                   anchorOrigin={{
                     vertical: "bottom",
@@ -532,7 +532,7 @@ const Summary = (props) => {
               style={{
                 fontWeight: "400",
                 fontSize: "0.6em",
-                color: "rgb(173, 176, 187)",
+                color: "#FFFFFF",
               }}
             >
               {"Joined on" +
@@ -556,7 +556,7 @@ const Summary = (props) => {
               style={{
                 fontWeight: "400",
                 fontSize: "0.6em",
-                color: "rgb(173, 176, 187)",
+                color: "#FFFFFF",
               }}
             >
               Created By: {creatorData.fullname}

@@ -150,11 +150,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
-    backgroundColor: "#A735FF",
+    backgroundColor: "#8A85FF",
     color: "white",
 
     "&:hover": {
-      backgroundColor: "#791AC2",
+      backgroundColor: "#8A85FF",
     },
   },
 

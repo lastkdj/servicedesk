@@ -169,7 +169,7 @@ const EditUser = (props) => {
           xs={12}
           style={{
             padding: "13px",
-            backgroundImage: `url(${Topimg})`,
+            backgroundColor: "rgb(138, 133, 255)",
             borderRadius: "5px",
             margin: "0px 20px",
             marginBottom: "20px",
@@ -213,7 +213,7 @@ const EditUser = (props) => {
           xs={12}
           style={{
             padding: "13px",
-            backgroundImage: `url(${Botimg})`,
+            backgroundColor: "rgb(138, 133, 255)",
             borderRadius: "5px",
             margin: "20px 20px",
           }}

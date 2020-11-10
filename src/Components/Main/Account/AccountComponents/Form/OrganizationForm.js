@@ -365,7 +365,7 @@ const OrganizationForm = () => {
             variant="outlined"
             placeholder="Analyst"
             inputProps={{
-              maxLength: 15,
+              maxLength: 20,
             }}
             className={classes.root}
             onChange={(ev) =>

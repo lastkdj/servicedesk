@@ -191,7 +191,7 @@ const SingUpForm = (props) => {
               className={classes.registrate}
               onClick={goLogin}
             >
-              Ya tienes una cuenta?{" "}
+              Already have an account?{" "}
               <span className={classes.span}>Sign in</span>
             </Link>
           </Grid>

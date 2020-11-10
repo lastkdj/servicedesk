@@ -42,7 +42,7 @@ const Actions = (props) => {
   const { editUser } = state;
   const classes = useStyles();
 
-  const isNotebook = useMediaQuery({ query: "(max-device-width: 1281px)" });
+  const isPhone = useMediaQuery({ query: "(max-device-width: 375px)" });
 
   const handleClick = () => {
     dispatch({ type: "selected", value: props.user.uid });
@@ -95,7 +95,7 @@ const Actions = (props) => {
             style={{ backgroundColor: "#11A1CB" }}
             // onClick={}
           >
-            <SearchIcon style={isNotebook ? { fontSize: "15px" } : null} />
+            <SearchIcon style={isPhone ? { fontSize: "15px" } : null} />
           </Button>
         </Tooltip>
       </Grid>{" "}
@@ -105,10 +105,15 @@ const Actions = (props) => {
             variant="contained"
             type="submit"
             color="primary"
-            style={{ backgroundColor: "#A735FF" }}
+            style={{
+              backgroundColor: "rgb(138, 133, 255)",
+              "&:hover": {
+                backgroundColor: "#6461B9",
+              },
+            }}
             onClick={handleClick}
           >
-            <EditIcon style={isNotebook ? { fontSize: "15px" } : null} />
+            <EditIcon style={isPhone ? { fontSize: "15px" } : null} />
           </Button>
         </Tooltip>
       </Grid>
@@ -140,10 +145,12 @@ const Actions = (props) => {
             ) : null}
             {props.user.disabled === "false" ? (
               <BlockIcon
-                style={isNotebook ? { fontSize: "15px", minWidth: "0" } : null}
+                style={isPhone ? { fontSize: "15px", minWidth: "0" } : null}
               />
             ) : (
-              <CheckCircleIcon />
+              <CheckCircleIcon
+                style={isPhone ? { fontSize: "15px", minWidth: "0" } : null}
+              />
             )}
           </Button>
         </span>
