@@ -1,24 +1,22 @@
 {
   "files": {
     "main.css": "/servicedesk/static/css/main.d949663c.chunk.css",
-    "main.js": "/servicedesk/static/js/main.71889303.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.71889303.chunk.js.map",
+    "main.js": "/servicedesk/static/js/main.f7a71539.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.f7a71539.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.dd69145d.chunk.js": "/servicedesk/static/js/2.dd69145d.chunk.js",
-    "static/js/2.dd69145d.chunk.js.map": "/servicedesk/static/js/2.dd69145d.chunk.js.map",
+    "static/js/2.713eadbc.chunk.js": "/servicedesk/static/js/2.713eadbc.chunk.js",
+    "static/js/2.713eadbc.chunk.js.map": "/servicedesk/static/js/2.713eadbc.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.621ee0dc776d83a7d00c6c3e41d6e982.js": "/servicedesk/precache-manifest.621ee0dc776d83a7d00c6c3e41d6e982.js",
+    "precache-manifest.e3b29f86a58560eb50a900c0826295b9.js": "/servicedesk/precache-manifest.e3b29f86a58560eb50a900c0826295b9.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
     "static/css/main.d949663c.chunk.css.map": "/servicedesk/static/css/main.d949663c.chunk.css.map",
-    "static/js/2.dd69145d.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.dd69145d.chunk.js.LICENSE.txt",
+    "static/js/2.713eadbc.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.713eadbc.chunk.js.LICENSE.txt",
     "static/media/22.jpg": "/servicedesk/static/media/22.8b95cb46.jpg",
     "static/media/333.jpg": "/servicedesk/static/media/333.4381fb06.jpg",
     "static/media/880447.jpg": "/servicedesk/static/media/880447.073ad846.jpg",
-    "static/media/Edit.jpg": "/servicedesk/static/media/Edit.20dc9982.jpg",
-    "static/media/Edit2.jpg": "/servicedesk/static/media/Edit2.6053972d.jpg",
     "static/media/TALogo.jpg": "/servicedesk/static/media/TALogo.4cfeda56.jpg",
     "static/media/abraham_nones.png": "/servicedesk/static/media/abraham_nones.f53868d8.png",
     "static/media/avatar.png": "/servicedesk/static/media/avatar.456fa3e1.png",
@@ -44,8 +42,8 @@
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.dd69145d.chunk.js",
+    "static/js/2.713eadbc.chunk.js",
     "static/css/main.d949663c.chunk.css",
-    "static/js/main.71889303.chunk.js"
+    "static/js/main.f7a71539.chunk.js"
   ]
 }
