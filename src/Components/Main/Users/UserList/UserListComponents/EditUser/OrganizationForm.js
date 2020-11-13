@@ -12,6 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import { useEditAccount } from "../../../../../Context/EditAccount";
 import { useSnack } from "../../../../../Context/SnackContext";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 //Company
 const sb = "Soletanche Bachy";
@@ -187,8 +189,20 @@ const OrganizationForm = (props) => {
   const [opencomp, setOpenComp] = useState(false);
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
+  const [error, setError] = useState("");
   const jobRef = useRef("");
   const phoneRef = useRef("");
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setError("");
+  };
 
   const handleCompany = (event) => {
     dispatch({
@@ -210,13 +224,13 @@ const OrganizationForm = (props) => {
 
   const onSubmit = () => {
     if (job === "") {
-      props.setError("Missing Fields");
+      setError("Missing Fields");
     } else if (company === "") {
-      props.setError("Missing Fields");
+      setError("Missing Fields");
     } else if (department === "") {
-      props.setError("Missing Fields");
+      setError("Missing Fields");
     } else if (country === "") {
-      props.setError("Missing Fields");
+      setError("Missing Fields");
     } else {
       props.setLoading(true);
       FirebaseApp.firestore()
@@ -237,6 +251,9 @@ const OrganizationForm = (props) => {
           snackDispatch({ type: "snack", value: snack });
           props.setLoading(false);
           props.dispatch({ type: "edit", value: props.editUser });
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   };
@@ -497,6 +514,13 @@ const OrganizationForm = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      {error === "Missing Fields" ? (
+        <Snackbar open={true} autoHideDuration={3000} onClose={handleError}>
+          <Alert style={{ backgroundColor: "#B20453" }} severity="error">
+            Missing Fields
+          </Alert>
+        </Snackbar>
+      ) : null}
     </Grid>
   );
 };

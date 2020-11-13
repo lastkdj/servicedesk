@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import useStyles from "./LoginStyles";
 import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import InputBase from "@material-ui/core/InputBase";
@@ -49,7 +47,7 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
               job: "",
               phonenumber: "",
               uid: FirebaseApp.auth().currentUser.uid,
-              createdby: "self",
+              createdby: FirebaseApp.auth().currentUser.uid,
             });
           setOpen(false);
           goLogin();

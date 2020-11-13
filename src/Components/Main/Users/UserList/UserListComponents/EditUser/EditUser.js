@@ -9,12 +9,9 @@ import { useEffect } from "react";
 import Summary from "./Summary";
 import ProfileForm from "./ProfileForm";
 import OrganizationForm from "./OrganizationForm";
-import Alerts from "./Alerts";
 import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { useUserList } from "../../../../../Context/UserListContext";
-import Topimg from "../../../../../../Imagenes/topimg.jpg";
-import Botimg from "../../../../../../Imagenes/bottomimg.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,7 +113,6 @@ const EditUser = (props) => {
   const { state, dispatch } = useUserList();
   const { selected, editUser, OriginuserData } = state;
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [profile, setProfile] = useState({});
 
   const classes = useStyles();
@@ -124,10 +120,6 @@ const EditUser = (props) => {
   const handleClose = () => {
     dispatch({ type: "edit", value: editUser });
   };
-
-  useEffect(() => {
-    setError("firstload");
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -205,7 +197,7 @@ const EditUser = (props) => {
             justifyContent: "center",
           }}
         >
-          <ProfileForm error={error} profile={profile} editUser={editUser} />
+          <ProfileForm profile={profile} editUser={editUser} />
           <Summary profile={profile} creator={profile.createdby} />
         </Grid>
         <Grid
@@ -222,15 +214,12 @@ const EditUser = (props) => {
         </Grid>
         <OrganizationForm
           profile={profile}
-          error={error}
-          setError={setError}
           loading={loading}
           setLoading={setLoading}
           editUser={editUser}
           dispatch={dispatch}
         />
       </Grid>
-      <Alerts error={error} setError={setError} />
     </Dialog>
   );
 };
