@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/servicedesk/static/css/main.d949663c.chunk.css",
-    "main.js": "/servicedesk/static/js/main.f7a71539.chunk.js",
-    "main.js.map": "/servicedesk/static/js/main.f7a71539.chunk.js.map",
+    "main.js": "/servicedesk/static/js/main.195bc6c5.chunk.js",
+    "main.js.map": "/servicedesk/static/js/main.195bc6c5.chunk.js.map",
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.713eadbc.chunk.js": "/servicedesk/static/js/2.713eadbc.chunk.js",
-    "static/js/2.713eadbc.chunk.js.map": "/servicedesk/static/js/2.713eadbc.chunk.js.map",
+    "static/js/2.972b3e3b.chunk.js": "/servicedesk/static/js/2.972b3e3b.chunk.js",
+    "static/js/2.972b3e3b.chunk.js.map": "/servicedesk/static/js/2.972b3e3b.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.e3b29f86a58560eb50a900c0826295b9.js": "/servicedesk/precache-manifest.e3b29f86a58560eb50a900c0826295b9.js",
+    "precache-manifest.1ff61e44444f14891f789fd071baedcc.js": "/servicedesk/precache-manifest.1ff61e44444f14891f789fd071baedcc.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
     "static/css/main.d949663c.chunk.css.map": "/servicedesk/static/css/main.d949663c.chunk.css.map",
-    "static/js/2.713eadbc.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.713eadbc.chunk.js.LICENSE.txt",
+    "static/js/2.972b3e3b.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.972b3e3b.chunk.js.LICENSE.txt",
     "static/media/22.jpg": "/servicedesk/static/media/22.8b95cb46.jpg",
     "static/media/333.jpg": "/servicedesk/static/media/333.4381fb06.jpg",
     "static/media/880447.jpg": "/servicedesk/static/media/880447.073ad846.jpg",
@@ -22,7 +22,6 @@
     "static/media/avatar.png": "/servicedesk/static/media/avatar.456fa3e1.png",
     "static/media/backastro.jpg": "/servicedesk/static/media/backastro.d2096f50.jpg",
     "static/media/background.jpg": "/servicedesk/static/media/background.7a9468ab.jpg",
-    "static/media/bottomimg.jpg": "/servicedesk/static/media/bottomimg.f37b64d8.jpg",
     "static/media/frey2.jpg": "/servicedesk/static/media/frey2.6e92bf7f.jpg",
     "static/media/freyLogo.jpg": "/servicedesk/static/media/freyLogo.1b7429a4.jpg",
     "static/media/freylogo2.jpg": "/servicedesk/static/media/freylogo2.c1ecc2f5.jpg",
@@ -36,14 +35,13 @@
     "static/media/sbclogo.jpg": "/servicedesk/static/media/sbclogo.af23685a.jpg",
     "static/media/ta.jpg": "/servicedesk/static/media/ta.e4aea664.jpg",
     "static/media/talogo2.jpg": "/servicedesk/static/media/talogo2.08aaa488.jpg",
-    "static/media/topimg.jpg": "/servicedesk/static/media/topimg.77172f95.jpg",
     "static/media/unnamed.jpg": "/servicedesk/static/media/unnamed.552e8707.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.713eadbc.chunk.js",
+    "static/js/2.972b3e3b.chunk.js",
     "static/css/main.d949663c.chunk.css",
-    "static/js/main.f7a71539.chunk.js"
+    "static/js/main.195bc6c5.chunk.js"
   ]
 }
