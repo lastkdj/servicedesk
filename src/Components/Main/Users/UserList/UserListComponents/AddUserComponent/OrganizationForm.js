@@ -234,6 +234,7 @@ const OrganizationForm = (props) => {
       props.setLoading(true);
       const utcDate = Date.now();
       const newDate = moment(utcDate).format("dddd Do MMMM YYYY, h:mm:ss a");
+      const shortDate = moment(utcDate).format("MMMM Do YYYY");
       const randomColor =
         "#" + Math.floor(Math.random() * 16777215).toString(16);
       const addUser = FirebaseApp.functions().httpsCallable("addUser");
@@ -250,6 +251,7 @@ const OrganizationForm = (props) => {
         job: job,
         publicinfo: true,
         joinDate: newDate,
+        shortDate: shortDate,
         usercreation_timeStamp: utcDate,
         defaultAvatar: randomColor,
         disabled: "false",

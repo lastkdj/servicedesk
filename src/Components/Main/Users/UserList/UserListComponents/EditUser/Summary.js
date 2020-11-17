@@ -150,7 +150,6 @@ const Summary = (props) => {
   };
 
   useEffect(() => {
-    console.log(props.profile.createdby);
     if (
       props.profile.createdby !== "" &&
       props.profile.createdby !== undefined

@@ -79,6 +79,7 @@ exports.addUser = functions.https.onCall((data, context) => {
   const job = data.job;
   const publicinfo = data.publicinfo;
   const joinDate = data.joinDate;
+  const shortDate = data.shortDate;
   const usercreation_timeStamp = data.usercreation_timeStamp;
   const defaultAvatar = data.defaultAvatar;
   const disabled = data.disabled;
@@ -107,6 +108,7 @@ exports.addUser = functions.https.onCall((data, context) => {
           job: job,
           publicinfo: publicinfo,
           joinDate: joinDate,
+          shortDate: shortDate,
           usercreation_timeStamp: usercreation_timeStamp,
           defaultAvatar: defaultAvatar,
           disabled: disabled,

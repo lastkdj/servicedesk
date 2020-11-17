@@ -29,6 +29,7 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
           const newDate = moment(utcDate).format(
             "dddd Do MMMM YYYY, h:mm:ss a"
           );
+          const shortDate = moment(utcDate).format("MMMM Do YYYY");
           FirebaseApp.firestore()
             .collection("users")
             .doc(FirebaseApp.auth().currentUser.uid)
@@ -39,6 +40,7 @@ function signupUser(userDetails, setError, setOpen, goLogin, hex) {
               email: email,
               password: password,
               joinDate: newDate,
+              shortDate: shortDate,
               usercreation_timeStamp: utcDate,
               defaultAvatar: hex,
               disabled: "false",

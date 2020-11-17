@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -6,8 +6,22 @@ import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import IconButton from "@material-ui/core/IconButton";
 import Zoom from "@material-ui/core/Zoom";
 import useStyles from "./styles";
+import FirebaseApp from "../../../../FireBase/FireBaseConfig";
+import moment from "moment";
 
 const RecentUsers = () => {
+  const [newUser, setNewUser] = useState("");
+
+  useEffect(() => {
+    FirebaseApp.firestore()
+      .collection("users")
+      .get()
+      .then((snap) => {
+        const size = snap.size;
+        setNewUser(size);
+      });
+  }, []);
+
   const classes = useStyles();
   return (
     <Zoom in={true} timeout={500}>
@@ -20,7 +34,9 @@ const RecentUsers = () => {
               </Typography>
             </Grid>
             <Grid xs={12}>
-              <Typography className={classes.paperinfo}>4 New Users</Typography>
+              <Typography className={classes.paperinfo}>
+                {newUser} Users Registered
+              </Typography>
             </Grid>
           </Grid>
           <Grid item xs={4} className={classes.icongrid}>
