@@ -13,6 +13,7 @@ import { useAccount } from "../../../../../Context/AccountContext";
 import { useEffect } from "react";
 import FirebaseApp from "../../../../../../FireBase/FireBaseConfig";
 import moment from "moment";
+import { useSnack } from "../../../../../Context/SnackContext";
 
 //Company
 const sb = "Soletanche Bachy";
@@ -153,6 +154,9 @@ const useStyles = makeStyles((theme) => ({
 
 const OrganizationForm = (props) => {
   const { dispatch, state } = useAccount();
+  const snackContext = useSnack();
+  const { snackAdd } = snackContext.state;
+  const { dispatch: snackDispatch } = snackContext;
   const {
     password,
     email,
@@ -184,10 +188,7 @@ const OrganizationForm = (props) => {
   };
 
   useEffect(() => {
-    if (
-      props.error === "auth/successfully-created" ||
-      props.error === "firstload"
-    ) {
+    if (snackAdd === true || props.error === "firstload") {
       dispatch({
         type: "field",
         field: "phone",
@@ -219,7 +220,7 @@ const OrganizationForm = (props) => {
       });
       setCount("");
     }
-  }, [props.error]);
+  }, [snackAdd, props.error]);
 
   const onSubmit = () => {
     if (job === "") {
@@ -259,8 +260,9 @@ const OrganizationForm = (props) => {
       }).then((result) => {
         if (result.data === null) {
           props.dispatch({ type: "fetch", value: props.OriginuserData });
-          props.setError("auth/successfully-created");
+          props.setNewUser(false);
           props.setLoading(false);
+          snackDispatch({ type: "add", value: snackAdd });
         } else {
           props.setLoading(false);
           props.setError(result.data);
@@ -385,6 +387,7 @@ const OrganizationForm = (props) => {
       >
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <Autocomplete
+            value={count}
             id="country"
             options={countries}
             classes={{

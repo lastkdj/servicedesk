@@ -172,7 +172,7 @@ const useStyles = makeStyles((theme) => ({
 const OrganizationForm = (props) => {
   const { dispatch, state } = useEditAccount();
   const snackContext = useSnack();
-  const { snack } = snackContext.state;
+  const { snackEdit } = snackContext.state;
   const { dispatch: snackDispatch } = snackContext;
   const {
     email,
@@ -189,6 +189,7 @@ const OrganizationForm = (props) => {
   const [opencomp, setOpenComp] = useState(false);
   const [depa, setDepa] = useState("");
   const [comp, setComp] = useState("");
+  const [count, setCount] = useState("");
   const [error, setError] = useState("");
   const jobRef = useRef("");
   const phoneRef = useRef("");
@@ -222,6 +223,41 @@ const OrganizationForm = (props) => {
     setDepa(event.target.value);
   };
 
+  useEffect(() => {
+    if (error === "auth/successfully-created" || error === "firstload") {
+      dispatch({
+        type: "field",
+        field: "phone",
+        value: "",
+      });
+      phoneRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "job",
+        value: "",
+      });
+      jobRef.current.value = "";
+      dispatch({
+        type: "field",
+        field: "company",
+        value: "",
+      });
+      setComp("");
+      dispatch({
+        type: "field",
+        field: "department",
+        value: "",
+      });
+      setDepa("");
+      dispatch({
+        type: "field",
+        field: "country",
+        value: "",
+      });
+      setCount("");
+    }
+  }, [error]);
+
   const onSubmit = () => {
     if (job === "") {
       setError("Missing Fields");
@@ -248,9 +284,10 @@ const OrganizationForm = (props) => {
           job: job,
         })
         .then(() => {
-          snackDispatch({ type: "snack", value: snack });
+          snackDispatch({ type: "edit", value: snackEdit });
           props.setLoading(false);
           props.dispatch({ type: "edit", value: props.editUser });
+          setError("auth/successfully-created");
         })
         .catch((error) => {
           console.log(error);
@@ -393,6 +430,7 @@ const OrganizationForm = (props) => {
       >
         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
           <Autocomplete
+            value={count}
             id="country"
             options={countries}
             classes={{

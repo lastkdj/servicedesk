@@ -1,21 +1,27 @@
-import { findByTestId } from "@testing-library/react";
 import React, { useContext, useMemo, createContext, useReducer } from "react";
 
 const SnackContext = createContext();
 
 function submitReducer(state, action) {
   switch (action.type) {
-    case "snack": {
+    case "edit": {
       return {
         ...state,
-        snack: !action.value,
+        snackEdit: !action.value,
+      };
+    }
+    case "add": {
+      return {
+        ...state,
+        snackAdd: !action.value,
       };
     }
   }
 }
 
 const initialState = {
-  snack: false,
+  snackEdit: false,
+  snackAdd: false,
 };
 
 export function SnackProvider(props) {

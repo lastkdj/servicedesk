@@ -213,6 +213,7 @@ const AddUser = (props) => {
           setLoading={setLoading}
           dispatch={dispatch}
           OriginuserData={OriginuserData}
+          setNewUser={props.setNewUser}
         />
       </Grid>
       <Alerts error={error} setError={setError} />

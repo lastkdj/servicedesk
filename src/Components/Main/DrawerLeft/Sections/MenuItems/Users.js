@@ -142,15 +142,18 @@ const Users = () => {
             <Grid
               item
               container
-              xs={3}
+              xs={4}
               alignItems="center"
               style={{ marginLeft: "10px" }}
             >
-              <Typography className={classes.menutexthardware}>
+              <Typography
+                className={classes.menutexthardware}
+                style={{ color: "#AEFF00" }}
+              >
                 Users
               </Typography>
             </Grid>
-            <Grid item container xs={6} style={{ justifyContent: "flex-end" }}>
+            <Grid item container xs={5} style={{ justifyContent: "flex-end" }}>
               {expanded ? (
                 <ExpandLessIcon style={{ color: "adb0bb" }} />
               ) : (
@@ -180,7 +183,12 @@ const Users = () => {
                 alignItems="center"
                 style={{ paddingLeft: "45px" }}
               >
-                <Typography className={classes.menutext}>User List</Typography>
+                <Typography
+                  className={classes.menutext}
+                  style={{ color: "#AEFF00" }}
+                >
+                  User List
+                </Typography>
               </Grid>
             </Button>
           </Link>

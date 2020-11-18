@@ -146,13 +146,11 @@ const useStyles = makeStyles((theme) => ({
 const PaperList = () => {
   const userContext = useUserList();
   const snackContext = useSnack();
-  const { snack } = snackContext.state;
+  const { snackEdit, snackAdd } = snackContext.state;
   const {
     userData,
     moreData,
     userFetch,
-    error,
-    success,
     OriginuserData,
     editUser,
   } = userContext.state;
@@ -177,8 +175,12 @@ const PaperList = () => {
 
   const classes = useStyles();
 
-  const handleClose = () => {
-    editDispatch({ type: "snack", value: snack });
+  const handleCloseEdit = () => {
+    editDispatch({ type: "edit", value: snackEdit });
+  };
+
+  const handleCloseAdd = () => {
+    editDispatch({ type: "add", value: snackAdd });
   };
 
   const fetchMoreData = () => {
@@ -369,14 +371,19 @@ const PaperList = () => {
           }}
         ></Grid>
       </Paper>
-      <Snackbar open={success} autoHideDuration={4000} onClose={handleSuccess}>
-        <Alert severity="success">The User has been successfully Removed</Alert>
-      </Snackbar>
-      <Snackbar open={error} autoHideDuration={4000} onClose={handleError}>
-        <Alert severity="error">You can't remove yourself</Alert>
-      </Snackbar>
-      <Snackbar open={snack} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar
+        open={snackEdit}
+        autoHideDuration={4000}
+        onClose={handleCloseEdit}
+      >
         <Alert severity="success">User info Updated</Alert>
+      </Snackbar>
+      <Snackbar
+        open={snackAdd}
+        autoHideDuration={4000}
+        onClose={handleCloseAdd}
+      >
+        <Alert severity="success">User Created Succesfully</Alert>
       </Snackbar>
     </Grid>
   );
