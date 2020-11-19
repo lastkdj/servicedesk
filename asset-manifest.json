@@ -6,14 +6,14 @@
     "runtime-main.js": "/servicedesk/static/js/runtime-main.3892dbd9.js",
     "runtime-main.js.map": "/servicedesk/static/js/runtime-main.3892dbd9.js.map",
     "static/css/2.c5f6aa66.chunk.css": "/servicedesk/static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.92707872.chunk.js": "/servicedesk/static/js/2.92707872.chunk.js",
-    "static/js/2.92707872.chunk.js.map": "/servicedesk/static/js/2.92707872.chunk.js.map",
+    "static/js/2.26fc2a96.chunk.js": "/servicedesk/static/js/2.26fc2a96.chunk.js",
+    "static/js/2.26fc2a96.chunk.js.map": "/servicedesk/static/js/2.26fc2a96.chunk.js.map",
     "index.html": "/servicedesk/index.html",
-    "precache-manifest.abfbeaa2128aaaa99a5162613d1fb464.js": "/servicedesk/precache-manifest.abfbeaa2128aaaa99a5162613d1fb464.js",
+    "precache-manifest.cc7087750e17ca65fbc2cd2db53f1fed.js": "/servicedesk/precache-manifest.cc7087750e17ca65fbc2cd2db53f1fed.js",
     "service-worker.js": "/servicedesk/service-worker.js",
     "static/css/2.c5f6aa66.chunk.css.map": "/servicedesk/static/css/2.c5f6aa66.chunk.css.map",
     "static/css/main.d949663c.chunk.css.map": "/servicedesk/static/css/main.d949663c.chunk.css.map",
-    "static/js/2.92707872.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.92707872.chunk.js.LICENSE.txt",
+    "static/js/2.26fc2a96.chunk.js.LICENSE.txt": "/servicedesk/static/js/2.26fc2a96.chunk.js.LICENSE.txt",
     "static/media/22.jpg": "/servicedesk/static/media/22.8b95cb46.jpg",
     "static/media/333.jpg": "/servicedesk/static/media/333.4381fb06.jpg",
     "static/media/880447.jpg": "/servicedesk/static/media/880447.073ad846.jpg",
@@ -40,7 +40,7 @@
   "entrypoints": [
     "static/js/runtime-main.3892dbd9.js",
     "static/css/2.c5f6aa66.chunk.css",
-    "static/js/2.92707872.chunk.js",
+    "static/js/2.26fc2a96.chunk.js",
     "static/css/main.d949663c.chunk.css",
     "static/js/main.34710e55.chunk.js"
   ]
